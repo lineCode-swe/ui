@@ -1,4 +1,4 @@
-name: CI Angular (no e2e)
+name: CI Angular
 on: push
 jobs:
   build:
