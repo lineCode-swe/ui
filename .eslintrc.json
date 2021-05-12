@@ -47,5 +47,11 @@
       ],
       "rules": {}
     }
-  ]
+  ],
+  "plugins": [
+    "header"
+  ],
+  "rules": {
+    "header/header": [2, "header.txt"]
+  }
 }
