@@ -1,3 +1,10 @@
+/*
+ * PORTACS
+ * piattaforma di controllo mobilità autonoma
+ *
+ * Copyright lineCode group <linecode.swe@gmail.com> 2020 - 2021
+ * Distributed under open-source licence (see accompanying file LICENCE).
+ */
 import {Position} from "./position";
 import {UnitStatus} from "./unit-status.enum";
 
@@ -6,9 +13,11 @@ export class Unit {
     private readonly id: string,
     private readonly name: string,
     private readonly base: Position,
-    private status: UnitStatus,
+    private position: Position = base,
+    private poiList: Position[] = [],
+    private status: UnitStatus = UnitStatus.BASE,
     private error: number = 0,
-    private speed: string,
+    private speed: number = 0,
   ) {}
 
   getId(): string {
@@ -23,11 +32,27 @@ export class Unit {
     return this.base;
   }
 
+  getPosition(): Position {
+    return this.position;
+  }
+
+  setPosition(position: Position): void {
+    this.position = position;
+  }
+
+  getPoiList(): Position[] {
+    return this.poiList;
+  }
+
+  setPoiList(poiList: Position[]): void {
+    this.poiList = poiList;
+  }
+
   getStatus(): UnitStatus {
     return this.status;
   }
 
-  setStatus(status: UnitStatus) {
+  setStatus(status: UnitStatus): void {
     this.status = status;
   }
 
@@ -35,15 +60,15 @@ export class Unit {
     return this.error;
   }
 
-  setError(error: number) {
+  setError(error: number): void {
     this.error = error;
   }
 
-  getSpeed(): string {
+  getSpeed(): number {
     return this.speed;
   }
 
-  setSpeed(speed: string) {
+  setSpeed(speed: number): void {
     this.speed = speed;
   }
 }

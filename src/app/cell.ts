@@ -1,3 +1,10 @@
+/*
+ * PORTACS
+ * piattaforma di controllo mobilità autonoma
+ *
+ * Copyright lineCode group <linecode.swe@gmail.com> 2020 - 2021
+ * Distributed under open-source licence (see accompanying file LICENCE).
+ */
 import {Position} from "./position";
 import {Direction} from "./direction.enum";
 
@@ -8,8 +15,8 @@ export class Cell {
     private readonly poi: boolean,
     private readonly base: boolean,
     private readonly direction: Direction = Direction.ALL,
-    private obstacle: boolean,
-    private unit: string,
+    private obstacle: boolean = false,
+    private unit: string = '',
   ) {}
 
   getPosition(): Position {
