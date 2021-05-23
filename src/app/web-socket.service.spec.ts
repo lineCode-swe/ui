@@ -5,7 +5,6 @@
  * Copyright lineCode group <linecode.swe@gmail.com> 2020 - 2021
  * Distributed under open-source licence (see accompanying file LICENCE).
  */
-import {sha1} from "@angular/compiler/src/i18n/digest";
 import {WebSocketService} from './web-socket.service';
 import {AuthStatus} from "./auth-status.enum";
 import {User} from "./user";
