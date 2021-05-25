@@ -22,6 +22,8 @@ import {UnitStopCommand} from "./unit-stop-command.enum";
 export class WebSocketService implements ServerService {
 
   private authStatus: AuthStatus = AuthStatus.NO_AUTH;
+  private mapLength: number = 0;
+  private mapHeight: number = 0;
 
   constructor(
     private cellMap: Map<Position, Cell>,
@@ -64,7 +66,9 @@ export class WebSocketService implements ServerService {
 
       case 'MapFromServer':
         this.cellMap.clear();
-        msg.map.forEach(cell => {
+        this.mapHeight = msg.map.height;
+        this.mapLength = msg.map.length;
+        msg.map.cells.forEach(cell => {
           this.cellMap.set(
             new Position(cell.position.x, cell.position.y),
             new Cell(
@@ -136,6 +140,14 @@ export class WebSocketService implements ServerService {
 
   getAuthStatus(): AuthStatus {
     return this.authStatus;
+  }
+
+  getMapLength(): number {
+    return this.mapLength;
+  }
+
+  getMapHeight(): number {
+    return this.mapHeight
   }
 
   getCell(position: Position): Cell {

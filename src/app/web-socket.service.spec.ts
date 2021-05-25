@@ -41,13 +41,13 @@ describe('WebSocketService', () => {
     )
   });
 
-  it('should be created', () => {
+  it('should be created [TU1]', () => {
     expect(service).toBeTruthy();
 
     expect(spySocket.subscribe).toHaveBeenCalledTimes(1);
   });
 
-  it('should receive a "KeepAliveFromServer" and do nothing', () => {
+  it('should receive a "KeepAliveFromServer" and do nothing [TU2]', () => {
     service.onMessage({
       type: 'KeepAliveFromServer',
     });
@@ -59,7 +59,7 @@ describe('WebSocketService', () => {
     expect(spySubject.next).toHaveBeenCalledTimes(0);
   });
 
-  it('should receive a "AuthFromServer" and change authStatus to "ADMIN"', () => {
+  it('should receive a "AuthFromServer" and change authStatus to "ADMIN" [TU3]', () => {
     service.onMessage({
       type: 'AuthFromServer',
       session: 'ADMIN',
@@ -68,7 +68,7 @@ describe('WebSocketService', () => {
     expect(service.getAuthStatus()).toEqual(AuthStatus.ADMIN);
   });
 
-  it('should receive a "UsersFromServer" and update internal User data structure', () => {
+  it('should receive a "UsersFromServer" and update internal User data structure [TU4]', () => {
     let msg = {
       type: 'UsersFromServer',
       users: [
@@ -92,7 +92,7 @@ describe('WebSocketService', () => {
     expect(spySubject.next).toHaveBeenCalledOnceWith('*');
   })
 
-  it('should receive a "UnitsFromServer" and update internal Unit data structure', () => {
+  it('should receive a "UnitsFromServer" and update internal Unit data structure [TU5]', () => {
     let msg = {
       type: 'UnitsFromServer',
       units: [
@@ -130,51 +130,55 @@ describe('WebSocketService', () => {
     expect(spySubject.next).toHaveBeenCalledOnceWith('*');
   });
 
-  it('should receive a "MapFromServer" and update internal Cell data structure', () => {
+  it('should receive a "MapFromServer" and update internal Cell data structure [TU6]', () => {
     let msg = {
       type: 'MapFromServer',
-      map: [
-        {
-          position: {
-            x: 0,
-            y: 0,
+      map: {
+        length: 2,
+        height: 2,
+        cells: [
+          {
+            position: {
+              x: 0,
+              y: 0,
+            },
+            locked: false,
+            poi: false,
+            base: false,
+            direction: 'ALL',
           },
-          locked: false,
-          poi: false,
-          base: false,
-          direction: 'ALL',
-        },
-        {
-          position: {
-            x: 1,
-            y: 0,
+          {
+            position: {
+              x: 1,
+              y: 0,
+            },
+            locked: true,
+            poi: true,
+            base: false,
+            direction: 'RIGHT',
           },
-          locked: true,
-          poi: true,
-          base: false,
-          direction: 'RIGHT',
-        },
-        {
-          position: {
-            x: 0,
-            y: 1,
+          {
+            position: {
+              x: 0,
+              y: 1,
+            },
+            locked: false,
+            poi: false,
+            base: true,
+            direction: 'LEFT',
           },
-          locked: false,
-          poi: false,
-          base: true,
-          direction: 'LEFT',
-        },
-        {
-          position: {
-            x: 1,
-            y: 1,
+          {
+            position: {
+              x: 1,
+              y: 1,
+            },
+            locked: true,
+            poi: true,
+            base: true,
+            direction: 'UP',
           },
-          locked: true,
-          poi: true,
-          base: true,
-          direction: 'UP',
-        },
-      ]
+        ]
+      }
     }
 
     service.onMessage(msg);
@@ -197,9 +201,11 @@ describe('WebSocketService', () => {
       new Position(1, 1),
       new Cell(new Position(1, 1), true, true, true, Direction.UP)
     ]);
+    expect(service.getMapHeight()).toEqual(2);
+    expect(service.getMapLength()).toEqual(2);
   });
 
-  it('should receive a "UnitStatusFromServer" with a known id, status "ERROR" and change internal data',
+  it('should receive a "UnitStatusFromServer" with a known id, status "ERROR" and change internal data [TU7]',
     () => {
     let msg = {
       type: 'UnitStatusFromServer',
@@ -219,7 +225,7 @@ describe('WebSocketService', () => {
     expect(console.log).toHaveBeenCalledTimes(0);
   });
 
-  it('should receive a "UnitPoiFromServer" with a known id, list of POI and change internal data',
+  it('should receive a "UnitPoiFromServer" with a known id, list of POI and change internal data [TU8]',
     () => {
     let msg = {
       type: 'UnitPoiFromServer',
@@ -251,7 +257,7 @@ describe('WebSocketService', () => {
     expect(console.log).toHaveBeenCalledTimes(0);
   });
 
-  it('should receive a "UnitSpeedFromServer" with a known id, a new speed value and change internal data',
+  it('should receive a "UnitSpeedFromServer" with a known id, a new speed value and change internal data [TU9]',
     () => {
     let msg = {
       type: 'UnitSpeedFromServer',
@@ -271,7 +277,7 @@ describe('WebSocketService', () => {
     expect(console.log).toHaveBeenCalledTimes(0);
   });
 
-  it('should receive a "UnitErrorFromServer" with a known id, a new error code and change internal data',
+  it('should receive a "UnitErrorFromServer" with a known id, a new error code and change internal data [TU10]',
     () => {
     let msg = {
       type: 'UnitErrorFromServer',
@@ -291,7 +297,7 @@ describe('WebSocketService', () => {
     expect(console.log).toHaveBeenCalledTimes(0);
   });
 
-  it('should receive a "UnitPosFromServer" with a known id, a new current position and change internal data',
+  it('should receive a "UnitPosFromServer" with a known id, a new current position and change internal data [TU11]',
     () => {
     let msg = {
       type: 'UnitPosFromServer',
@@ -314,7 +320,7 @@ describe('WebSocketService', () => {
     expect(console.log).toHaveBeenCalledTimes(0);
   });
 
-  it('should receive a "Unit*FromServer" with unknown id, not change internal data and print error message',
+  it('should receive a "Unit*FromServer" with unknown id, not change internal data and print error message [TU12]',
     () => {
     [
       'UnitStatusFromServer',
@@ -344,7 +350,7 @@ describe('WebSocketService', () => {
     });
   });
 
-  it('should send a login request through socket by giving an obj with username and password',
+  it('should send a login request through socket by giving an obj with username and password [TU13]',
     () => {
     service.login('essepi78', 'TheRightPwd');
 
@@ -355,7 +361,7 @@ describe('WebSocketService', () => {
     }));
   });
 
-  it('should send a logout request through socket by giving an obj with username', () => {
+  it('should send a logout request through socket by giving an obj with username [TU14]', () => {
     service.logout('essepi78');
 
     expect(spySocket.next).toHaveBeenCalledOnceWith(JSON.stringify({
@@ -364,7 +370,7 @@ describe('WebSocketService', () => {
     }));
   });
 
-  it('should send new user request through socket by giving an obj with user data', () => {
+  it('should send new user request through socket by giving an obj with user data [TU15]', () => {
     service.addUser('hiyajo', '123', false);
     service.addUser('FunkyGallo', '456', true);
 
@@ -383,7 +389,7 @@ describe('WebSocketService', () => {
     }));
   });
 
-  it('should send a delete user request through socket by giving an obj with username', () => {
+  it('should send a delete user request through socket by giving an obj with username [TU16]', () => {
     service.deleteUser('essepi78');
 
     expect(spySocket.next).toHaveBeenCalledOnceWith(JSON.stringify({
@@ -392,7 +398,7 @@ describe('WebSocketService', () => {
     }));
   });
 
-  it('should send an add unit request through socket by giving an obj with unit data', () => {
+  it('should send an add unit request through socket by giving an obj with unit data [TU17]', () => {
     service.addUnit('unit1', 'one', new Position(42, 240));
 
     expect(spySocket.next).toHaveBeenCalledOnceWith(JSON.stringify({
@@ -406,7 +412,7 @@ describe('WebSocketService', () => {
     }));
   });
 
-  it('should send a delete unit request through socket by giving an obj with unit id', () => {
+  it('should send a delete unit request through socket by giving an obj with unit id [TU18]', () => {
     service.deleteUnit('unit1')
 
     expect(spySocket.next).toHaveBeenCalledOnceWith(JSON.stringify({
@@ -415,7 +421,7 @@ describe('WebSocketService', () => {
     }));
   });
 
-  it('should send a start unit request through socket by giving an obj with id and poi list', () => {
+  it('should send a start unit request through socket by giving an obj with id and poi list [TU19]', () => {
     service.start('unit1', [
       new Position(7, 8),
       new Position(9, 10),
@@ -437,7 +443,7 @@ describe('WebSocketService', () => {
     }));
   });
 
-  it('should send a stop unit request through socket by giving an obj with unit id and stop command',
+  it('should send a stop unit request through socket by giving an obj with unit id and stop command [TU20]',
     () => {
     service.stop('unit1')
 
@@ -448,7 +454,7 @@ describe('WebSocketService', () => {
     }));
   });
 
-  it('should send a shutdown unit request through socket by giving an obj with unit id and shutdown command',
+  it('should send a shutdown unit request through socket by giving an obj with unit id and shutdown command [TU21]',
   () => {
     service.shutdown('unit1')
 
@@ -459,7 +465,7 @@ describe('WebSocketService', () => {
     }));
   });
 
-  it('should send a goback unit request through socket by giving an obj with unit id and goback command',
+  it('should send a goback unit request through socket by giving an obj with unit id and goback command [TU22]',
   () => {
     service.goBack('unit1')
 
@@ -470,7 +476,7 @@ describe('WebSocketService', () => {
     }));
   });
 
-  it('should send a new map request through socket by giving an obj with map string extracted from file',
+  it('should send a new map request through socket by giving an obj with map string extracted from file [TU23]',
     () => {
     service.newMap('+ + > > > _\n+ + > > > _\n+ + + + + <\n+ + X + + ^\nB + + + + P')
 
