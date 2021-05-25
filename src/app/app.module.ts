@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import {FormsModule} from "@angular/forms";
 import { HeaderAdminComponent } from './header-admin/header-admin.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MapComponent } from './map/map.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HeaderComponent,
     LoginComponent,
     HeaderAdminComponent,
+    MapComponent,
 
 
   ],
