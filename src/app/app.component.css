@@ -1,0 +1,24 @@
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", Helvetica, Arial, sans-serif;
+}
+
+.header{
+  padding: 5px;
+  text-align: center;
+
+
+}
+
+footer {
+  background: #2875d4;
+  color: white;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.body{
+  background-color: #2875d4;
+}
