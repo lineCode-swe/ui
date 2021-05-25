@@ -18,7 +18,7 @@ import { MapComponent } from './map/map.component';
 import { ServerService } from "./server-service";
 import { WebSocketService } from "./web-socket.service";
 import { Subject } from "rxjs";
-import {webSocket, WebSocketSubject} from "rxjs/webSocket";
+import { webSocket, WebSocketSubject } from "rxjs/webSocket";
 
 @NgModule({
   declarations: [
@@ -37,7 +37,7 @@ import {webSocket, WebSocketSubject} from "rxjs/webSocket";
     { provide: ServerService, useClass: WebSocketService },
     Map,
     Subject,
-    { provide: WebSocketSubject, useFactory: () => {webSocket<any>('ws://localhost:8080/');} }
+    { provide: WebSocketSubject, useFactory: () => { return webSocket<any>('ws://localhost:8080/'); } }
   ],
   bootstrap: [AppComponent]
 })
