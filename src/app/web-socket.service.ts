@@ -35,7 +35,7 @@ export class WebSocketService implements ServerService {
     private socket: WebSocketSubject<any>,
   ) {
     this.socket.subscribe({
-      next: (value: string) => { this.onMessage(JSON.parse(value)); }
+      next: (value: any) => { this.onMessage(value); }
     })
   }
 
