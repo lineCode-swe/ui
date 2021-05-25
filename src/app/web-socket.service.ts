@@ -34,7 +34,7 @@ export class WebSocketService implements ServerService {
     private unitSubj: Subject<string>,
     private socket: WebSocketSubject<any>,
   ) {
-    socket.subscribe({
+    this.socket.subscribe({
       next: (value: string) => { this.onMessage(JSON.parse(value)); }
     })
   }
@@ -147,7 +147,7 @@ export class WebSocketService implements ServerService {
   }
 
   getMapHeight(): number {
-    return this.mapHeight
+    return this.mapHeight;
   }
 
   getCell(position: Position): Cell {
