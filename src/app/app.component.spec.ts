@@ -1,3 +1,10 @@
+/*
+ * PORTACS
+ * piattaforma di controllo mobilità autonoma
+ *
+ * Copyright lineCode group <linecode.swe@gmail.com> 2020 - 2021
+ * Distributed under open-source licence (see accompanying file LICENCE).
+ */
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
