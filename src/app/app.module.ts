@@ -19,6 +19,7 @@ import { ServerService } from "./server-service";
 import { WebSocketService } from "./web-socket.service";
 import { Subject } from "rxjs";
 import { webSocket, WebSocketSubject } from "rxjs/webSocket";
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { webSocket, WebSocketSubject } from "rxjs/webSocket";
   imports: [
     BrowserModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    AppRoutingModule
   ],
   providers: [
     { provide: ServerService, useClass: WebSocketService },
