@@ -201,6 +201,7 @@ describe('WebSocketService', () => {
       new Position(1, 1),
       new Cell(new Position(1, 1), true, true, true, Direction.UP)
     ]);
+    expect(spySubject.next).toHaveBeenCalledOnceWith(new Position(-1, -1));
     expect(service.getMapHeight()).toEqual(2);
     expect(service.getMapLength()).toEqual(2);
   });
@@ -327,7 +328,7 @@ describe('WebSocketService', () => {
       'UnitPoiFromServer',
       'UnitSpeedFromServer',
       'UnitErrorFromServer',
-      'UnitErrorFromServer',
+      'UnitPosFromServer',
     ].forEach(currentType => {
       let msg = {
         type: currentType,
@@ -370,7 +371,7 @@ describe('WebSocketService', () => {
     }));
   });
 
-  it('should send new user request through socket by giving an obj with user data [TU15]', () => {
+  it('should send two new user request through socket by giving an obj with user data [TU15]', () => {
     service.addUser('hiyajo', '123', false);
     service.addUser('FunkyGallo', '456', true);
 
