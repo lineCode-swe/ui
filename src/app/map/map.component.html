@@ -5,20 +5,34 @@
   <div class="row justify-content-center">
     <div class="col-8">
 
-      <!--<table class="table">
-        <span *ngFor="let cell of grid">
-          <tr>
+      <table class="table">
+        <tr *ngFor="let row of this.getArrayHeight(); let i = index">
+          <td
+            *ngFor="let col of this.getArrayLength(); let j = index"
+            [class.directionAll]="directionAll(i, j)"
+            [class.directionUp]="directionUp(i, j)"
+            [class.directionDown]="directionDown(i, j)"
+            [class.directionLeft]="directionLeft(i, j)"
+            [class.directionRight]="directionRight(i, j)"
+            [class.cellLocked]="cellLocked(i, j)"
+          >
 
-            <td>
-              {{ cell.getPosition() }}
-              hi
-            </td>
-
-          </tr>
+            <!-- Da aggiungere: " | async" dopo grid -->
+            <span *ngFor="let cell of obs | async">
+              <span [innerHTML]="displayCell(cell, i, j)"
+                [class.cellUnit]="cell.getUnit()"
+                [class.cellBase]="cell.isBase()"
+                [class.cellPoi]="cell.isPoi()"
+                [class.cellObstacle]="cell.getObstacle()"
+              >
         </span>
-      </table>-->
+      </span>
 
-    </div>
-  </div>
+    </td>
+  </tr>
+</table>
+
+</div>
+</div>
 
 </div>

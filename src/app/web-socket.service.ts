@@ -29,7 +29,7 @@ export class WebSocketService implements ServerService {
     private cellMap: Map<Position, Cell>,
     private userMap: Map<string, User>,
     private unitMap: Map<string, Unit>,
-    private cellSubj: Subject<Position>,
+    private cellsSubj: Subject<Cell[]>,
     private userSubj: Subject<string>,
     private unitSubj: Subject<string>,
     private socket: WebSocketSubject<any>,
@@ -80,7 +80,14 @@ export class WebSocketService implements ServerService {
             )
           )
         });
-        this.cellSubj.next(new Position(-1, -1));
+
+        // create cell[]
+
+
+
+
+
+        this.cellsSubj.next(new Position(-1, -1));
         break;
 
       case 'UnitStatusFromServer':
@@ -159,7 +166,7 @@ export class WebSocketService implements ServerService {
   }
 
   subscribeCell(obs: PartialObserver<Position>): void {
-    this.cellSubj.subscribe(obs);
+    this.cellsSubj.subscribe(obs);
   }
 
   getUser(username: string): User {
