@@ -7,7 +7,6 @@ table {
 
 table, td {
   border: 3px solid black;
-  background-color: lightgreen;
   border-collapse: collapse;
   empty-cells: show;
   text-align: center;
@@ -16,11 +15,12 @@ table, td {
 }
 
 table td {
-  height: 30px;
-  width: 30px;
+  min-height: 40px;
+  max-height: 40px;
+  min-width: 40px;
+  max-width: 120px;
   text-align: center;
   overflow: hidden;
-  white-space: nowrap;
 }
 
 .directionAll {
@@ -57,15 +57,18 @@ table td {
 }
 
 .cellPoi {
-  background: #00cc00;
+  background: lightgreen;
+  /*background: #00cc00;*/
 }
 
 .cellBase {
-  background-color: #4ddbff;
+  background: lightblue;
+  /*background-color: #4ddbff;*/
 }
 
 .cellObstacle {
-  background-color: #ff3333;
+  background: lightcoral;
+  /*background-color: #ff3333;*/
 }
 
 

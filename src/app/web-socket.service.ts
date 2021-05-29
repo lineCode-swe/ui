@@ -5,16 +5,16 @@
  * Copyright lineCode group <linecode.swe@gmail.com> 2020 - 2021
  * Distributed under open-source licence (see accompanying file LICENCE).
  */
-import {Injectable} from '@angular/core';
-import {WebSocketSubject} from "rxjs/webSocket";
-import {PartialObserver, Subject} from "rxjs";
-import {ServerService} from "./server-service";
-import {Cell} from "./cell";
-import {User} from "./user";
-import {Unit} from "./unit";
-import {Position} from "./position";
-import {AuthStatus} from "./auth-status.enum";
-import {UnitStopCommand} from "./unit-stop-command.enum";
+import { Injectable } from '@angular/core';
+import { WebSocketSubject } from "rxjs/webSocket";
+import { Observable, PartialObserver, Subject } from "rxjs";
+import { ServerService } from "./server-service";
+import { Cell } from "./cell";
+import { User } from "./user";
+import { Unit } from "./unit";
+import { Position } from "./position";
+import { AuthStatus } from "./auth-status.enum";
+import { UnitStopCommand } from "./unit-stop-command.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,7 @@ export class WebSocketService implements ServerService {
     private cellMap: Map<Position, Cell>,
     private userMap: Map<string, User>,
     private unitMap: Map<string, Unit>,
-    private cellsSubj: Subject<Cell[]>,
+    private cellSubj: Subject<Position>,
     private userSubj: Subject<string>,
     private unitSubj: Subject<string>,
     private socket: WebSocketSubject<any>,
@@ -68,6 +68,7 @@ export class WebSocketService implements ServerService {
         this.cellMap.clear();
         this.mapHeight = msg.map.height;
         this.mapLength = msg.map.length;
+        let cells: Cell[] = [];
         msg.map.cells.forEach(cell => {
           this.cellMap.set(
             new Position(cell.position.x, cell.position.y),
@@ -76,18 +77,10 @@ export class WebSocketService implements ServerService {
               cell.locked,
               cell.poi,
               cell.base,
-              cell.direction
-            )
-          )
+              cell.direction,
+            ))
         });
-
-        // create cell[]
-
-
-
-
-
-        this.cellsSubj.next(new Position(-1, -1));
+        this.cellSubj.next(new Position(-1, -1));
         break;
 
       case 'UnitStatusFromServer':
@@ -166,7 +159,7 @@ export class WebSocketService implements ServerService {
   }
 
   subscribeCell(obs: PartialObserver<Position>): void {
-    this.cellsSubj.subscribe(obs);
+    this.cellSubj.subscribe(obs);
   }
 
   getUser(username: string): User {

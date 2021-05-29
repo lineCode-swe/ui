@@ -1,0 +1,33 @@
+table {
+  margin-left:auto;
+  margin-top: 2em;
+  margin-right:auto;
+}
+
+table, td, th {
+  border: 3px solid black;
+  border-collapse: collapse;
+  empty-cells: show;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+th, td {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+table td {
+  min-height: 40px;
+  max-height: 40px;
+  min-width: 40px;
+  max-width: 120px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.unitManagement {
+  float: right;
+  margin-right: 1.5em;
+}

@@ -1,0 +1,24 @@
+<div class="unitManagement">
+  <table>
+    <tr>
+      <th></th>
+      <th scope="col">ID</th>
+      <th scope="col">BASE</th>
+      <th scope="col">POSITION</th>
+      <th scope="col">STATUS</th>
+      <th scope="col">ERROR</th>
+      <th scope="col">SPEED</th>
+    </tr>
+    <!-- Da aggiungere: " | async" -->
+    <tr *ngFor="let unit of this.obs; let i = index">
+      <!--    DA FARE LA FUNZIONE DEL BUTTON-->
+      <td><button (click)="getUnitDetails(unit.getId())">[X]</button></td>
+      <td>{{ unit.getId() }}</td>
+      <td>{{ unit.getBase() }}</td>
+      <td>{{ unit.getPosition() }}</td>
+      <td>{{ unit.getStatus() }}</td>
+      <td>{{ unit.getError() }}</td>
+      <td>{{ unit.getSpeed() }}</td>
+    </tr>
+  </table>
+</div>

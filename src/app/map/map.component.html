@@ -15,24 +15,22 @@
             [class.directionLeft]="directionLeft(i, j)"
             [class.directionRight]="directionRight(i, j)"
             [class.cellLocked]="cellLocked(i, j)"
+            [class.cellBase]="cellBase(i, j)"
+            [class.cellPoi]="cellPoi(i, j)"
           >
-
-            <!-- Da aggiungere: " | async" dopo grid -->
-            <span *ngFor="let cell of obs | async">
+            <!-- Da aggiungere: " | async" -->
+            <span *ngFor="let cell of map">
               <span [innerHTML]="displayCell(cell, i, j)"
-                [class.cellUnit]="cell.getUnit()"
-                [class.cellBase]="cell.isBase()"
-                [class.cellPoi]="cell.isPoi()"
-                [class.cellObstacle]="cell.getObstacle()"
+                    [class.cellUnit]="cell.getUnit()"
+                    [class.cellObstacle]="cell.getObstacle()"
               >
-        </span>
-      </span>
+              </span>
+            </span>
+          </td>
+        </tr>
+      </table>
 
-    </td>
-  </tr>
-</table>
-
-</div>
-</div>
+    </div>
+  </div>
 
 </div>

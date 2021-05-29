@@ -8,9 +8,9 @@
 import { Component } from '@angular/core';
 import { Cell } from "../cell";
 import { Position } from "../position";
-import {ServerService } from "../server-service";
+import { ServerService } from "../server-service";
 import { Direction } from "../direction.enum";
-import {Observable, Observer} from "rxjs";
+import { Observer } from "rxjs";
 
 @Component({
   selector: 'app-map',
@@ -19,55 +19,65 @@ import {Observable, Observer} from "rxjs";
 })
 export class MapComponent {
 
-  private arrayLength: Array<number> = [];
-  private arrayHeight: Array<number> = [];
+  // TESTING
+  private mapLengthTemp: number;
+  private mapHeightTemp: number;
 
-  public obs: Observable<Cell[]>;
+  private mapLength: Array<number> = [];
+  private mapHeight: Array<number> = [];
+
+  // TESTING - Dovrebbe essere Observable<Cell>
+  public map: Cell[];
+  // public obstacles: Position[];
 
   constructor(private service: ServerService) {
-
-    this.obs
-
-    for (let i: number = 0; i < this.service.getMapLength(); i++) {
-      this.arrayLength.push(i);
+    this.mapLengthTemp = 4; // this.service.getMapLength();
+    for (let i: number = 0; i<this.mapLengthTemp; i++) {
+      this.mapLength.push(i);
     }
 
-    for (let i: number = 0; i < this.service.getMapHeight(); i++) {
-      this.arrayHeight.push(i);
+    this.mapHeightTemp = 3; // this.service.getMapHeight();
+    for (let i: number = 0; i<this.mapHeightTemp; i++) {
+      this.mapHeight.push(i);
     }
 
+    // TESTING
+    let poiCell1: Cell = new Cell(new Position(0, 0), false, true, false, Direction.ALL, false, "A");
+    let poiCell2: Cell = new Cell(new Position(0, 1), false, false, false, Direction.UP, false, "B");
+    let lockCell1: Cell = new Cell(new Position(0, 2), true, false, false, Direction.DOWN, false, "");
+    let baseCell1: Cell = new Cell(new Position(0, 3), false, false, true, Direction.LEFT, false, "");
+
+    let baseCell2: Cell = new Cell(new Position(1, 0), false, false, true, Direction.ALL, false, "C");
+    let lockCell2: Cell = new Cell(new Position(1, 1), true, false, false, Direction.RIGHT, false, "");
+    let poiCell3: Cell = new Cell(new Position(1, 2), false, false, false, Direction.RIGHT, true, "");
+    let poiCell4: Cell = new Cell(new Position(1, 3), false, true, false, Direction.DOWN, false, "");
+
+    let emptyCell1: Cell = new Cell(new Position(1, 0), false, false, false, Direction.ALL, false, "");
+    let emptyCell2: Cell = new Cell(new Position(1, 1), false, false, false, Direction.ALL, false, "");
+    let emptyCell3: Cell = new Cell(new Position(1, 2), false, false, false, Direction.ALL, false, "");
+    let emptyCell4: Cell = new Cell(new Position(1, 3), false, false, false, Direction.ALL, false, "");
+
+    this.map = [
+      poiCell1, poiCell2, lockCell1, baseCell1,
+      baseCell2, lockCell2, poiCell3, poiCell4,
+      emptyCell1, emptyCell2, emptyCell3, emptyCell4
+    ];
   }
 
   getArrayLength(): Array<number> {
-    return this.arrayLength;
+    return this.mapLength;
   }
 
   getArrayHeight(): Array<number> {
-    return this.arrayHeight;
+    return this.mapHeight;
   }
 
   displayCell(cell: Cell, i: number, j: number): string {
     let htmlStr: string = '';
     let pos: Position= new Position(i, j);
     if (cell.getPosition().toString() == pos.toString()) {
-      // POI + UNITS
-      if (cell.isPoi() && cell.getUnit() != "") {
-        htmlStr += '\xa0P<sup>U</sup>\xa0';
-      }
-      // POI
-      else if (cell.isPoi()) {
-        htmlStr += '\xa0P\xa0';
-      }
-      // BASE + UNITS
-      else if (cell.isBase() && cell.getUnit() != "") {
-        htmlStr += '\xa0B<sup>U</sup>\xa0';
-      }
-      // BASE
-      else if (cell.isBase()) {
-        htmlStr += '\xa0B\xa0';
-      }
       // OBSTACLE + UNITS
-      else if (cell.getObstacle() && cell.getUnit() != "") {
+      if (cell.getObstacle() && cell.getUnit() != "") {
         htmlStr += '\xa0O<sup>U</sup>\xa0';
       }
       // OBSTACLE
@@ -83,35 +93,44 @@ export class MapComponent {
   }
 
   directionAll(i: number, j: number): boolean {
-    let pos: number = this.service.getMapLength() * i + j;
-    return this.obs[pos].getDirection() == Direction.ALL;
+    let pos: number = this.getArrayLength().length * i + j;
+    return this.map[pos].getDirection() == Direction.ALL;
   }
 
   directionUp(i: number, j: number): boolean {
-    let pos: number = this.service.getMapLength() * i + j;
-    return this.obs[pos].getDirection() == Direction.UP;
+    let pos: number = this.getArrayLength().length * i + j;
+    return this.map[pos].getDirection() == Direction.UP;
   }
 
   directionDown(i: number, j: number): boolean {
-    let pos: number = this.service.getMapLength() * i + j;
-    return this.obs[pos].getDirection() == Direction.DOWN;
+    let pos: number = this.getArrayLength().length * i + j;
+    return this.map[pos].getDirection() == Direction.DOWN;
   }
 
   directionLeft(i: number, j: number): boolean {
-    let pos: number = this.service.getMapLength() * i + j;
-    return this.obs[pos].getDirection() == Direction.LEFT;
+    let pos: number = this.getArrayLength().length * i + j;
+    return this.map[pos].getDirection() == Direction.LEFT;
   }
 
   directionRight(i: number, j: number): boolean {
-    let pos: number = this.service.getMapLength() * i + j;
-    return this.obs[pos].getDirection() == Direction.RIGHT;
+    let pos: number = this.getArrayLength().length * i + j;
+    return this.map[pos].getDirection() == Direction.RIGHT;
   }
 
   cellLocked(i: number, j: number): boolean {
-    let pos: number = this.service.getMapLength() * i + j;
-    return this.obs[pos].isLocked();
+    let pos: number = this.getArrayLength().length * i + j;
+    return this.map[pos].isLocked();
   }
 
+  cellBase(i: number, j: number): boolean {
+    let pos: number = this.getArrayLength().length * i + j;
+    return this.map[pos].isBase();
+  }
+
+  cellPoi(i: number, j: number): boolean {
+    let pos: number = this.getArrayLength().length * i + j;
+    return this.map[pos].isPoi();
+  }
 }
 
 
