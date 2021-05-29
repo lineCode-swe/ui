@@ -7,7 +7,7 @@
  */
 import {Injectable} from '@angular/core';
 import {WebSocketSubject} from "rxjs/webSocket";
-import {PartialObserver, Subject} from "rxjs";
+import {Observable, PartialObserver, Subject} from "rxjs";
 import {ServerService} from "./server-service";
 import {Cell} from "./cell";
 import {User} from "./user";
@@ -29,9 +29,10 @@ export class WebSocketService implements ServerService {
     private cellMap: Map<Position, Cell>,
     private userMap: Map<string, User>,
     private unitMap: Map<string, Unit>,
-    private cellSubj: Subject<Position>,
-    private userSubj: Subject<string>,
-    private unitSubj: Subject<string>,
+    private cellSubj: Subject<Cell[]>,
+    private userSubj: Subject<User[]>,
+    private unitSubj: Subject<Unit[]>,
+    private authSubj: Subject<AuthStatus>,
     private socket: WebSocketSubject<any>,
   ) {
     this.socket.subscribe({
@@ -46,6 +47,7 @@ export class WebSocketService implements ServerService {
 
       case 'AuthFromServer':
         this.authStatus = msg.session;
+        this.authSubj.next(this.authStatus);
         break;
 
       case 'UsersFromServer':
@@ -53,7 +55,7 @@ export class WebSocketService implements ServerService {
         msg.users.forEach(user => {
           this.userMap.set(user.username, new User(user.username, user.admin));
         })
-        this.userSubj.next('*');
+        this.userSubj.next(Array.from(this.userMap.values()));
         break;
 
       case 'UnitsFromServer':
@@ -61,7 +63,7 @@ export class WebSocketService implements ServerService {
         msg.units.forEach(unit => {
           this.unitMap.set(unit.id, new Unit(unit.id, unit.name, new Position(unit.base.x, unit.base.y)));
         })
-        this.unitSubj.next('*');
+        this.unitSubj.next(Array.from(this.unitMap.values()));
         break;
 
       case 'MapFromServer':
@@ -80,13 +82,13 @@ export class WebSocketService implements ServerService {
             )
           )
         });
-        this.cellSubj.next(new Position(-1, -1));
+        this.cellSubj.next(Array.from(this.cellMap.values()));
         break;
 
       case 'UnitStatusFromServer':
         if (this.unitMap.has(msg.id)) {
           this.unitMap.get(msg.id).setStatus(msg.status);
-          this.unitSubj.next(msg.id);
+          this.unitSubj.next(Array.from(this.unitMap.values()));
         } else {
           console.log(`Unit with ID: ${msg.id} has been requested but not found`);
         }
@@ -99,7 +101,7 @@ export class WebSocketService implements ServerService {
             poiList.push(new Position(pos.x, pos.y))
           });
           this.unitMap.get(msg.id).setPoiList(poiList);
-          this.unitSubj.next(msg.id);
+          this.unitSubj.next(Array.from(this.unitMap.values()));
         } else {
           console.log(`Unit with ID: ${msg.id} has been requested but not found`);
         }
@@ -108,7 +110,7 @@ export class WebSocketService implements ServerService {
       case 'UnitSpeedFromServer':
         if (this.unitMap.has(msg.id)) {
           this.unitMap.get(msg.id).setSpeed(msg.speed);
-          this.unitSubj.next(msg.id);
+          this.unitSubj.next(Array.from(this.unitMap.values()));
         } else {
           console.log(`Unit with ID: ${msg.id} has been requested but not found`);
         }
@@ -117,7 +119,7 @@ export class WebSocketService implements ServerService {
       case 'UnitErrorFromServer':
         if (this.unitMap.has(msg.id)) {
           this.unitMap.get(msg.id).setError(msg.error);
-          this.unitSubj.next(msg.id);
+          this.unitSubj.next(Array.from(this.unitMap.values()));
         } else {
           console.log(`Unit with ID: ${msg.id} has been requested but not found`);
         }
@@ -125,8 +127,14 @@ export class WebSocketService implements ServerService {
 
       case 'UnitPosFromServer':
         if (this.unitMap.has(msg.id)) {
-          this.unitMap.get(msg.id).setPosition(new Position(msg.position.x, msg.position.y));
-          this.unitSubj.next(msg.id);
+          let unit: Unit = this.unitMap.get(msg.id);
+          let oldPosition: Position = unit.getPosition();
+          let newPosition: Position = new Position(msg.position.x, msg.position.y);
+          unit.setPosition(newPosition);
+          this.cellMap.get(oldPosition).setUnit('');
+          this.cellMap.get(newPosition).setUnit(msg.id);
+          this.cellSubj.next(Array.from(this.cellMap.values()));
+          this.unitSubj.next(Array.from(this.unitMap.values()));
         } else {
           console.log(`Unit with ID: ${msg.id} has been requested but not found`);
         }
@@ -142,6 +150,10 @@ export class WebSocketService implements ServerService {
     return this.authStatus;
   }
 
+  subscribeAuth(obs: PartialObserver<AuthStatus>): void {
+    this.authSubj.subscribe(obs);
+  }
+
   getMapLength(): number {
     return this.mapLength;
   }
@@ -154,36 +166,25 @@ export class WebSocketService implements ServerService {
     return this.cellMap.get(position);
   }
 
-  getAllCell(): Cell[] {
-    return Array.from(this.cellMap.values());
-  }
-
-  subscribeCell(obs: PartialObserver<Position>): void {
-    this.cellSubj.subscribe(obs);
+  // @ts-ignore
+  getCellObservable(): Observable<Cell[]> {
+    return this.cellSubj.asObservable();
   }
 
   getUser(username: string): User {
     return this.userMap.get(username);
   }
 
-  getAllUser(): User[] {
-    return Array.from(this.userMap.values());
-  }
-
-  subscribeUser(obs: PartialObserver<string>): void {
-    this.userSubj.subscribe(obs);
+  getUserObservable(): Observable<User[]> {
+    return this.userSubj.asObservable();
   }
 
   getUnit(id: string): Unit {
     return this.unitMap.get(id);
   }
 
-  getAllUnit(): Unit[] {
-    return Array.from(this.unitMap.values());
-  }
-
-  subscribeUnit(obs: PartialObserver<string>): void {
-    this.unitSubj.subscribe(obs);
+  getUnitObservable(): Observable<Unit[]> {
+    return this.unitSubj.asObservable();
   }
 
   login(user: string, password: string): void {
