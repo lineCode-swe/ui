@@ -22,10 +22,9 @@ describe('WebSocketService', () => {
   let spyLog: any;
   let fakeUnit: Unit;
 
-
   beforeEach(() => {
     spySocket = jasmine.createSpyObj('WebSocketSubject', ['next', 'subscribe']);
-    spyMap = jasmine.createSpyObj('Map', ['set', 'get', 'clear', 'has']);
+    spyMap = jasmine.createSpyObj('Map', ['set', 'get', 'clear', 'has', 'values']);
     spySubject = jasmine.createSpyObj('Subject', ['next']);
     spyLog = spyOn(console, 'log').and.callThrough();
     fakeUnit = new Unit('unit1', 'one', new Position(0, 0));
@@ -34,6 +33,7 @@ describe('WebSocketService', () => {
       spyMap,
       spyMap,
       spyMap,
+      spySubject,
       spySubject,
       spySubject,
       spySubject,
@@ -53,10 +53,10 @@ describe('WebSocketService', () => {
     });
 
     expect(service.getAuthStatus()).toEqual(AuthStatus.NO_AUTH);
-    expect(spyMap.get).toHaveBeenCalledTimes(0);
-    expect(spyMap.set).toHaveBeenCalledTimes(0);
-    expect(spySocket.next).toHaveBeenCalledTimes(0);
-    expect(spySubject.next).toHaveBeenCalledTimes(0);
+    expect(spyMap.get).not.toHaveBeenCalled();
+    expect(spyMap.set).not.toHaveBeenCalled();
+    expect(spySocket.next).not.toHaveBeenCalled();
+    expect(spySubject.next).not.toHaveBeenCalled();
   });
 
   it('should receive a "AuthFromServer" and change authStatus to "ADMIN" [TU3]', () => {
@@ -83,13 +83,17 @@ describe('WebSocketService', () => {
       ]
     }
 
+    let user1: User = new User('hiyajo', false);
+    let user2: User = new User('essepi', true);
+    spyMap.values.and.returnValue([user1, user2]);
+
     service.onMessage(msg);
 
     expect(spyMap.clear).toHaveBeenCalledTimes(1);
     expect(spyMap.set).toHaveBeenCalledTimes(2);
-    expect(spyMap.set.calls.argsFor(0)).toEqual(['hiyajo', new User('hiyajo', false)]);
-    expect(spyMap.set.calls.argsFor(1)).toEqual(['essepi', new User('essepi', true)]);
-    expect(spySubject.next).toHaveBeenCalledOnceWith('*');
+    expect(spyMap.set.calls.argsFor(0)).toEqual(['hiyajo', user1]);
+    expect(spyMap.set.calls.argsFor(1)).toEqual(['essepi', user2]);
+    expect(spySubject.next).toHaveBeenCalledOnceWith([user1, user2]);
   })
 
   it('should receive a "UnitsFromServer" and update internal Unit data structure [TU5]', () => {
@@ -109,25 +113,23 @@ describe('WebSocketService', () => {
           name: 'two',
           base: {
             x: 420,
-            y: 69,
+            y: 24,
           },
         }
       ]
     }
 
+    let unit1: Unit = new Unit('unit1', 'one', new Position(0, 0));
+    let unit2: Unit = new Unit('unit2', 'two', new Position(420, 24));
+    spyMap.values.and.returnValue([unit1, unit2]);
+
     service.onMessage(msg);
 
     expect(spyMap.clear).toHaveBeenCalledTimes(1);
     expect(spyMap.set).toHaveBeenCalledTimes(2);
-    expect(spyMap.set.calls.argsFor(0)).toEqual([
-      'unit1',
-      new Unit('unit1', 'one', new Position(0, 0))
-    ]);
-    expect(spyMap.set.calls.argsFor(1)).toEqual([
-      'unit2',
-      new Unit('unit2', 'two', new Position(420, 69))
-    ]);
-    expect(spySubject.next).toHaveBeenCalledOnceWith('*');
+    expect(spyMap.set.calls.argsFor(0)).toEqual(['unit1', unit1]);
+    expect(spyMap.set.calls.argsFor(1)).toEqual(['unit2', unit2]);
+    expect(spySubject.next).toHaveBeenCalledOnceWith([unit1, unit2]);
   });
 
   it('should receive a "MapFromServer" and update internal Cell data structure [TU6]', () => {
@@ -181,27 +183,21 @@ describe('WebSocketService', () => {
       }
     }
 
+    let cell0: Cell = new Cell(new Position(0, 0), false, false, false, Direction.ALL);
+    let cell1: Cell = new Cell(new Position(1, 0), true, true, false, Direction.RIGHT);
+    let cell2: Cell = new Cell(new Position(0, 1), false, false, true, Direction.LEFT);
+    let cell3: Cell = new Cell(new Position(1, 1), true, true, true, Direction.UP);
+    spyMap.values.and.returnValue([cell0, cell1, cell2, cell3]);
+
     service.onMessage(msg);
 
     expect(spyMap.clear).toHaveBeenCalledTimes(1);
     expect(spyMap.set).toHaveBeenCalledTimes(4);
-    expect(spyMap.set.calls.argsFor(0)).toEqual([
-      new Position(0, 0),
-      new Cell(new Position(0, 0), false, false, false, Direction.ALL)
-    ]);
-    expect(spyMap.set.calls.argsFor(1)).toEqual([
-      new Position(1, 0),
-      new Cell(new Position(1, 0), true, true, false, Direction.RIGHT)
-    ]);
-    expect(spyMap.set.calls.argsFor(2)).toEqual([
-      new Position(0, 1),
-      new Cell(new Position(0, 1), false, false, true, Direction.LEFT)
-    ]);
-    expect(spyMap.set.calls.argsFor(3)).toEqual([
-      new Position(1, 1),
-      new Cell(new Position(1, 1), true, true, true, Direction.UP)
-    ]);
-    expect(spySubject.next).toHaveBeenCalledOnceWith(new Position(-1, -1));
+    expect(spyMap.set.calls.argsFor(0)).toEqual([new Position(0, 0), cell0]);
+    expect(spyMap.set.calls.argsFor(1)).toEqual([new Position(1, 0), cell1]);
+    expect(spyMap.set.calls.argsFor(2)).toEqual([new Position(0, 1), cell2]);
+    expect(spyMap.set.calls.argsFor(3)).toEqual([new Position(1, 1), cell3]);
+    expect(spySubject.next).toHaveBeenCalledOnceWith([cell0, cell1, cell2, cell3]);
     expect(service.getMapHeight()).toEqual(2);
     expect(service.getMapLength()).toEqual(2);
   });
@@ -216,14 +212,15 @@ describe('WebSocketService', () => {
 
     spyMap.get.and.returnValue(fakeUnit);
     spyMap.has.and.returnValue(true);
+    spyMap.values.and.returnValue([fakeUnit]);
 
     service.onMessage(msg);
 
     expect(spyMap.has).toHaveBeenCalledTimes(1);
     expect(spyMap.get).toHaveBeenCalledOnceWith('unit1');
     expect(fakeUnit.getStatus()).toEqual(UnitStatus.ERROR);
-    expect(spySubject.next).toHaveBeenCalledOnceWith('unit1');
-    expect(console.log).toHaveBeenCalledTimes(0);
+    expect(spySubject.next).toHaveBeenCalledOnceWith([fakeUnit]);
+    expect(console.log).not.toHaveBeenCalled();
   });
 
   it('should receive a "UnitPoiFromServer" with a known id, list of POI and change internal data [TU8]',
@@ -245,6 +242,7 @@ describe('WebSocketService', () => {
 
     spyMap.get.and.returnValue(fakeUnit);
     spyMap.has.and.returnValue(true);
+    spyMap.values.and.returnValue([fakeUnit]);
 
     service.onMessage(msg);
 
@@ -254,8 +252,8 @@ describe('WebSocketService', () => {
       new Position(5, 6),
       new Position(7, 8),
     ]);
-    expect(spySubject.next).toHaveBeenCalledOnceWith('unit1');
-    expect(console.log).toHaveBeenCalledTimes(0);
+    expect(spySubject.next).toHaveBeenCalledOnceWith([fakeUnit]);
+    expect(console.log).not.toHaveBeenCalled();
   });
 
   it('should receive a "UnitSpeedFromServer" with a known id, a new speed value and change internal data [TU9]',
@@ -268,14 +266,15 @@ describe('WebSocketService', () => {
 
     spyMap.get.and.returnValue(fakeUnit);
     spyMap.has.and.returnValue(true);
+    spyMap.values.and.returnValue([fakeUnit]);
 
     service.onMessage(msg);
 
     expect(spyMap.has).toHaveBeenCalledTimes(1);
     expect(spyMap.get).toHaveBeenCalledOnceWith('unit1');
     expect(fakeUnit.getSpeed()).toEqual(42);
-    expect(spySubject.next).toHaveBeenCalledOnceWith('unit1');
-    expect(console.log).toHaveBeenCalledTimes(0);
+    expect(spySubject.next).toHaveBeenCalledOnceWith([fakeUnit]);
+    expect(console.log).not.toHaveBeenCalled();
   });
 
   it('should receive a "UnitErrorFromServer" with a known id, a new error code and change internal data [TU10]',
@@ -288,37 +287,52 @@ describe('WebSocketService', () => {
 
     spyMap.get.and.returnValue(fakeUnit);
     spyMap.has.and.returnValue(true);
+    spyMap.values.and.returnValue([fakeUnit]);
 
     service.onMessage(msg);
 
     expect(spyMap.has).toHaveBeenCalledTimes(1);
     expect(spyMap.get).toHaveBeenCalledOnceWith('unit1');
     expect(fakeUnit.getError()).toEqual(42);
-    expect(spySubject.next).toHaveBeenCalledOnceWith('unit1');
-    expect(console.log).toHaveBeenCalledTimes(0);
+    expect(spySubject.next).toHaveBeenCalledOnceWith([fakeUnit]);
+    expect(console.log).not.toHaveBeenCalled();
   });
 
-  it('should receive a "UnitPosFromServer" with a known id, a new current position and change internal data [TU11]',
+  it('should receive a "UnitPosFromServer" with a known id, a new current position and change internal data (unit and grid) [TU11]',
     () => {
     let msg = {
       type: 'UnitPosFromServer',
       id: 'unit1',
       position: {
-        x: 42,
-        y: 42,
+        x: 0,
+        y: 1,
       },
     }
 
-    spyMap.get.and.returnValue(fakeUnit);
+    let oldPosition: Position = fakeUnit.getPosition();
+    let newPosition: Position = new Position(0, 1);
+    let fakeCellInOldPosition: Cell = new Cell(oldPosition, false, false, false,
+      Direction.ALL, false, fakeUnit.getId());
+    let fakeCellInNewPosition: Cell = new Cell(newPosition, false, false, false);
+
+    spyMap.get.and.returnValues(fakeUnit, fakeCellInOldPosition, fakeCellInNewPosition);
     spyMap.has.and.returnValue(true);
+    spyMap.values.and.returnValues([fakeCellInOldPosition, fakeCellInNewPosition], [fakeUnit])
 
     service.onMessage(msg);
 
     expect(spyMap.has).toHaveBeenCalledTimes(1);
-    expect(spyMap.get).toHaveBeenCalledOnceWith('unit1');
-    expect(fakeUnit.getPosition()).toEqual(new Position(42, 42));
-    expect(spySubject.next).toHaveBeenCalledOnceWith('unit1');
-    expect(console.log).toHaveBeenCalledTimes(0);
+    expect(spyMap.get).toHaveBeenCalledTimes(3);
+    expect(spyMap.get).toHaveBeenCalledWith('unit1');
+    expect(spyMap.get).toHaveBeenCalledWith(oldPosition);
+    expect(spyMap.get).toHaveBeenCalledWith(newPosition);
+    expect(fakeUnit.getPosition()).toEqual(newPosition);
+    expect(fakeCellInOldPosition.getUnit()).toEqual('');
+    expect(fakeCellInNewPosition.getUnit()).toEqual('unit1');
+    expect(spySubject.next).toHaveBeenCalledTimes(2);
+    expect(spySubject.next.calls.argsFor(0)).toEqual([[fakeCellInOldPosition, fakeCellInNewPosition]]);
+    expect(spySubject.next.calls.argsFor(1)).toEqual([[fakeUnit]]);
+    expect(console.log).not.toHaveBeenCalled();
   });
 
   it('should receive a "Unit*FromServer" with unknown id, not change internal data and print error message [TU12]',
@@ -345,8 +359,8 @@ describe('WebSocketService', () => {
       service.onMessage(msg);
 
       expect(spyMap.has).toHaveBeenCalledTimes(1);
-      expect(spyMap.get).toHaveBeenCalledTimes(0);
-      expect(spySubject.next).toHaveBeenCalledTimes(0);
+      expect(spyMap.get).not.toHaveBeenCalled();
+      expect(spySubject.next).not.toHaveBeenCalled();
       expect(console.log).toHaveBeenCalledOnceWith('Unit with ID: unit5 has been requested but not found');
     });
   });
