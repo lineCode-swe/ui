@@ -20,11 +20,14 @@ import { Location } from "@angular/common";
 })
 export class UnitDetailsComponent {
 
-  private units: Observable<Unit[]>;
   @Input() public unitID: string;
+  private units: Observable<Unit[]>;
   private localPoiList: Position[];
 
-  constructor(private service: ServerService, public _router: Router, public _location: Location) {
+  public _router: Router;
+  public _location: Location;
+
+  constructor(private service: ServerService) {
 
   }
 
@@ -57,12 +60,11 @@ export class UnitDetailsComponent {
   }
 
   refreshComponent(): void {
-    // TO DO
+    this._router.navigateByUrl('', { skipLocationChange: true });
+    this._router.navigate(['UnitDetailsComponent']);
   }
 
   addPoi(): void {
-
-
     this.refreshComponent();
   }
 
