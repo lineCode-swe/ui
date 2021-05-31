@@ -18,8 +18,7 @@
             [class.cellBase]="cellBase(i, j)"
             [class.cellPoi]="cellPoi(i, j)"
           >
-            <!-- Da aggiungere: " | async" -->
-            <span *ngFor="let cell of map">
+            <span *ngFor="let cell of this.getMap() | async">
               <span [innerHTML]="displayCell(cell, i, j)"
                     [class.cellUnit]="cell.getUnit()"
                     [class.cellObstacle]="cell.getObstacle()"

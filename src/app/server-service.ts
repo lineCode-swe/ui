@@ -18,7 +18,7 @@ export abstract class ServerService {
   abstract getMapLength(): number;
   abstract getMapHeight(): number;
   abstract getCell(position: Position): Cell;
-  abstract getCellObservable: Observable<Cell[]>;
+  abstract getCellObservable(): Observable<Cell[]>;
   abstract getUser(username: string): User;
   abstract getUserObservable(): Observable<User[]>;
   abstract getUnit(id: string): Unit;

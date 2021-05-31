@@ -20,7 +20,8 @@ import { WebSocketService } from "./web-socket.service";
 import { Subject } from "rxjs";
 import { webSocket, WebSocketSubject } from "rxjs/webSocket";
 import { UnitManagementComponent } from './unit-management/unit-management.component';
-import { UnitDetailsComponent } from './unit-details/unit-details.component';
+import { UnitDetailsComponent } from './unit-management/unit-details/unit-details.component';
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { UnitDetailsComponent } from './unit-details/unit-details.component';
     HeaderAdminComponent,
     MapComponent,
     UnitManagementComponent,
-    UnitDetailsComponent,
+    UnitDetailsComponent
   ],
   imports: [
     BrowserModule,

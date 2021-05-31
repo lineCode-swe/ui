@@ -10,7 +10,8 @@ import { Cell } from "../cell";
 import { Position } from "../position";
 import { ServerService } from "../server-service";
 import { Direction } from "../direction.enum";
-import { Observer } from "rxjs";
+import {Observable, Observer} from "rxjs";
+import {Unit} from "../unit";
 
 @Component({
   selector: 'app-map',
@@ -19,49 +20,60 @@ import { Observer } from "rxjs";
 })
 export class MapComponent {
 
-  // TESTING
-  private mapLengthTemp: number;
-  private mapHeightTemp: number;
+  // private mapLengthTemp: number;
+  // private mapHeightTemp: number;
 
   private mapLength: Array<number> = [];
   private mapHeight: Array<number> = [];
 
-  // TESTING - Dovrebbe essere Observable<Cell>
-  public map: Cell[];
-  // public obstacles: Position[];
+  private map: Observable<Cell[]>;
+  private units: Observable<Unit[]>;
 
   constructor(private service: ServerService) {
-    this.mapLengthTemp = 4; // this.service.getMapLength();
-    for (let i: number = 0; i<this.mapLengthTemp; i++) {
+    //this.mapLengthTemp = 4;
+    // this.mapHeightTemp = 3;
+
+    this.map = this.service.getCellObservable();
+    this.units = this.service.getUnitObservable();
+
+    for (let i: number = 0; i<this.service.getMapLength(); i++) {
       this.mapLength.push(i);
     }
 
-    this.mapHeightTemp = 3; // this.service.getMapHeight();
-    for (let i: number = 0; i<this.mapHeightTemp; i++) {
+    for (let i: number = 0; i<this.service.getMapHeight(); i++) {
       this.mapHeight.push(i);
     }
 
-    // TESTING
-    let poiCell1: Cell = new Cell(new Position(0, 0), false, true, false, Direction.ALL, false, "A");
-    let poiCell2: Cell = new Cell(new Position(0, 1), false, false, false, Direction.UP, false, "B");
-    let lockCell1: Cell = new Cell(new Position(0, 2), true, false, false, Direction.DOWN, false, "");
-    let baseCell1: Cell = new Cell(new Position(0, 3), false, false, true, Direction.LEFT, false, "");
+    // // TESTING
+    // let poiCell1: Cell = new Cell(new Position(0, 0), false, true, false, Direction.ALL, false, "A");
+    // let poiCell2: Cell = new Cell(new Position(0, 1), false, false, false, Direction.UP, false, "B");
+    // let lockCell1: Cell = new Cell(new Position(0, 2), true, false, false, Direction.DOWN, false, "");
+    // let baseCell1: Cell = new Cell(new Position(0, 3), false, false, true, Direction.LEFT, false, "");
+    //
+    // let baseCell2: Cell = new Cell(new Position(1, 0), false, false, true, Direction.ALL, false, "C");
+    // let lockCell2: Cell = new Cell(new Position(1, 1), true, false, false, Direction.RIGHT, false, "");
+    // let poiCell3: Cell = new Cell(new Position(1, 2), false, false, false, Direction.RIGHT, true, "");
+    // let poiCell4: Cell = new Cell(new Position(1, 3), false, true, false, Direction.DOWN, false, "");
+    //
+    // let emptyCell1: Cell = new Cell(new Position(1, 0), false, false, false, Direction.ALL, false, "");
+    // let emptyCell2: Cell = new Cell(new Position(1, 1), false, false, false, Direction.ALL, false, "");
+    // let emptyCell3: Cell = new Cell(new Position(1, 2), false, false, false, Direction.ALL, false, "");
+    // let emptyCell4: Cell = new Cell(new Position(1, 3), false, false, false, Direction.ALL, false, "");
+    //
+    // this.map = [
+    //   poiCell1, poiCell2, lockCell1, baseCell1,
+    //   baseCell2, lockCell2, poiCell3, poiCell4,
+    //   emptyCell1, emptyCell2, emptyCell3, emptyCell4
+    // ];
 
-    let baseCell2: Cell = new Cell(new Position(1, 0), false, false, true, Direction.ALL, false, "C");
-    let lockCell2: Cell = new Cell(new Position(1, 1), true, false, false, Direction.RIGHT, false, "");
-    let poiCell3: Cell = new Cell(new Position(1, 2), false, false, false, Direction.RIGHT, true, "");
-    let poiCell4: Cell = new Cell(new Position(1, 3), false, true, false, Direction.DOWN, false, "");
+  }
 
-    let emptyCell1: Cell = new Cell(new Position(1, 0), false, false, false, Direction.ALL, false, "");
-    let emptyCell2: Cell = new Cell(new Position(1, 1), false, false, false, Direction.ALL, false, "");
-    let emptyCell3: Cell = new Cell(new Position(1, 2), false, false, false, Direction.ALL, false, "");
-    let emptyCell4: Cell = new Cell(new Position(1, 3), false, false, false, Direction.ALL, false, "");
+  getMap(): Observable<Cell[]> {
+    return this.map;
+  }
 
-    this.map = [
-      poiCell1, poiCell2, lockCell1, baseCell1,
-      baseCell2, lockCell2, poiCell3, poiCell4,
-      emptyCell1, emptyCell2, emptyCell3, emptyCell4
-    ];
+  getUnits(): Observable<Unit[]> {
+    return this.units;
   }
 
   getArrayLength(): Array<number> {

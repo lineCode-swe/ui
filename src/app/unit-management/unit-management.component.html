@@ -1,3 +1,5 @@
+<app-unit-details [unitID]="this.getUnitID()"></app-unit-details>
+
 <div class="unitManagement">
   <table>
     <tr>
@@ -9,10 +11,8 @@
       <th scope="col">ERROR</th>
       <th scope="col">SPEED</th>
     </tr>
-    <!-- Da aggiungere: " | async" -->
-    <tr *ngFor="let unit of this.obs; let i = index">
-      <!--    DA FARE LA FUNZIONE DEL BUTTON-->
-      <td><button (click)="getUnitDetails(unit.getId())">[X]</button></td>
+    <tr *ngFor="let unit of this.getUnits() | async; let i = index">
+      <td><button (click)="selectUnit(unit.getId())">[X]</button></td>
       <td>{{ unit.getId() }}</td>
       <td>{{ unit.getBase() }}</td>
       <td>{{ unit.getPosition() }}</td>

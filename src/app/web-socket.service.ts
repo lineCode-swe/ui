@@ -70,7 +70,6 @@ export class WebSocketService implements ServerService {
         this.cellMap.clear();
         this.mapHeight = msg.map.height;
         this.mapLength = msg.map.length;
-        let cells: Cell[] = [];
         msg.map.cells.forEach(cell => {
           this.cellMap.set(
             new Position(cell.position.x, cell.position.y),
@@ -166,7 +165,6 @@ export class WebSocketService implements ServerService {
     return this.cellMap.get(position);
   }
 
-  // @ts-ignore
   getCellObservable(): Observable<Cell[]> {
     return this.cellSubj.asObservable();
   }
