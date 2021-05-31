@@ -9,10 +9,13 @@ import { NgModule } from '@angular/core';
 import {RouterModule,Routes} from "@angular/router";
 import {LoginComponent} from "./login/login.component";
 import {HeaderComponent} from "./header/header.component";
+import {HeaderAdminComponent} from "./header-admin/header-admin.component";
+import {AppComponent} from "./app.component";
 
 const routes: Routes=[
-  {path: 'Login', component: LoginComponent},
-  {path:'Home', component: HeaderComponent}
+  {path: '', component: AppComponent },
+  {path:'homeAdmin', component: HeaderAdminComponent},
+  {path:'homeUser', component: HeaderComponent}
 ];
 
 @NgModule({

@@ -32,6 +32,7 @@ export class WebSocketService implements ServerService {
     private cellSubj: Subject<Position>,
     private userSubj: Subject<string>,
     private unitSubj: Subject<string>,
+    private authSubj: Subject<AuthStatus>,
     private socket: WebSocketSubject<any>,
   ) {
     this.socket.subscribe({
@@ -46,6 +47,7 @@ export class WebSocketService implements ServerService {
 
       case 'AuthFromServer':
         this.authStatus = msg.session;
+        this.authSubj.next(this.authStatus);
         break;
 
       case 'UsersFromServer':
@@ -140,6 +142,10 @@ export class WebSocketService implements ServerService {
 
   getAuthStatus(): AuthStatus {
     return this.authStatus;
+  }
+
+  subscribeAuth(obs: PartialObserver<AuthStatus>): void {
+    this.authSubj.subscribe(obs);
   }
 
   getMapLength(): number {

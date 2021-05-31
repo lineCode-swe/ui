@@ -14,6 +14,7 @@ import {Unit} from "./unit";
 
 export abstract class ServerService {
   abstract getAuthStatus(): AuthStatus;
+  abstract subscribeAuth(obs: PartialObserver<AuthStatus>): void;
   abstract getMapLength(): number;
   abstract getMapHeight(): number;
   abstract getCell(position: Position): Cell;
