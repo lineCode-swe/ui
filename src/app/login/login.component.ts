@@ -10,6 +10,7 @@ import {ServerService} from "../server-service";
 import {AuthStatus} from "../auth-status.enum";
 import {Router} from "@angular/router";
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,13 +19,13 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
 
   constructor(private service: ServerService, private route:Router) {
-    service.subscribeAuth({ //costruzione inline di un Pobserver
+    service.subscribeAuth({
       next: newAuth => { this.redirectIfAuth(newAuth); }
     });
   }
 
 
-  login(user: HTMLInputElement, password: HTMLInputElement):void{//dati del form da prendere e mettere come parametr
+  login(user: HTMLInputElement, password: HTMLInputElement):void{
       let value: string = user.value;
       this.service.login(value,password.value);
   }

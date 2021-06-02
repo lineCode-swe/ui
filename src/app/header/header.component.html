@@ -1,28 +1,25 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">
-    Brand
-  </a>
+<nav class="navbar navbar-expand-lg navbar-dark ">
+  <a class="navbar-brand" id="brand">
+    Portacs </a>
 
-  <button class="navbar-toggler" type="button"
-          (click)="toggleNavbar()">
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
     <span class="navbar-toggler-icon"></span>
   </button>
 
 
-  <div class="collapse navbar-collapse"
-       [ngClass]="{ 'show': navbarOpen }">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Item 1</a>
+  <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
+    <ul class="navbar-nav mr-auto ">
+      <li class="nav-item active"  id="adminUnit">
+        <a class="nav-link" routerLink="/Login">Gestione Unità</a>
       </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="#">Item 2</a>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/Login" id="adminUser">Gestione Utenti</a>
       </li>
-
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/Login">Manuale Utente</a>
+      </li>
     </ul>
-
-      <button  class="btn btn-outline-secondary" routerLink="/Login"> Logout</button>
-
+    <button  class=" btn btn-primary" routerLink="/Login" id="btn-log"> Logout</button>
   </div>
+
 </nav>
