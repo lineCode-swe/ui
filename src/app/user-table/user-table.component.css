@@ -1,0 +1,42 @@
+h1{
+  text-align: center;
+  color: black;
+  display: block;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.container{
+  margin-bottom: 10px;
+  text-align: center;
+  color:black;
+}
+
+.New-User{
+  position : absolute;
+  right : 380px;
+  top: 115px;
+
+}
+
+.title{
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.row{
+  color: black;
+  /*border: 1px solid black;*/
+}
+
+
+.col{
+ border: 1px solid black;
+  padding: 20px;
+}
+
+button{
+  padding: 3px;
+  margin-right: 10px;
+
+}

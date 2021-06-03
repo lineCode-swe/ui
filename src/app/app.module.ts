@@ -19,6 +19,8 @@ import { ServerService } from "./server-service";
 import { WebSocketService } from "./web-socket.service";
 import { Subject } from "rxjs";
 import { webSocket, WebSocketSubject } from "rxjs/webSocket";
+import { UserTableComponent } from './user-table/user-table.component';
+import { UnitTableComponent } from './unit-table/unit-table.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { webSocket, WebSocketSubject } from "rxjs/webSocket";
     LoginComponent,
     HeaderAdminComponent,
     MapComponent,
+    UserTableComponent,
+    UnitTableComponent,
   ],
   imports: [
     BrowserModule,
