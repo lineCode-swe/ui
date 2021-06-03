@@ -1,24 +1,37 @@
 <app-unit-details [unitIndex]="this.getUnitIndex()"></app-unit-details>
 
 <div class="unitManagement">
-  <table>
-    <tr>
-      <th></th>
-      <th scope="col">ID</th>
-      <th scope="col">BASE</th>
-      <th scope="col">POSITION</th>
-      <th scope="col">STATUS</th>
-      <th scope="col">SPEED</th>
-      <th scope="col">ERROR</th>
-    </tr>
-    <tr *ngFor="let unit of this.getUnits(); let i = index">
-      <td><button (click)="selectUnit(i)">@</button></td>
-      <td>{{ unit.getId() }}</td>
-      <td>{{ unit.getBase() }}</td>
-      <td>{{ unit.getPosition() }}</td>
-      <td>{{ unit.getStatus() }}</td>
-      <td>{{ unit.getSpeed() }}</td>
-      <td>{{ unit.getError() }}</td>
-    </tr>
-  </table>
+
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+  <div class="row " id="row-hidden">
+    <div class="col-12"></div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-8">
+
+      <table class="table">
+        <tr>
+          <th></th>
+          <th scope="col">ID</th>
+          <th scope="col">BASE</th>
+          <th scope="col">POSITION</th>
+          <th scope="col">STATUS</th>
+          <th scope="col">SPEED</th>
+          <th scope="col">ERROR</th>
+        </tr>
+        <tr *ngFor="let unit of this.getUnits(); let i = index">
+          <td><button (click)="selectUnit(i)">@</button></td>
+          <td>{{ unit.getId() }}</td>
+          <td>{{ unit.getBase() }}</td>
+          <td>{{ unit.getPosition() }}</td>
+          <td>{{ unit.getStatus() }}</td>
+          <td>{{ unit.getSpeed() }}</td>
+          <td>{{ unit.getError() }}</td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+
+
 </div>
