@@ -19,8 +19,14 @@ import { ServerService } from "./server-service";
 import { WebSocketService } from "./web-socket.service";
 import { Subject } from "rxjs";
 import { webSocket, WebSocketSubject } from "rxjs/webSocket";
+import { AppRoutingModule } from './app-routing.module';
 import { UnitManagementComponent } from './unit-management/unit-management.component';
 import { UnitDetailsComponent } from './unit-management/unit-details/unit-details.component';
+
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -32,12 +38,14 @@ import { UnitDetailsComponent } from './unit-management/unit-details/unit-detail
     UnitManagementComponent,
     UnitDetailsComponent
   ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        NgbModule,
-        ReactiveFormsModule
-    ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    NgbModule,
+    AppRoutingModule,
+    ReactiveFormsModule
+  ],
+        
   providers: [
     { provide: ServerService, useClass: WebSocketService },
     Map,
