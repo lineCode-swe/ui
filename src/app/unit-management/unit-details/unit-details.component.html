@@ -1,40 +1,50 @@
-<div class="unitDetails">
-  <table>
-    <tr>
-      <td>ID</td>
-      <td>{{ this.getUnitID() }}</td>
-    </tr>
-    <tr>
-      <td>ORDERS</td>
-      <td>
-        <ul>
-          <li *ngFor="let poi of this.getLocalPoiList(); let i = index">
-            {{ poi }}
-            <button (click)="removePoi(i)">Remove</button>
-          </li>
-          <li>
-            <button (click)="addPoi()">Add</button>
-          </li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <ul>
-          <li>
-            <button (click)="unitStart(this.getUnitID(), this.getLocalPoiList())">Start</button>
-          </li>
-          <li>
-            <button (click)="unitGoBack(this.getUnitID())">Go Back</button>
-          </li>
-          <li>
-            <button (click)="unitStop(this.getUnitID())">Stop</button>
-          </li>
-          <li>
-            <button (click)="unitShutdown(this.getUnitID())">Shutdown</button>
-          </li>
-        </ul>
-      </td>
-    </tr>
-  </table>
+<div *ngIf="unitIndex">
+
+  <div class="unitDetails">
+    <table>
+      <tr>
+        <td>ID</td>
+        <td>
+          {{ this.getLocalUnit().getId() }}
+        </td>
+      </tr>
+      <tr>
+        <td>ORDERS</td>
+        <td>
+          <ul>
+            <li *ngFor="let poi of this.getLocalPoiList(); let i = index">
+              <span *ngIf="poi != null">{{ poi }}</span>
+              <button (click)="removePoi(i)" [disabled]="this.checkBase()">Remove</button>
+            </li>
+            <li>
+              <form [formGroup]="poiForm" (ngSubmit)="onSubmit()">
+                <input type="number" formControlName="poiX" min="0" placeholder="X">
+                <input type="number" formControlName="poiY" min="0" placeholder="Y">
+                <button class="button" type="submit" [disabled]="this.checkBase()">Add</button>
+              </form>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <ul>
+            <li>
+              <button (click)="unitStart(this.getLocalUnit().getId(), this.getLocalPoiList())" [disabled]="this.checkStart()">Start</button>
+            </li>
+            <li>
+              <button (click)="unitGoBack(this.getLocalUnit().getId())" [disabled]="this.checkGoBack()">Go Back</button>
+            </li>
+            <li>
+              <button (click)="unitStop(this.getLocalUnit().getId())" [disabled]="this.checkStop()">Stop</button>
+            </li>
+            <li>
+              <button (click)="unitShutdown(this.getLocalUnit().getId())" [disabled]="this.checkShutdown()">Shutdown</button>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+
 </div>

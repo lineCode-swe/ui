@@ -1,17 +1,14 @@
 table {
   margin-left:auto;
-  margin-top: 2em;
+  margin-top: 1em;
   margin-right:auto;
-  table-layout:fixed;
 }
 
 table, td, th {
   border: 3px solid black;
   border-collapse: collapse;
   empty-cells: show;
-  text-align: center;
   font-size: 15px;
-  font-weight: 800;
 }
 
 th, td {
@@ -20,10 +17,6 @@ th, td {
 }
 
 table td {
-  min-height: 40px;
-  max-height: 40px;
-  min-width: 40px;
-  max-width: 120px;
   text-align: center;
   overflow: hidden;
 }
@@ -36,4 +29,33 @@ table td {
 .unitDetails ul {
   list-style-type: none;
   padding: 0;
+}
+
+li {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+button {
+  font-size: smaller;
+  border: 2px solid #2875d4;
+  background: #ffffff;
+  color: #2875d4;
+  border-radius: 4px;
+}
+
+button:hover {
+  border: 2px solid #2875d4;
+  background: #2875d4;
+  color: #ffffff;
+  border-radius: 4px;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+input {
+  width: 40px;
+  margin-right: 4px;
 }

@@ -11,7 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HeaderAdminComponent } from './header-admin/header-admin.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MapComponent } from './map/map.component';
@@ -21,7 +21,6 @@ import { Subject } from "rxjs";
 import { webSocket, WebSocketSubject } from "rxjs/webSocket";
 import { UnitManagementComponent } from './unit-management/unit-management.component';
 import { UnitDetailsComponent } from './unit-management/unit-details/unit-details.component';
-import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -33,11 +32,12 @@ import {RouterModule} from "@angular/router";
     UnitManagementComponent,
     UnitDetailsComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    NgbModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        NgbModule,
+        ReactiveFormsModule
+    ],
   providers: [
     { provide: ServerService, useClass: WebSocketService },
     Map,
