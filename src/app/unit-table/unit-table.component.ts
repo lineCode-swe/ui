@@ -49,7 +49,7 @@ export class UnitTableComponent {
       this.unitForm.controls['baseX'].value != null &&
       this.unitForm.controls['baseY'].value != null
     ) {
-      if (this.service.getUnit(this.unitForm.controls['unitID'].value)) {
+      if (typeof this.service.getUnit(this.unitForm.controls['unitID'].value) == typeof Unit) {
         alert("ERROR!" +
           "ID already existent");
       }

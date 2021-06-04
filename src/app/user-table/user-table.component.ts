@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { User } from "../user";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { ServerService } from "../server-service";
+import {Unit} from "../unit";
 
 @Component({
   selector: 'app-user-table',
@@ -33,7 +34,7 @@ export class UserTableComponent {
       this.userForm.controls['status'].value != null &&
       this.userForm.controls['username'].value.match(/^[0-9a-z]+$/)
     ) {
-      if (this.service.getUser(this.userForm.controls['username'].value)) {
+      if (typeof this.service.getUser(this.userForm.controls['username'].value) == typeof User) {
         alert("ERROR!" +
           "Username already existent");
       }
