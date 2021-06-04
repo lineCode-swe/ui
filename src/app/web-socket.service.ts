@@ -166,7 +166,6 @@ export class WebSocketService implements ServerService {
     return this.cellMap.get(position);
   }
 
-  // @ts-ignore
   getCellObservable(): Observable<Cell[]> {
     return this.cellSubj.asObservable();
   }

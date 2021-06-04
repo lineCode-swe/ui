@@ -1,56 +1,45 @@
+<h1>Users Management</h1>
 
+<div>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <label>Username:
+      <input type="text" formControlName="username" placeholder="Username">
+    </label>
 
+    <label>Password:
+      <input type="text" formControlName="password" placeholder="Password">
+    </label>
 
-<h1>Gestione Utenti</h1>
+    <input type="radio" id="admin" name="status" formControlName="status" value="true">
+    <label for="admin">Admin</label>
+    <input type="radio" id="user" name="status" formControlName="status" value="false">
+    <label for="user">User</label>
 
-<div class="New-User">
-  <button onclick="myFunction()">Nuovo Utente</button>
+    <button class="button" type="submit">Add user</button>
+  </form>
 </div>
 
-<div class="title">
-<div class="container">
-<div class="row">
-  <div class="col"> Username </div>
-  <div class="col"> Password </div>
-  <div class="col"> Status </div>
-  <div class="col"> </div>
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+  <div class="row " id="row-hidden">
+    <div class="col-12"></div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-8">
+
+      <table class="table">
+        <tr>
+          <th>Username</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+        <tr *ngFor="let user of this.getUsers() | async">
+          <td>{{ user.getUsername() }}</td>
+          <td>{{ user.getAdmin() }}</td>
+          <td>
+            <button (click)="this.deleteUser(user.getUsername())">Delete</button></td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
 </div>
-</div>
-</div>
-
-<div class="container">
-
-  <div class="row">
-    <div class="col"> Giuseppe </div>
-    <div class="col"> 12345</div>
-    <div class="col"> admin </div>
-    <div class="col"> <button onclick="myFunction()">Modifica</button><button onclick="myFunction()">Elimina</button></div>
-  </div>
-
-  <div class="row">
-    <div class="col"> Paolo </div>
-    <div class="col"> 48574 </div>
-    <div class="col"> admin </div>
-    <div class="col"> <button onclick="myFunction()">Modifica</button><button onclick="myFunction()">Elimina</button></div>
-  </div>
-
-  <div class="row">
-    <div class="col"> Luca </div>
-    <div class="col"> 495498 </div>
-    <div class="col"> user </div>
-    <div class="col"><button onclick="myFunction()">Modifica</button><button onclick="myFunction()">Elimina</button></div>
-  </div>
-
-  <div class="row">
-    <div class="col"> Erica </div>
-    <div class="col"> 45542 </div>
-    <div class="col"> user </div>
-    <div class="col"><button onclick="myFunction()">Modifica</button><button onclick="myFunction()">Elimina</button></div>
-  </div>
-
-  <div class="row">
-    <div class="col"> Lucia </div>
-    <div class="col"> 698541 </div>
-    <div class="col"> user </div>
-    <div class="col"><button onclick="myFunction()">Modifica</button><button onclick="myFunction()">Elimina</button></div>
-  </div>
