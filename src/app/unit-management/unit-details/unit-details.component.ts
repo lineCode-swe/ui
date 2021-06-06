@@ -19,51 +19,33 @@ import {FormBuilder} from '@angular/forms';
 })
 export class UnitDetailsComponent implements OnChanges {
 
-  @Input() public unitIndex: number;
+  @Input() public unitId: string;
 
-  private units: Unit[] = [];
-  private localunit: Unit;
-  private localPoiList: Position[] = [];
+  private localUnit: Unit;
   poiForm = this.formBuilder.group({
     poiX: null,
     poiY: null
   });
 
   constructor(private service: ServerService, private formBuilder: FormBuilder) {
-    let pos1: Position = new Position(0, 0);
-    let pos2: Position = new Position(1, 0);
-    let pos3: Position = new Position(0, 2);
-    let pos4: Position = new Position(1, 3);
-    let pos5: Position = new Position(0, 3);
-    let pos6: Position = new Position(2, 1);
-
-    let unit1: Unit = new Unit('0', 'A', pos1, pos5, [pos1, pos4], UnitStatus.GOINGTO, 0, 50);
-    let unit2: Unit = new Unit('1', 'B', pos3, pos2, [pos4], UnitStatus.STOP, 0, 50);
-    let unit3: Unit = new Unit('2', 'C', pos1, pos1, [pos3, pos2], UnitStatus.BASE, 0, 50);
-    let unit4: Unit = new Unit('3', 'D', pos4, pos3, [pos1], UnitStatus.STOP, 0, 50);
-    let unit5: Unit = new Unit('4', 'E', pos1, pos4, [pos5, pos4], UnitStatus.GOINGTO, 0, 50);
-    let unit6: Unit = new Unit('5', 'F', pos3, pos6, [pos6, pos3], UnitStatus.GOINGTO, 0, 50);
-
-    this.units = [unit1, unit2, unit3, unit4, unit5, unit6];
+    this.localUnit = this.service.getUnit(this.unitId);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    let change: SimpleChange = changes['unitIndex'];
+    let change: SimpleChange = changes['unitId'];
     if (change) {
-      this.unitIndex = change.currentValue;
-      this.localunit = this.units[this.unitIndex];
-      this.localPoiList = this.localunit.getPoiList();
+      this.unitId = change.currentValue;
+      this.localUnit = this.service.getUnit(this.unitId);
     }
   }
 
   onSubmit(): void {
-    // USARE this.service.getMapLength() && this.service.getMapHeight()
     if (
       -1 < this.poiForm.controls['poiX'].value &&
-      this.poiForm.controls['poiX'].value < 4 &&
+      this.poiForm.controls['poiX'].value < this.service.getMapLength() &&
 
       -1 < this.poiForm.controls['poiY'].value &&
-      this.poiForm.controls['poiY'].value < 3 &&
+      this.poiForm.controls['poiY'].value < this.service.getMapHeight() &&
 
       this.poiForm.controls['poiX'].value != null &&
       this.poiForm.controls['poiY'].value != null
@@ -71,44 +53,38 @@ export class UnitDetailsComponent implements OnChanges {
     {
       let pos: Position = new Position(this.poiForm.controls['poiX'].value, this.poiForm.controls['poiY'].value);
       let present: boolean = false;
-      for (let poi of this.localPoiList) {
+      for (let poi of this.localUnit.getPoiList()) {
         if (pos.getX() == poi.getX() && pos.getY() == poi.getY()) {
           present = true;
-          alert("ATTENZIONE!\n" +
-            "La posizione inserita è già presente nella lista dell'unità!");
+          alert("ERROR!\n" +
+            "The position inserted is already existent!");
         }
       }
       if (!present) {
-        this.localPoiList.push(pos);
+        let array: Position[] = this.localUnit.getPoiList();
+        array.push(pos);
+        this.localUnit.setPoiList(array);
       }
     }
     else {
-      alert("ATTENZIONE!\n" +
-        "Inserita posizione non valida!\n" +
-        "X deve essere compresa tra 0 e 3\n" +
-        "Y deve essere compresa tra 0 e 2");
-    } // USARE // this.service.getMapLength() - 1 && this.service.getMapHeight() - 1
+      alert("ERROR!\n" +
+        "The position inserted is not valid!\n" +
+        "X needs to be between 0 and " + (this.service.getMapLength() - 1) + '\n' +
+        "Y needs to be between 0 and " + (this.service.getMapHeight() - 1));
+    }
     this.poiForm.reset();
   }
 
-  getUnits(): Unit[] {
-    return this.units;
-  }
-
   getLocalUnit(): Unit {
-    return this.localunit;
+    return this.localUnit;
   }
 
-  getUnitIndex(): number {
-    return this.unitIndex;
+  getUnitId(): string {
+    return this.unitId;
   }
 
-  setUnitIndex(i: number): void {
-    this.unitIndex = i;
-  }
-
-  getLocalPoiList(): Position[] {
-    return this.localPoiList;
+  setUnitIndex(i: string): void {
+    this.unitId = i;
   }
 
   unitStart(id: string, list: Position[]): void {
@@ -116,8 +92,8 @@ export class UnitDetailsComponent implements OnChanges {
       this.service.start(id, list);
     }
     else {
-      alert("ATTENZIONE!\n" +
-        "La lista degli ordini è vuota!\n");
+      alert("ERROR!\n" +
+        "The order list is empty!\n");
     }
   }
 
@@ -134,34 +110,36 @@ export class UnitDetailsComponent implements OnChanges {
   }
 
   removePoi(i: number): void {
-    this.localPoiList.splice(i, 1);
+    let array: Position[] = this.localUnit.getPoiList();
+    array.splice(i, 1);
+    this.localUnit.setPoiList(array);
   }
 
   checkBase(): boolean {
-    return this.localunit.getBase() != this.localunit.getPosition();
+    return this.localUnit.getBase() != this.localUnit.getPosition();
   }
 
   checkGoBack(): boolean {
-    return this.localunit.getStatus() == UnitStatus.BASE
-      || this.localunit.getStatus() == UnitStatus.DISCONNECTED;
+    return this.localUnit.getStatus() == UnitStatus.BASE
+      || this.localUnit.getStatus() == UnitStatus.DISCONNECTED;
   }
 
   checkStart(): boolean {
-    return this.localunit.getStatus() == UnitStatus.GOINGTO
-      || this.localunit.getStatus() == UnitStatus.ERROR;
+    return this.localUnit.getStatus() == UnitStatus.GOINGTO
+      || this.localUnit.getStatus() == UnitStatus.ERROR;
   }
 
   checkStop(): boolean {
-    return this.localunit.getStatus() == UnitStatus.STOP
-      || this.localunit.getStatus() == UnitStatus.BASE
-      || this.localunit.getStatus() == UnitStatus.DISCONNECTED;
+    return this.localUnit.getStatus() == UnitStatus.STOP
+      || this.localUnit.getStatus() == UnitStatus.BASE
+      || this.localUnit.getStatus() == UnitStatus.DISCONNECTED;
   }
 
   checkShutdown(): boolean {
-    return this.localunit.getStatus() == UnitStatus.GOINGTO
-      || this.localunit.getStatus() == UnitStatus.STOP
-      || this.localunit.getStatus() == UnitStatus.ERROR
-      || this.localunit.getStatus() == UnitStatus.DISCONNECTED;
+    return this.localUnit.getStatus() == UnitStatus.GOINGTO
+      || this.localUnit.getStatus() == UnitStatus.STOP
+      || this.localUnit.getStatus() == UnitStatus.ERROR
+      || this.localUnit.getStatus() == UnitStatus.DISCONNECTED;
   }
 
 }
