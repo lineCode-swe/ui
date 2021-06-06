@@ -1,0 +1,45 @@
+<h1>Users Management</h1>
+
+<div>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <label>Username:
+      <input type="text" formControlName="username" placeholder="Username">
+    </label>
+
+    <label>Password:
+      <input type="text" formControlName="password" placeholder="Password">
+    </label>
+
+    <input type="radio" id="admin" name="status" formControlName="status" value="true">
+    <label for="admin">Admin</label>
+    <input type="radio" id="user" name="status" formControlName="status" value="false">
+    <label for="user">User</label>
+
+    <button class="button" type="submit">Add user</button>
+  </form>
+</div>
+
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+  <div class="row " id="row-hidden">
+    <div class="col-12"></div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-8">
+
+      <table class="table">
+        <tr>
+          <th>Username</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+        <tr *ngFor="let user of this.getUsers() | async">
+          <td>{{ user.getUsername() }}</td>
+          <td>{{ user.getAdmin() }}</td>
+          <td>
+            <button (click)="this.deleteUser(user.getUsername())">Delete</button></td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+</div>
