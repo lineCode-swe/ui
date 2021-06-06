@@ -22,6 +22,7 @@ import { webSocket, WebSocketSubject } from "rxjs/webSocket";
 import { AppRoutingModule } from './app-routing.module';
 import { UnitManagementComponent } from './unit-management/unit-management.component';
 import { UnitDetailsComponent } from './unit-management/unit-details/unit-details.component';
+import { TablesUnitComponent } from './tables-unit/tables-unit.component';
 
 
 
@@ -36,7 +37,8 @@ import { UnitDetailsComponent } from './unit-management/unit-details/unit-detail
     HeaderAdminComponent,
     MapComponent,
     UnitManagementComponent,
-    UnitDetailsComponent
+    UnitDetailsComponent,
+    TablesUnitComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,6 @@ nav{
   font-size: x-large;
 }
 
-#btn-log{
+#btn-login, #btn-logout{
   background-color: lightslategrey;
 }

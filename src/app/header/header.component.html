@@ -10,16 +10,17 @@
   <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
     <ul class="navbar-nav mr-auto ">
       <li class="nav-item active"  id="adminUnit">
-        <a class="nav-link" routerLink="/Login">Gestione Unità</a>
+        <a class="nav-link" routerLink="/Unit">Unit Management</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/Login" id="adminUser">Gestione Utenti</a>
+        <a class="nav-link" routerLink="/User" id="adminUser">User Management</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/Login">Manuale Utente</a>
+        <a class="nav-link" routerLink="/Manual">User Manual</a>
       </li>
     </ul>
-    <button  class=" btn btn-primary" routerLink="/Login" id="btn-log"> Logout</button>
+    <button class=" btn btn-primary" routerLink="/Login" id="btn-login">Login</button>
+    <button  class=" btn btn-primary" routerLink="/Login" id="btn-logout" (click)="logout()"> Logout</button>
   </div>
 
 </nav>

@@ -16,7 +16,8 @@ import {ServerService} from "../server-service";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private service: ServerService) {}
+  constructor(private service: ServerService) {
+  }
 
 
   showMe(): void{
@@ -24,13 +25,21 @@ export class HeaderComponent implements OnInit {
     if (auth== AuthStatus.NO_AUTH){
       document.getElementById('adminUnit').hidden= true;
       document.getElementById('adminUser').hidden= true;
+      document.getElementById('btn-logout').hidden= true;
+
     }
     if (auth== AuthStatus.AUTH){
       document.getElementById('adminUnit').hidden= true;
       document.getElementById('adminUser').hidden= true;
+      document.getElementById('btn-login').hidden= true;
     }
     else{
+      document.getElementById('btn-login').hidden= true;
     }
+  }
+
+  logout(user: string):void{
+    this.service.logout(user);
   }
 
   ngOnInit(): void {

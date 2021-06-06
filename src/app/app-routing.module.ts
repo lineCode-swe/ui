@@ -9,13 +9,15 @@ import { NgModule } from '@angular/core';
 import {RouterModule,Routes} from "@angular/router";
 import {LoginComponent} from "./login/login.component";
 import {HeaderComponent} from "./header/header.component";
-import {HeaderAdminComponent} from "./header-admin/header-admin.component";
 import {AppComponent} from "./app.component";
+import {MapComponent} from "./map/map.component";
+import {TablesUnitComponent} from "./tables-unit/tables-unit.component";
 
 const routes: Routes=[
-  {path: '', component: AppComponent },
-  {path:'homeAdmin', component: HeaderAdminComponent},
-  {path:'homeUser', component: HeaderComponent}
+  {path: '', component: MapComponent},
+  {path:'Unit', component: TablesUnitComponent},
+  {path:'User', component: HeaderComponent},
+  {path: 'Login', component: LoginComponent}
 ];
 
 @NgModule({

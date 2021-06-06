@@ -19,7 +19,7 @@ import {UnitStatus} from "../unit-status.enum";
 export class UnitManagementComponent {
 
   private units: Unit[] = [];
-  private unitIndex: number = 0;
+  private unitIndex: number = 1;
 
   constructor(private service: ServerService) {
 
