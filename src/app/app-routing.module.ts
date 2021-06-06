@@ -12,11 +12,15 @@ import {HeaderComponent} from "./header/header.component";
 import {AppComponent} from "./app.component";
 import {MapComponent} from "./map/map.component";
 import {TablesUnitComponent} from "./tables-unit/tables-unit.component";
+import {HeaderAdminComponent} from "./header-admin/header-admin.component";
+import {UserTableComponent} from "./user-table/user-table.component";
+import {UnitTableComponent} from "./unit-table/unit-table.component";
 
 const routes: Routes=[
-  {path: '', component: MapComponent},
-  {path:'Unit', component: TablesUnitComponent},
-  {path:'User', component: HeaderComponent},
+  {path: '', component: HeaderAdminComponent},
+  {path:'UnitM', component: TablesUnitComponent},
+  {path: 'UserT', component: UserTableComponent},
+  {path:'UnitT', component: UnitTableComponent},
   {path: 'Login', component: LoginComponent}
 ];
 

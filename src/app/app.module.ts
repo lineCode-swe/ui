@@ -48,10 +48,10 @@ import { TablesUnitComponent } from './tables-unit/tables-unit.component';
     BrowserModule,
     FormsModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
     AppRoutingModule,
   ],
-        
+
   providers: [
     { provide: ServerService, useClass: WebSocketService },
     Map,
