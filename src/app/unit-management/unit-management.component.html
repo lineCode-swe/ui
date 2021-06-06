@@ -1,4 +1,4 @@
-<app-unit-details [unitIndex]="this.getUnitIndex()"></app-unit-details>
+<app-unit-details [unitId]="this.getUnitId()"></app-unit-details>
 
 <div class="unitManagement">
 
@@ -19,8 +19,8 @@
           <th scope="col">SPEED</th>
           <th scope="col">ERROR</th>
         </tr>
-        <tr *ngFor="let unit of this.getUnits(); let i = index">
-          <td><button (click)="selectUnit(i)">@</button></td>
+        <tr *ngFor="let unit of this.getUnits() | async">
+          <td><button (click)="selectUnit(unit.getId())">@</button></td>
           <td>{{ unit.getId() }}</td>
           <td>{{ unit.getBase() }}</td>
           <td>{{ unit.getPosition() }}</td>
@@ -34,4 +34,5 @@
   </div>
 
 
+</div>
 </div>

@@ -1,4 +1,4 @@
-<div *ngIf="unitIndex">
+<div *ngIf="unitId">
 
   <div class="container-fluid" xmlns="http://www.w3.org/1999/html">
     <div class="row " id="row-hidden">
@@ -18,7 +18,7 @@
               <td>ORDERS</td>
               <td>
                 <ul>
-                  <li *ngFor="let poi of this.getLocalPoiList(); let i = index">
+                  <li *ngFor="let poi of this.getLocalUnit().getPoiList(); let i = index">
                     <span *ngIf="poi != null">{{ poi }}</span>
                     <button (click)="removePoi(i)" [disabled]="this.checkBase()">Remove</button>
                   </li>
@@ -36,7 +36,7 @@
               <td colspan="2">
                 <ul>
                   <li>
-                    <button (click)="unitStart(this.getLocalUnit().getId(), this.getLocalPoiList())" [disabled]="this.checkStart()">Start</button>
+                    <button (click)="unitStart(this.getLocalUnit().getId(), this.getLocalUnit().getPoiList())" [disabled]="this.checkStart()">Start</button>
                   </li>
                   <li>
                     <button (click)="unitGoBack(this.getLocalUnit().getId())" [disabled]="this.checkGoBack()">Go Back</button>
