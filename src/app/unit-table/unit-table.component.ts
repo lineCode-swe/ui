@@ -1,18 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ServerService } from "../server-service";
 import { Position } from "../position";
 import { Unit } from "../unit";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 
 @Component({
   selector: 'app-unit-table',
   templateUrl: './unit-table.component.html',
   styleUrls: ['./unit-table.component.css']
 })
-export class UnitTableComponent {
+export class UnitTableComponent implements OnDestroy {
 
-  private units: Observable<Unit[]>;
+  subscription: Subscription;
+  private units: Unit[];
   unitForm: FormGroup = this.formBuilder.group({
     unitID: null,
     unitName: null,
@@ -21,10 +22,21 @@ export class UnitTableComponent {
   });
 
   constructor(private service: ServerService, private formBuilder: FormBuilder) {
-    this.units = this.service.getUnitObservable();
+    this.subscription = this.service.getUnitObservable().subscribe(message => {
+      if (message) {
+        this.units = message;
+      }
+      else {
+        this.units = [];
+      }
+    })
   }
 
-  getUnits(): Observable<Unit[]> {
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  getUnits(): Unit[] {
     return this.units;
   }
 
