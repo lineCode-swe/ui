@@ -12,10 +12,6 @@ export class Position {
     private readonly y: number,
   ) {}
 
-  toString(): string {
-    return '(' + this.x + ';' + this.y + ')';
-  }
-
   getX(): number {
     return this.x;
   }

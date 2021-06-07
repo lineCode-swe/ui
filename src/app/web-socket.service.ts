@@ -42,7 +42,7 @@ export class WebSocketService implements ServerService {
 
   onMessage(msg: any): void {
     switch (msg.type) {
-      case 'KeepaliveToUi':
+      case 'KeepAliveToUi':
         break;
 
       case 'AuthToUi':
