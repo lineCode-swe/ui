@@ -41,10 +41,10 @@ export class UnitTableComponent {
       this.unitForm.controls['unitName'].value.match(/^[0-9a-z]+$/) &&
 
       -1 < this.unitForm.controls['baseX'].value &&
-      this.unitForm.controls['baseX'].value < this.service.getMapLength() &&
+      this.unitForm.controls['baseX'].value < (this.service.getMapLength()-1) &&
 
       -1 < this.unitForm.controls['baseY'].value &&
-      this.unitForm.controls['baseY'].value < this.service.getMapHeight() &&
+      this.unitForm.controls['baseY'].value < (this.service.getMapHeight()-1) &&
 
       this.unitForm.controls['baseX'].value != null &&
       this.unitForm.controls['baseY'].value != null
