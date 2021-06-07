@@ -42,15 +42,15 @@ export class WebSocketService implements ServerService {
 
   onMessage(msg: any): void {
     switch (msg.type) {
-      case 'KeepAliveFromServer':
+      case 'KeepaliveToUi':
         break;
 
-      case 'AuthFromServer':
+      case 'AuthToUi':
         this.authStatus = msg.session;
         this.authSubj.next(this.authStatus);
         break;
 
-      case 'UsersFromServer':
+      case 'UsersToUi':
         this.userMap.clear();
         msg.users.forEach(user => {
           this.userMap.set(user.username, new User(user.username, user.admin));
@@ -58,7 +58,7 @@ export class WebSocketService implements ServerService {
         this.userSubj.next(Array.from(this.userMap.values()));
         break;
 
-      case 'UnitsFromServer':
+      case 'UnitsToUi':
         this.unitMap.clear();
         msg.units.forEach(unit => {
           this.unitMap.set(unit.id, new Unit(unit.id, unit.name, new Position(unit.base.x, unit.base.y)));
@@ -66,7 +66,7 @@ export class WebSocketService implements ServerService {
         this.unitSubj.next(Array.from(this.unitMap.values()));
         break;
 
-      case 'MapFromServer':
+      case 'MapToUi':
         this.cellMap.clear();
         this.mapHeight = msg.map.height;
         this.mapLength = msg.map.length;
@@ -84,7 +84,7 @@ export class WebSocketService implements ServerService {
         this.cellSubj.next(Array.from(this.cellMap.values()));
         break;
 
-      case 'UnitStatusFromServer':
+      case 'UnitStatusToUi':
         if (this.unitMap.has(msg.id)) {
           this.unitMap.get(msg.id).setStatus(msg.status);
           this.unitSubj.next(Array.from(this.unitMap.values()));
@@ -93,7 +93,7 @@ export class WebSocketService implements ServerService {
         }
         break;
 
-      case 'UnitPoiFromServer':
+      case 'UnitPoiToUi':
         if (this.unitMap.has(msg.id)) {
           let poiList: Position[] = [];
           msg.poi.forEach(pos => {
@@ -106,7 +106,7 @@ export class WebSocketService implements ServerService {
         }
         break;
 
-      case 'UnitSpeedFromServer':
+      case 'UnitSpeedToUi':
         if (this.unitMap.has(msg.id)) {
           this.unitMap.get(msg.id).setSpeed(msg.speed);
           this.unitSubj.next(Array.from(this.unitMap.values()));
@@ -115,7 +115,7 @@ export class WebSocketService implements ServerService {
         }
         break;
 
-      case 'UnitErrorFromServer':
+      case 'UnitErrorToUi':
         if (this.unitMap.has(msg.id)) {
           this.unitMap.get(msg.id).setError(msg.error);
           this.unitSubj.next(Array.from(this.unitMap.values()));
@@ -124,7 +124,7 @@ export class WebSocketService implements ServerService {
         }
         break;
 
-      case 'UnitPosFromServer':
+      case 'UnitPositionToUi':
         if (this.unitMap.has(msg.id)) {
           let unit: Unit = this.unitMap.get(msg.id);
           let oldPosition: Position = unit.getPosition();

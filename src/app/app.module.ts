@@ -26,11 +26,6 @@ import { UnitManagementComponent } from './unit-management/unit-management.compo
 import { UnitDetailsComponent } from './unit-management/unit-details/unit-details.component';
 import { TablesUnitComponent } from './tables-unit/tables-unit.component';
 
-
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,

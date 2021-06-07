@@ -47,9 +47,9 @@ describe('WebSocketService', () => {
     expect(spySocket.subscribe).toHaveBeenCalledTimes(1);
   });
 
-  it('should receive a "KeepAliveFromServer" and do nothing [TU2]', () => {
+  it('should receive a "KeepaliveToUi" and do nothing [TU2]', () => {
     service.onMessage({
-      type: 'KeepAliveFromServer',
+      type: 'KeepaliveToUi',
     });
 
     expect(service.getAuthStatus()).toEqual(AuthStatus.NO_AUTH);
@@ -59,18 +59,18 @@ describe('WebSocketService', () => {
     expect(spySubject.next).not.toHaveBeenCalled();
   });
 
-  it('should receive a "AuthFromServer" and change authStatus to "ADMIN" [TU3]', () => {
+  it('should receive a "AuthToUi" and change authStatus to "ADMIN" [TU3]', () => {
     service.onMessage({
-      type: 'AuthFromServer',
+      type: 'AuthToUi',
       session: 'ADMIN',
     });
 
     expect(service.getAuthStatus()).toEqual(AuthStatus.ADMIN);
   });
 
-  it('should receive a "UsersFromServer" and update internal User data structure [TU4]', () => {
+  it('should receive a "UsersToUi" and update internal User data structure [TU4]', () => {
     let msg = {
-      type: 'UsersFromServer',
+      type: 'UsersToUi',
       users: [
         {
           username: 'hiyajo',
@@ -96,9 +96,9 @@ describe('WebSocketService', () => {
     expect(spySubject.next).toHaveBeenCalledOnceWith([user1, user2]);
   })
 
-  it('should receive a "UnitsFromServer" and update internal Unit data structure [TU5]', () => {
+  it('should receive a "UnitsToUi" and update internal Unit data structure [TU5]', () => {
     let msg = {
-      type: 'UnitsFromServer',
+      type: 'UnitsToUi',
       units: [
         {
           id: 'unit1',
@@ -132,9 +132,9 @@ describe('WebSocketService', () => {
     expect(spySubject.next).toHaveBeenCalledOnceWith([unit1, unit2]);
   });
 
-  it('should receive a "MapFromServer" and update internal Cell data structure [TU6]', () => {
+  it('should receive a "MapToUi" and update internal Cell data structure [TU6]', () => {
     let msg = {
-      type: 'MapFromServer',
+      type: 'MapToUi',
       map: {
         length: 2,
         height: 2,
@@ -202,10 +202,10 @@ describe('WebSocketService', () => {
     expect(service.getMapLength()).toEqual(2);
   });
 
-  it('should receive a "UnitStatusFromServer" with a known id, status "ERROR" and change internal data [TU7]',
+  it('should receive a "UnitStatusToUi" with a known id, status "ERROR" and change internal data [TU7]',
     () => {
     let msg = {
-      type: 'UnitStatusFromServer',
+      type: 'UnitStatusToUi',
       id: 'unit1',
       status: 'ERROR',
     }
@@ -223,10 +223,10 @@ describe('WebSocketService', () => {
     expect(console.log).not.toHaveBeenCalled();
   });
 
-  it('should receive a "UnitPoiFromServer" with a known id, list of POI and change internal data [TU8]',
+  it('should receive a "UnitPoiToUi" with a known id, list of POI and change internal data [TU8]',
     () => {
     let msg = {
-      type: 'UnitPoiFromServer',
+      type: 'UnitPoiToUi',
       id: 'unit1',
       poi: [
         {
@@ -256,7 +256,7 @@ describe('WebSocketService', () => {
     expect(console.log).not.toHaveBeenCalled();
   });
 
-  it('should receive a "UnitSpeedFromServer" with a known id, a new speed value and change internal data [TU9]',
+  it('should receive a "UnitSpeedToUi" with a known id, a new speed value and change internal data [TU9]',
     () => {
     let msg = {
       type: 'UnitSpeedFromServer',
@@ -277,10 +277,10 @@ describe('WebSocketService', () => {
     expect(console.log).not.toHaveBeenCalled();
   });
 
-  it('should receive a "UnitErrorFromServer" with a known id, a new error code and change internal data [TU10]',
+  it('should receive a "UnitErrorToUi" with a known id, a new error code and change internal data [TU10]',
     () => {
     let msg = {
-      type: 'UnitErrorFromServer',
+      type: 'UnitErrorToUi',
       id: 'unit1',
       error: 42,
     }
@@ -298,10 +298,10 @@ describe('WebSocketService', () => {
     expect(console.log).not.toHaveBeenCalled();
   });
 
-  it('should receive a "UnitPosFromServer" with a known id, a new current position and change internal data (unit and grid) [TU11]',
+  it('should receive a "UnitPositionToUi" with a known id, a new current position and change internal data (unit and grid) [TU11]',
     () => {
     let msg = {
-      type: 'UnitPosFromServer',
+      type: 'UnitPositionToUi',
       id: 'unit1',
       position: {
         x: 0,
