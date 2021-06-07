@@ -186,87 +186,87 @@ export class WebSocketService implements ServerService {
   }
 
   login(user: string, password: string): void {
-    this.socket.next(JSON.stringify({
+    this.socket.next({
       type: 'LoginToServer',
       user: user,
       password: password,
-    }));
+    });
   }
 
   logout(): void {
-    this.socket.next(JSON.stringify({
+    this.socket.next({
       type: 'LogoutToServer',
-    }));
+    });
   }
 
   addUser(user: string, password: string, admin: boolean): void {
-    this.socket.next(JSON.stringify({
+    this.socket.next({
       type: 'UserToServer',
       user: user,
       password: password,
       admin: admin,
-    }));
+    });
   }
 
   deleteUser(user: string): void {
-    this.socket.next(JSON.stringify({
+    this.socket.next({
       type: 'DeleteUserToServer',
       user: user,
-    }));
+    });
   }
 
   addUnit(id: string, name: string, base: Position): void {
-    this.socket.next(JSON.stringify({
+    this.socket.next({
       type: 'UnitToServer',
       id: id,
       name: name,
       base: base,
-    }));
+    })
   }
 
   deleteUnit(id: string): void {
-    this.socket.next(JSON.stringify({
+    this.socket.next({
       type: 'DeleteUnitToServer',
       id: id,
-    }));
+    });
   }
 
   start(id: string, poiList: Position[]): void {
-    this.socket.next(JSON.stringify({
+    this.socket.next({
       type: 'UnitStartToServer',
       id: id,
       poiList: poiList,
-    }));
+    });
   }
 
   stop(id: string): void {
-    this.socket.next(JSON.stringify({
+    this.socket.next({
       type: 'UnitStopToServer',
       id: id,
       command: UnitStopCommand.STOP,
-    }));
+    });
   }
 
   shutdown(id: string): void {
-    this.socket.next(JSON.stringify({
+    this.socket.next({
       type: 'UnitStopToServer',
       id: id,
       command: UnitStopCommand.SHUTDOWN,
-    }));
+    });
   }
 
   goBack(id: string): void {
-    this.socket.next(JSON.stringify({
+    this.socket.next({
       type: 'UnitStopToServer',
       id: id,
       command: UnitStopCommand.BASE,
-    }));
+    });
   }
 
   newMap(map: string): void {
-    this.socket.next(JSON.stringify({
+    this.socket.next({
       type: 'MapToServer',
       mapConfig: map,
-    }));
+    });
   }
 }
