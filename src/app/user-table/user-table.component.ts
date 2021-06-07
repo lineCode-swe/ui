@@ -32,7 +32,7 @@ export class UserTableComponent {
       this.userForm.controls['username'].value != null &&
       this.userForm.controls['password'].value != null &&
       this.userForm.controls['status'].value != null &&
-      this.userForm.controls['username'].value.match(/^[0-9a-z]+$/)
+      this.userForm.controls['username'].value.match(/^[a-zA-Z0-9]+$/)
     ) {
       if (typeof this.service.getUser(this.userForm.controls['username'].value) == typeof User) {
         alert("ERROR!" +
@@ -46,7 +46,7 @@ export class UserTableComponent {
     }
     else {
       alert("ERROR!\n" +
-        "Username must ne alphanumeric\n" +
+        "Username must be alphanumeric\n" +
         "Username and Password must not be empty\n" +
         "A Status must be selected");
     }

@@ -38,7 +38,7 @@ export class UnitTableComponent {
       this.unitForm.controls['unitName'].value != null &&
 
       this.unitForm.controls['unitID'].value.match(/^[a-zA-Z0-9-_]+$/) &&
-      this.unitForm.controls['unitName'].value.match(/^[a-zA-Z0-9-_]+$/) &&
+      this.unitForm.controls['unitName'].value.match(/^[a-zA-Z0-9]+$/) &&
 
       -1 < this.unitForm.controls['baseX'].value &&
       this.unitForm.controls['baseX'].value < (this.service.getMapLength()-1) &&
@@ -62,7 +62,7 @@ export class UnitTableComponent {
     }
     else {
       alert("ERROR!\n" +
-        "ID and Name must be alphanumeric and not empty\n" +
+        "Name must be alphanumeric and not empty\n" +
         "X must be between 0 and " + this.service.getMapLength() + "\n" +
         "Y must be between 0 and " + this.service.getMapHeight());
     }
