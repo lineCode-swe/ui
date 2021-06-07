@@ -193,10 +193,9 @@ export class WebSocketService implements ServerService {
     }));
   }
 
-  logout(user: string): void {
+  logout(): void {
     this.socket.next(JSON.stringify({
       type: 'LogoutToServer',
-      user: user,
     }));
   }
 

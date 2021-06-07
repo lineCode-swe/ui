@@ -377,11 +377,10 @@ describe('WebSocketService', () => {
   });
 
   it('should send a logout request through socket by giving an obj with username [TU14]', () => {
-    service.logout('essepi78');
+    service.logout();
 
     expect(spySocket.next).toHaveBeenCalledOnceWith(JSON.stringify({
       type: 'LogoutToServer',
-      user: 'essepi78',
     }));
   });
 

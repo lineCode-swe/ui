@@ -38,8 +38,8 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  logout(user: string):void{
-    this.service.logout(user);
+  logout():void{
+    this.service.logout();
   }
 
   ngOnInit(): void {

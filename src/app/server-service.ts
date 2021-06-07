@@ -24,7 +24,7 @@ export abstract class ServerService {
   abstract getUnit(id: string): Unit;
   abstract getUnitObservable(): Observable<Unit[]>;
   abstract login(user: string, password: string): void;
-  abstract logout(user: string): void;
+  abstract logout(): void;
   abstract addUser(user: string, password: string, admin: boolean): void;
   abstract deleteUser(user: string): void;
   abstract addUnit(id: string, name: string, base: Position): void;

@@ -18,11 +18,11 @@ import {Observable} from "rxjs";
 export class UnitManagementComponent {
 
   private units: Observable<Unit[]>;
-  private unitId: string;
+  private unitId: string = '';
 
   constructor(private service: ServerService) {
     this.units = this.service.getUnitObservable();
-    this.unitId = (this.units)[0].getId();
+
   }
 
   getUnits(): Observable<Unit[]> {

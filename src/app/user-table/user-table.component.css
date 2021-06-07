@@ -1,0 +1,28 @@
+* {
+  font-family: 'Nunito', sans-serif
+}
+label{
+  margin: 1%;
+}
+h1{
+
+  margin: 2%;
+  font-size:50px;
+
+}
+
+#form{
+  align-items: center;
+  background-color: lightslategrey;
+
+}
+
+button{
+  background-color: #2875d4;
+  color: white;
+  margin-right: 5%;
+}
+
+table{
+  text-align: center;
+}
