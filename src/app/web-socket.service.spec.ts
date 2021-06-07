@@ -259,7 +259,7 @@ describe('WebSocketService', () => {
   it('should receive a "UnitSpeedToUi" with a known id, a new speed value and change internal data [TU9]',
     () => {
     let msg = {
-      type: 'UnitSpeedFromServer',
+      type: 'UnitSpeedToUi',
       id: 'unit1',
       speed: 42,
     }
@@ -335,14 +335,14 @@ describe('WebSocketService', () => {
     expect(console.log).not.toHaveBeenCalled();
   });
 
-  it('should receive a "Unit*FromServer" with unknown id, not change internal data and print error message [TU12]',
+  it('should receive a "Unit*ToUi" with unknown id, not change internal data and print error message [TU12]',
     () => {
     [
-      'UnitStatusFromServer',
-      'UnitPoiFromServer',
-      'UnitSpeedFromServer',
-      'UnitErrorFromServer',
-      'UnitPosFromServer',
+      'UnitStatusToUi',
+      'UnitPoiToUi',
+      'UnitSpeedToUi',
+      'UnitErrorToUi',
+      'UnitPositionToUi',
     ].forEach(currentType => {
       let msg = {
         type: currentType,
