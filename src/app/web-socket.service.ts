@@ -78,9 +78,8 @@ export class WebSocketService implements ServerService {
               cell.locked,
               cell.poi,
               cell.base,
-              cell.direction
-            )
-          )
+              cell.direction,
+            ))
         });
         this.cellSubj.next(Array.from(this.cellMap.values()));
         break;
@@ -194,10 +193,9 @@ export class WebSocketService implements ServerService {
     }));
   }
 
-  logout(user: string): void {
+  logout(): void {
     this.socket.next(JSON.stringify({
       type: 'LogoutToServer',
-      user: user,
     }));
   }
 

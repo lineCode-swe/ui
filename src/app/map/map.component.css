@@ -1,0 +1,74 @@
+table {
+  margin-left:auto;
+  margin-top: 2em;
+  margin-right:auto;
+  table-layout:fixed;
+}
+
+table, td {
+  border: 3px solid black;
+  border-collapse: collapse;
+  empty-cells: show;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+table td {
+  min-height: 40px;
+  max-height: 40px;
+  min-width: 40px;
+  max-width: 120px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.directionAll {
+  background-color: #d9d9d9;
+}
+
+.directionUp {
+  background-image: url("src/assets/images/arrow1.png");
+  background-color: #d9d9d9;
+}
+
+.directionDown {
+  background-image: url("src/assets/images/arrow2.png");
+  background-color: #d9d9d9;
+}
+
+.directionLeft {
+  background-image: url("src/assets/images/arrow3.png");
+  background-color: #d9d9d9;
+}
+
+.directionRight {
+  background-image: url("src/assets/images/arrow4.png");
+  background-color: #d9d9d9;
+}
+
+.cellLocked {
+  background-image: linear-gradient(45deg, #a3a3a3 25%, #424242 25%, #424242 50%, #a3a3a3 50%, #a3a3a3 75%, #424242 75%, #424242 100%);
+  background-size: 55px 55px;
+}
+
+.cellUnit {
+  background-color: #ffff66;
+}
+
+.cellPoi {
+  background: lightgreen;
+  /*background: #00cc00;*/
+}
+
+.cellBase {
+  background: lightblue;
+  /*background-color: #4ddbff;*/
+}
+
+.cellObstacle {
+  background: lightcoral;
+  /*background-color: #ff3333;*/
+}
+
+

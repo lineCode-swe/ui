@@ -5,7 +5,9 @@
  * Copyright lineCode group <linecode.swe@gmail.com> 2020 - 2021
  * Distributed under open-source licence (see accompanying file LICENCE).
  */
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthStatus} from "../auth-status.enum";
+import {ServerService} from "../server-service";
 
 @Component({
   selector: 'app-header',
@@ -13,10 +15,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor() { }
+
+  constructor(private service: ServerService) {
+  }
+
+
+  showMe(): void{
+    let auth:AuthStatus= this.service.getAuthStatus();
+    if (auth== AuthStatus.NO_AUTH){
+      document.getElementById('adminUnit').hidden= true;
+      document.getElementById('adminUser').hidden= true;
+      document.getElementById('btn-logout').hidden= true;
+
+    }
+    if (auth== AuthStatus.AUTH){
+      document.getElementById('adminUnit').hidden= true;
+      document.getElementById('adminUser').hidden= true;
+      document.getElementById('btn-login').hidden= true;
+    }
+    else{
+      document.getElementById('btn-login').hidden= true;
+    }
+  }
+
+  logout():void{
+    this.service.logout();
+  }
 
   ngOnInit(): void {
-    console.log("ciao")
+  this.showMe();
 
   }
 
@@ -24,6 +51,8 @@ export class HeaderComponent implements OnInit {
   toggleNavbar(){
     this.navbarOpen=!this.navbarOpen;
   }
+
+
 
 
 

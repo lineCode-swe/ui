@@ -1,0 +1,12 @@
+nav{
+  background-color: #2875d4;
+
+}
+
+#brand{
+  font-size: x-large;
+}
+
+#btn-login, #btn-logout{
+  background-color: lightslategrey;
+}
