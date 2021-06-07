@@ -56,7 +56,7 @@ import { TablesUnitComponent } from './tables-unit/tables-unit.component';
     { provide: ServerService, useClass: WebSocketService },
     Map,
     Subject,
-    { provide: WebSocketSubject, useFactory: () => { return webSocket<any>('ws://localhost:8080/'); } }
+    { provide: WebSocketSubject, useFactory: () => { return webSocket<any>('ws://localhost:8080/ui'); } }
   ],
   bootstrap: [AppComponent]
 })
