@@ -35,10 +35,10 @@ export class LoginComponent implements OnInit {
       this.route.navigate([' ']);
     }
     if(auth == AuthStatus.AUTH){
-      this.route.navigate(['/Table']);
+      this.route.navigate(['/UnitM']);
     }
     else{
-      this.route.navigate(['/User'])
+      this.route.navigate(['/UserT'])
     }
   }
 
