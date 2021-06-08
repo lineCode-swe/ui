@@ -5,27 +5,31 @@
  * Copyright lineCode group <linecode.swe@gmail.com> 2020 - 2021
  * Distributed under open-source licence (see accompanying file LICENCE).
  */
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ServerService} from "../server-service";
 import {Unit} from "../unit";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-unit-management',
   templateUrl: './unit-management.component.html',
   styleUrls: ['./unit-management.component.css']
 })
-export class UnitManagementComponent {
+export class UnitManagementComponent implements OnInit {
 
-  private units: Observable<Unit[]>;
+  private units: Unit[] = [];
   private unitId: string = '';
 
-  constructor(private service: ServerService) {
-    this.units = this.service.getUnitObservable();
+  constructor(private service: ServerService) { }
 
+  ngOnInit() {
+    this.units = this.service.getUnits();
+
+    this.service.subscribeUnits({
+      next: units => { this.units = units; }
+    })
   }
 
-  getUnits(): Observable<Unit[]> {
+  getUnits(): Unit[] {
     return this.units;
   }
 

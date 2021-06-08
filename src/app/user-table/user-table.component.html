@@ -36,7 +36,7 @@
           <th>Actions</th>
         </tr>
         <tbody>
-        <tr *ngFor="let user of this.getUsers() | async" >
+        <tr *ngFor="let user of this.getUsers()" >
           <td>{{ user.getUsername() }}</td>
           <td>{{ user.getAdmin() }}</td>
           <td>

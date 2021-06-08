@@ -13,7 +13,7 @@
               <td>
                 <ul>
                   <li *ngFor="let poi of this.getLocalUnit().getPoiList(); let i = index">
-                    <span *ngIf="poi != null">{{ poi }}</span>
+                    <span *ngIf="poi != null">X: {{ poi.getX() }} : Y: {{ poi.getY() }}</span>
                     <button (click)="removePoi(i)" [disabled]="this.checkBase()">Remove</button>
                   </li>
                   <li>

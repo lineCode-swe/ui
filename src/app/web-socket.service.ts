@@ -165,24 +165,48 @@ export class WebSocketService implements ServerService {
     return this.cellMap.get(position);
   }
 
-  getCellObservable(): Observable<Cell[]> {
-    return this.cellSubj.asObservable();
+  getCells(): Cell[] {
+    return Array.from(this.cellMap.values());
+  }
+
+  // getCellObservable(): Observable<Cell[]> {
+  //   return this.cellSubj.asObservable();
+  // }
+
+  subscribeCells(obs: PartialObserver<Cell[]>) {
+    this.cellSubj.subscribe(obs);
   }
 
   getUser(username: string): User {
     return this.userMap.get(username);
   }
 
-  getUserObservable(): Observable<User[]> {
-    return this.userSubj.asObservable();
+  getUsers(): User[] {
+    return Array.from(this.userMap.values());
+  }
+
+  // getUserObservable(): Observable<User[]> {
+  //   return this.userSubj.asObservable();
+  // }
+
+  subscribeUsers(obs: PartialObserver<User[]>) {
+    this.userSubj.subscribe(obs);
   }
 
   getUnit(id: string): Unit {
     return this.unitMap.get(id);
   }
 
-  getUnitObservable(): Observable<Unit[]> {
-    return this.unitSubj.asObservable();
+  getUnits(): Unit[] {
+    return Array.from(this.unitMap.values());
+  }
+
+  // getUnitObservable(): Observable<Unit[]> {
+  //   return this.unitSubj.asObservable();
+  // }
+
+  subscribeUnits(obs: PartialObserver<Unit[]>) {
+    this.unitSubj.subscribe(obs);
   }
 
   login(user: string, password: string): void {
