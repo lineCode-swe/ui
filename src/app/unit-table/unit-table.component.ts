@@ -12,7 +12,7 @@ import { Observable, Subscription } from "rxjs";
 })
 export class UnitTableComponent implements OnDestroy {
 
-  subscription: Subscription;
+  // subscription: Subscription;
   private units: Unit[];
   unitForm: FormGroup = this.formBuilder.group({
     unitID: null,
@@ -22,18 +22,22 @@ export class UnitTableComponent implements OnDestroy {
   });
 
   constructor(private service: ServerService, private formBuilder: FormBuilder) {
-    this.subscription = this.service.getUnitObservable().subscribe(message => {
-      if (message) {
-        this.units = message;
-      }
-      else {
-        this.units = [];
-      }
+
+  }
+
+  ngOnInit() {
+    this.units = this.service.getUnits();
+
+    // this.subscription = this.service.getUnitObservable().subscribe(message => {
+    //   this.units = message;
+    // })
+    this.service.subscribeUnits({
+      next: units => { this.units = units; }
     })
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 
   getUnits(): Unit[] {

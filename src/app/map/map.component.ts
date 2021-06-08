@@ -27,7 +27,7 @@ export class MapComponent {
 
   constructor(private service: ServerService) {
 
-    this.map = this.service.getCellObservable();
+    //this.map = this.service.getCellObservable();
 
     for (let i: number = 0; i<this.service.getMapLength(); i++) {
       this.mapLength.push(i);

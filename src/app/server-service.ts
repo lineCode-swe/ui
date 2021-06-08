@@ -18,11 +18,15 @@ export abstract class ServerService {
   abstract getMapLength(): number;
   abstract getMapHeight(): number;
   abstract getCell(position: Position): Cell;
-  abstract getCellObservable(): Observable<Cell[]>;
+  abstract getCells(): Cell[];
+  abstract subscribeCells(obs: PartialObserver<Cell[]>): void;
   abstract getUser(username: string): User;
-  abstract getUserObservable(): Observable<User[]>;
+  abstract getUsers(): User[];
+  //abstract getUserObservable(): Observable<User[]>;
+  abstract subscribeUsers(obs: PartialObserver<User[]>): void;
   abstract getUnit(id: string): Unit;
-  abstract getUnitObservable(): Observable<Unit[]>;
+  abstract getUnits(): Unit[];
+  abstract subscribeUnits(obs: PartialObserver<Unit[]>): void;
   abstract login(user: string, password: string): void;
   abstract logout(): void;
   abstract addUser(user: string, password: string, admin: boolean): void;

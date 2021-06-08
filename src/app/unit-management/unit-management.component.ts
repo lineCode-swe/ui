@@ -21,7 +21,7 @@ export class UnitManagementComponent {
   private unitId: string = '';
 
   constructor(private service: ServerService) {
-    this.units = this.service.getUnitObservable();
+    //this.units = this.service.getUnitObservable();
 
   }
 

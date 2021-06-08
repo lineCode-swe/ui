@@ -20,7 +20,7 @@ export class UserTableComponent {
   });
 
   constructor(private service: ServerService, private formBuilder: FormBuilder) {
-    this.users = this.service.getUserObservable();
+    //this.users = this.service.getUserObservable();
   }
 
   getUsers(): Observable<User[]> {
