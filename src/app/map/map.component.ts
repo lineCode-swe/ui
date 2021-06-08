@@ -5,12 +5,12 @@
  * Copyright lineCode group <linecode.swe@gmail.com> 2020 - 2021
  * Distributed under open-source licence (see accompanying file LICENCE).
  */
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Cell } from "../cell";
 import { Position } from "../position";
 import { ServerService } from "../server-service";
 import { Direction } from "../direction.enum";
-import {Observable, Observer} from "rxjs";
+import { Observable } from "rxjs";
 import {Unit} from "../unit";
 
 @Component({
@@ -18,16 +18,14 @@ import {Unit} from "../unit";
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent {
+export class MapComponent implements OnInit {
 
   private mapLength: Array<number> = [];
   private mapHeight: Array<number> = [];
 
-  private map: Observable<Cell[]>;
+  private map: Cell[];
 
   constructor(private service: ServerService) {
-
-    //this.map = this.service.getCellObservable();
 
     for (let i: number = 0; i<this.service.getMapLength(); i++) {
       this.mapLength.push(i);
@@ -39,7 +37,15 @@ export class MapComponent {
 
   }
 
-  getMap(): Observable<Cell[]> {
+  ngOnInit() {
+    this.map = this.service.getCells();
+
+    this.service.subscribeCells({
+      next: cells => { this.map = cells; }
+    })
+  }
+
+  getMap(): Cell[] {
     return this.map;
   }
 

@@ -1,29 +1,33 @@
-import { Component } from '@angular/core';
-import { Observable } from "rxjs";
+import {Component, OnInit} from '@angular/core';
 import { User } from "../user";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { ServerService } from "../server-service";
-import {Unit} from "../unit";
 
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.css']
 })
-export class UserTableComponent {
+export class UserTableComponent implements OnInit {
 
-  private users: Observable<User[]>;
+  private users: User[];
   userForm: FormGroup = this.formBuilder.group({
     username: null,
     password: null,
     status: null
   });
 
-  constructor(private service: ServerService, private formBuilder: FormBuilder) {
-    //this.users = this.service.getUserObservable();
+  constructor(private service: ServerService, private formBuilder: FormBuilder) { }
+
+  ngOnInit() {
+    this.users = this.service.getUsers();
+
+    this.service.subscribeUsers({
+      next: users => { this.users = users; }
+    })
   }
 
-  getUsers(): Observable<User[]> {
+  getUsers(): User[] {
     return this.users;
   }
 

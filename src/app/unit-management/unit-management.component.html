@@ -1,4 +1,3 @@
-
 <app-unit-details [unitId]="this.getUnitId()"></app-unit-details>
 
       <table class="table">
@@ -11,7 +10,7 @@
           <th scope="col">SPEED</th>
           <th scope="col">ERROR</th>
         </tr>
-        <tr *ngFor="let unit of this.getUnits() | async">
+        <tr *ngFor="let unit of this.getUnits()">
           <td><button (click)="selectUnit(unit.getId())">@</button></td>
           <td>{{ unit.getId() }}</td>
           <td>{{ unit.getBase() }}</td>
