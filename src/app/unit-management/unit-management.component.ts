@@ -16,7 +16,7 @@ import {Unit} from "../unit";
 })
 export class UnitManagementComponent implements OnInit {
 
-  private units: Unit[];
+  private units: Unit[] = [];
   private unitId: string = '';
 
   constructor(private service: ServerService) { }

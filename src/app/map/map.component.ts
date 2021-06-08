@@ -23,7 +23,7 @@ export class MapComponent implements OnInit {
   private mapLength: Array<number> = [];
   private mapHeight: Array<number> = [];
 
-  private map: Cell[];
+  private map: Cell[] = [];
 
   constructor(private service: ServerService) {
 
