@@ -26,14 +26,13 @@ export class HeaderComponent implements OnInit {
       document.getElementById('adminUnit').hidden= true;
       document.getElementById('adminUser').hidden= true;
       document.getElementById('btn-logout').hidden= true;
-
     }
-    if (auth== AuthStatus.AUTH){
+    else if (auth== AuthStatus.AUTH){
       document.getElementById('adminUnit').hidden= true;
       document.getElementById('adminUser').hidden= true;
       document.getElementById('btn-login').hidden= true;
     }
-    else{
+    else if(auth== AuthStatus.ADMIN){
       document.getElementById('btn-login').hidden= true;
     }
   }

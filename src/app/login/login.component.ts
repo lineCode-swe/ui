@@ -28,22 +28,21 @@ export class LoginComponent implements OnInit {
   login(user: HTMLInputElement, password: HTMLInputElement):void{
       let value: string = user.value;
       this.service.login(value,password.value);
+      this.redirectIfAuth(this.service.getAuthStatus());
   }
 
   redirectIfAuth(auth: AuthStatus):void{
     if(auth == AuthStatus.NO_AUTH){
-      this.route.navigate([' ']);
+      this.route.navigate(['']);
     }
-    if(auth == AuthStatus.AUTH){
+    else if(auth == AuthStatus.AUTH){
       this.route.navigate(['/UnitM']);
     }
-    else{
+    else if(auth== AuthStatus.ADMIN){
       this.route.navigate(['/UserT'])
     }
   }
 
-  ngOnInit(): void {
-    this.redirectIfAuth(this.service.getAuthStatus());
-  }
+  ngOnInit(): void {}
 
 }
