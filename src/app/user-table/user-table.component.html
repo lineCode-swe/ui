@@ -38,7 +38,7 @@
         <tbody>
         <tr *ngFor="let user of this.getUsers()" >
           <td>{{ user.getUsername() }}</td>
-          <td>{{ user.getAdmin() }}</td>
+          <td>{{ displayStatus(user.getAdmin()) }}</td>
           <td>
             <button class="btn active" aria-pressed="true" (click)="this.deleteUser(user.getUsername())">Delete</button></td>
         </tr>
