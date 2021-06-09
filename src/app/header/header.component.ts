@@ -16,9 +16,9 @@ import {ServerService} from "../server-service";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private service: ServerService) {
-  }
+  navbarOpen = false;
 
+  constructor(private service: ServerService) { }
 
   showMe(): void{
     let auth:AuthStatus= this.service.getAuthStatus();
@@ -46,13 +46,8 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  navbarOpen=false;
   toggleNavbar(){
     this.navbarOpen=!this.navbarOpen;
   }
-
-
-
-
 
 }

@@ -5,7 +5,7 @@
  * Copyright lineCode group <linecode.swe@gmail.com> 2020 - 2021
  * Distributed under open-source licence (see accompanying file LICENCE).
  */
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {RouterModule,Routes} from "@angular/router";
 import {LoginComponent} from "./login/login.component";
 import {HomeMapComponent} from "./home-map/home-map.component";

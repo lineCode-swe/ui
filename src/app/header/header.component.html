@@ -1,11 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark ">
-  <a class="navbar-brand" id="brand">
-    Portacs </a>
+  <a class="navbar-brand" id="brand">Portacs</a>
 
   <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
     <span class="navbar-toggler-icon"></span>
   </button>
-
 
   <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
     <ul class="navbar-nav mr-auto ">
@@ -20,7 +18,7 @@
       </li>
     </ul>
     <button class=" btn btn-primary" routerLink="/Login" id="btn-login">Login</button>
-    <button  class=" btn btn-primary" routerLink="/Login" id="btn-logout" (click)="logout()"> Logout</button>
+    <button class=" btn btn-primary" routerLink="/Login" id="btn-logout" (click)="logout()">Logout</button>
   </div>
 
 </nav>

@@ -10,7 +10,7 @@ import { ServerService } from "../server-service";
 })
 export class UserTableComponent implements OnInit {
 
-  private users: User[] = [];
+  private users: User[];
   userForm: FormGroup = this.formBuilder.group({
     username: null,
     password: null,
