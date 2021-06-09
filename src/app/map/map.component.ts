@@ -10,8 +10,6 @@ import { Cell } from "../cell";
 import { Position } from "../position";
 import { ServerService } from "../server-service";
 import { Direction } from "../direction.enum";
-import { Observable } from "rxjs";
-import {Unit} from "../unit";
 
 @Component({
   selector: 'app-map',
