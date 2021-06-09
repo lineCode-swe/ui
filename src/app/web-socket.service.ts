@@ -7,7 +7,7 @@
  */
 import {Injectable} from '@angular/core';
 import {WebSocketSubject} from "rxjs/webSocket";
-import {Observable, PartialObserver, Subject} from "rxjs";
+import {PartialObserver, Subject} from "rxjs";
 import {ServerService} from "./server-service";
 import {Cell} from "./cell";
 import {User} from "./user";
@@ -169,10 +169,6 @@ export class WebSocketService implements ServerService {
     return Array.from(this.cellMap.values());
   }
 
-  // getCellObservable(): Observable<Cell[]> {
-  //   return this.cellSubj.asObservable();
-  // }
-
   subscribeCells(obs: PartialObserver<Cell[]>) {
     this.cellSubj.subscribe(obs);
   }
@@ -185,10 +181,6 @@ export class WebSocketService implements ServerService {
     return Array.from(this.userMap.values());
   }
 
-  // getUserObservable(): Observable<User[]> {
-  //   return this.userSubj.asObservable();
-  // }
-
   subscribeUsers(obs: PartialObserver<User[]>) {
     this.userSubj.subscribe(obs);
   }
@@ -200,10 +192,6 @@ export class WebSocketService implements ServerService {
   getUnits(): Unit[] {
     return Array.from(this.unitMap.values());
   }
-
-  // getUnitObservable(): Observable<Unit[]> {
-  //   return this.unitSubj.asObservable();
-  // }
 
   subscribeUnits(obs: PartialObserver<Unit[]>) {
     this.unitSubj.subscribe(obs);

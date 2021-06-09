@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from "../user";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { ServerService } from "../server-service";
@@ -10,7 +10,7 @@ import { ServerService } from "../server-service";
 })
 export class UserTableComponent implements OnInit {
 
-  private users: User[] = [];
+  private users: User[];
   userForm: FormGroup = this.formBuilder.group({
     username: null,
     password: null,
@@ -56,8 +56,12 @@ export class UserTableComponent implements OnInit {
     }
   }
 
-  deleteUser(username: string) {
+  deleteUser(username: string): void {
     this.service.deleteUser(username);
+  }
+
+  displayStatus(status: boolean): string {
+    return status ? "Admin" : "User";
   }
 
 }
