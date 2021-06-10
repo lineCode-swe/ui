@@ -64,13 +64,13 @@ export class UnitTableComponent implements OnInit {
     else {
       alert("ERROR!\n" +
         "Name must be alphanumeric and not empty\n" +
-        "X must be between 0 and " + this.service.getMapLength() + "\n" +
-        "Y must be between 0 and " + this.service.getMapHeight());
+        "X must be between 0 and " + (this.service.getMapLength()-1) + "\n" +
+        "Y must be between 0 and " + (this.service.getMapHeight()-1));
     }
   }
 
   deleteUnit(id: string) {
     this.service.deleteUnit(id);
   }
-  
+
 }
