@@ -54,10 +54,16 @@ export class UnitTableComponent implements OnInit {
       this.unitForm.controls['baseX'].value != null &&
       this.unitForm.controls['baseY'].value != null
     ) {
-      alert("Unit successfully created!");
-      this.service.addUnit(this.unitForm.controls['unitID'].value, this.unitForm.controls['unitName'].value,
-        new Position(this.unitForm.controls['baseX'].value, this.unitForm.controls['baseY'].value));
-      this.unitForm.reset();
+      let pos: Position = new Position(this.unitForm.controls['baseX'].value, this.unitForm.controls['baseY'].value);
+      if (this.service.getCell(pos).isBase()) {
+        alert("Unit successfully created!");
+        this.service.addUnit(this.unitForm.controls['unitID'].value, this.unitForm.controls['unitName'].value, pos);
+        this.unitForm.reset();
+      }
+      else {
+        alert("ERROR!\n" +
+          "The coordinates inserted are not a valid Base position");
+      }
     }
     else {
       alert("ERROR!\n" +
