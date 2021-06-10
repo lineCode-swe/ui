@@ -33,10 +33,6 @@ export class UnitTableComponent implements OnInit {
     return this.units;
   }
 
-  deleteUnit(id: string) {
-    this.service.deleteUnit(id);
-  }
-
   onSubmit() {
     if (
       this.unitForm.controls['unitID'].value != null &&
@@ -72,4 +68,9 @@ export class UnitTableComponent implements OnInit {
         "Y must be between 0 and " + this.service.getMapHeight());
     }
   }
+
+  deleteUnit(id: string) {
+    this.service.deleteUnit(id);
+  }
+  
 }

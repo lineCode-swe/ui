@@ -1,7 +1,8 @@
 <app-header></app-header>
 
-<div class="container-fluid" id="form">
-  <h1>Users Management</h1>
+<h1>Users Management</h1>
+
+<div>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
     <label>Username:
@@ -17,18 +18,18 @@
     <input type="radio" id="user" name="status" formControlName="status" value="false">
     <label for="user">User</label>
 
-    <button class="btn active" aria-pressed="true" type="submit">Add user</button>
+    <button class="button" type="submit">Add user</button>
     </div>
   </form>
 </div>
 
-<div class="container-fluid justify-content-center" xmlns="http://www.w3.org/1999/html">
+<div class="container-fluid">
   <div class="row " id="row-hidden">
     <div class="col-12"></div>
   </div>
-  <div class="row">
-    <div class="col-12">
-      <div class="table-responsive">
+  <div class="row justify-content-center">
+    <div class="col-8">
+
       <table class="table">
         <tr>
           <th>Username</th>
@@ -40,12 +41,11 @@
           <td>{{ user.getUsername() }}</td>
           <td>{{ displayStatus(user.getAdmin()) }}</td>
           <td>
-            <button class="btn active" aria-pressed="true" (click)="this.deleteUser(user.getUsername())">Delete</button></td>
+            <button (click)="this.deleteUser(user.getUsername())">Delete</button></td>
         </tr>
         </tbody>
       </table>
-      </div>
+
     </div>
   </div>
 </div>
-
