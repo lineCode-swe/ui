@@ -15,6 +15,7 @@ import {Unit} from "./unit";
 import {Position} from "./position";
 import {AuthStatus} from "./auth-status.enum";
 import {UnitStopCommand} from "./unit-stop-command.enum";
+import {Direction} from "./direction.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class WebSocketService implements ServerService {
   private mapHeight: number = 0;
 
   constructor(
-    private cellMap: Map<Position, Cell>,
+    private cellMap: Map<string, Cell>,
     private userMap: Map<string, User>,
     private unitMap: Map<string, Unit>,
     private cellSubj: Subject<Cell[]>,
@@ -72,13 +73,13 @@ export class WebSocketService implements ServerService {
         this.mapLength = msg.map.length;
         msg.map.cells.forEach(cell => {
           this.cellMap.set(
-            new Position(cell.position.x, cell.position.y),
+            JSON.stringify(new Position(cell.position.x, cell.position.y)),
             new Cell(
               new Position(cell.position.x, cell.position.y),
-              cell.locked,
-              cell.poi,
-              cell.base,
-              cell.direction,
+              cell.locked as boolean,
+              cell.poi as boolean,
+              cell.base as boolean,
+              cell.direction as Direction,
             ))
         });
         this.cellSubj.next(Array.from(this.cellMap.values()));
@@ -130,8 +131,8 @@ export class WebSocketService implements ServerService {
           let oldPosition: Position = unit.getPosition();
           let newPosition: Position = new Position(msg.position.x, msg.position.y);
           unit.setPosition(newPosition);
-          this.cellMap.get(oldPosition).setUnit('');
-          this.cellMap.get(newPosition).setUnit(msg.id);
+          this.cellMap.get(JSON.stringify(oldPosition)).setUnit('');
+          this.cellMap.get(JSON.stringify(newPosition)).setUnit(msg.id);
           this.cellSubj.next(Array.from(this.cellMap.values()));
           this.unitSubj.next(Array.from(this.unitMap.values()));
         } else {
@@ -162,7 +163,7 @@ export class WebSocketService implements ServerService {
   }
 
   getCell(position: Position): Cell {
-    return this.cellMap.get(position);
+    return this.cellMap.get(JSON.stringify(position));
   }
 
   getCells(): Cell[] {
