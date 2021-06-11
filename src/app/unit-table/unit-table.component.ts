@@ -65,7 +65,9 @@ export class UnitTableComponent implements OnInit {
       alert("ERROR!\n" +
         "Name must be alphanumeric and not empty\n" +
         "X must be between 0 and " + (this.service.getMapLength()-1) + "\n" +
-        "Y must be between 0 and " + (this.service.getMapHeight()-1));
+        "Y must be between 0 and " + (this.service.getMapHeight()-1) + "\n" +
+        "(X,Y) must be a valid Base position"
+      );
     }
   }
 
