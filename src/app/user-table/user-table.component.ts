@@ -43,7 +43,6 @@ export class UserTableComponent implements OnInit {
           "Username already existent");
       }
       else {
-        alert("User successfully created!");
         this.service.addUser(this.userForm.controls['username'].value, this.userForm.controls['password'].value, this.userForm.controls['status'].value);
         this.userForm.reset();
       }

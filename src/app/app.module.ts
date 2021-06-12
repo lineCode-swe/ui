@@ -24,6 +24,11 @@ import { UnitManagementComponent } from './unit-management/unit-management.compo
 import { UnitDetailsComponent } from './unit-management/unit-details/unit-details.component';
 import { TablesUnitComponent } from './tables-unit/tables-unit.component';
 import { HomeMapComponent } from './home-map/home-map.component';
+import { CELL_MAP, UNIT_MAP, USER_MAP, CELL_SUBJ, AUTH_SUBJ, UNIT_SUBJ, USER_SUBJ } from "./app.config";
+import { Cell } from "./cell";
+import { User } from "./user";
+import { Unit } from "./unit";
+import { AuthStatus } from "./auth-status.enum";
 
 @NgModule({
   declarations: [
@@ -48,8 +53,13 @@ import { HomeMapComponent } from './home-map/home-map.component';
 
   providers: [
     { provide: ServerService, useClass: WebSocketService },
-    Map,
-    Subject,
+    { provide: CELL_MAP, useValue: new Map<string, Cell>()},
+    { provide: USER_MAP, useValue: new Map<string, User>()},
+    { provide: UNIT_MAP, useValue: new Map<string, Unit>()},
+    { provide: CELL_SUBJ, useValue: new Subject<Cell[]>()},
+    { provide: USER_SUBJ, useValue: new Subject<User[]>()},
+    { provide: UNIT_SUBJ, useValue: new Subject<Unit[]>()},
+    { provide: AUTH_SUBJ, useValue: new Subject<AuthStatus>()},
     { provide: WebSocketSubject, useFactory: () => { return webSocket<any>('ws://localhost:8080/ui'); } }
   ],
   bootstrap: [AppComponent]

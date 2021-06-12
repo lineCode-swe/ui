@@ -52,7 +52,6 @@ export class UnitTableComponent implements OnInit {
     ) {
       let pos: Position = new Position(this.unitForm.controls['baseX'].value, this.unitForm.controls['baseY'].value);
       if (this.service.getCell(pos).isBase()) {
-        alert("Unit successfully created!");
         this.service.addUnit(this.unitForm.controls['unitID'].value, this.unitForm.controls['unitName'].value, pos);
         this.unitForm.reset();
       }

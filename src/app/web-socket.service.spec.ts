@@ -193,10 +193,10 @@ describe('WebSocketService', () => {
 
     expect(spyMap.clear).toHaveBeenCalledTimes(1);
     expect(spyMap.set).toHaveBeenCalledTimes(4);
-    expect(spyMap.set.calls.argsFor(0)).toEqual([new Position(0, 0), cell0]);
-    expect(spyMap.set.calls.argsFor(1)).toEqual([new Position(1, 0), cell1]);
-    expect(spyMap.set.calls.argsFor(2)).toEqual([new Position(0, 1), cell2]);
-    expect(spyMap.set.calls.argsFor(3)).toEqual([new Position(1, 1), cell3]);
+    expect(spyMap.set.calls.argsFor(0)).toEqual([JSON.stringify(new Position(0, 0)), cell0]);
+    expect(spyMap.set.calls.argsFor(1)).toEqual([JSON.stringify(new Position(1, 0)), cell1]);
+    expect(spyMap.set.calls.argsFor(2)).toEqual([JSON.stringify(new Position(0, 1)), cell2]);
+    expect(spyMap.set.calls.argsFor(3)).toEqual([JSON.stringify(new Position(1, 1)), cell3]);
     expect(spySubject.next).toHaveBeenCalledOnceWith([cell0, cell1, cell2, cell3]);
     expect(service.getMapHeight()).toEqual(2);
     expect(service.getMapLength()).toEqual(2);
@@ -324,8 +324,8 @@ describe('WebSocketService', () => {
     expect(spyMap.has).toHaveBeenCalledTimes(1);
     expect(spyMap.get).toHaveBeenCalledTimes(3);
     expect(spyMap.get).toHaveBeenCalledWith('unit1');
-    expect(spyMap.get).toHaveBeenCalledWith(oldPosition);
-    expect(spyMap.get).toHaveBeenCalledWith(newPosition);
+    expect(spyMap.get).toHaveBeenCalledWith(JSON.stringify(oldPosition));
+    expect(spyMap.get).toHaveBeenCalledWith(JSON.stringify(newPosition));
     expect(fakeUnit.getPosition()).toEqual(newPosition);
     expect(fakeCellInOldPosition.getUnit()).toEqual('');
     expect(fakeCellInNewPosition.getUnit()).toEqual('unit1');

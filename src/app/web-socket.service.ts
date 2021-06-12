@@ -5,7 +5,7 @@
  * Copyright lineCode group <linecode.swe@gmail.com> 2020 - 2021
  * Distributed under open-source licence (see accompanying file LICENCE).
  */
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {WebSocketSubject} from "rxjs/webSocket";
 import {PartialObserver, Subject} from "rxjs";
 import {ServerService} from "./server-service";
@@ -16,6 +16,7 @@ import {Position} from "./position";
 import {AuthStatus} from "./auth-status.enum";
 import {UnitStopCommand} from "./unit-stop-command.enum";
 import {Direction} from "./direction.enum";
+import {AUTH_SUBJ, CELL_MAP, CELL_SUBJ, UNIT_MAP, UNIT_SUBJ, USER_MAP, USER_SUBJ} from "./app.config";
 
 @Injectable({
   providedIn: 'root'
@@ -27,13 +28,13 @@ export class WebSocketService implements ServerService {
   private mapHeight: number = 0;
 
   constructor(
-    private cellMap: Map<string, Cell>,
-    private userMap: Map<string, User>,
-    private unitMap: Map<string, Unit>,
-    private cellSubj: Subject<Cell[]>,
-    private userSubj: Subject<User[]>,
-    private unitSubj: Subject<Unit[]>,
-    private authSubj: Subject<AuthStatus>,
+    @Inject(CELL_MAP) private cellMap: Map<string, Cell>,
+    @Inject(USER_MAP) private userMap: Map<string, User>,
+    @Inject(UNIT_MAP) private unitMap: Map<string, Unit>,
+    @Inject(CELL_SUBJ) private cellSubj: Subject<Cell[]>,
+    @Inject(USER_SUBJ) private userSubj: Subject<User[]>,
+    @Inject(UNIT_SUBJ) private unitSubj: Subject<Unit[]>,
+    @Inject(AUTH_SUBJ) private authSubj: Subject<AuthStatus>,
     private socket: WebSocketSubject<any>,
   ) {
     this.socket.subscribe({
