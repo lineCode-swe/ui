@@ -15,9 +15,9 @@ import {UnitTableComponent} from "./unit-table/unit-table.component";
 
 const routes: Routes=[
   {path: '', component: HomeMapComponent},
-  {path:'UnitM', component: TablesUnitComponent},
+  {path: 'UnitM', component: TablesUnitComponent},
   {path: 'UserT', component: UserTableComponent},
-  {path:'UnitT', component: UnitTableComponent},
+  {path: 'UnitT', component: UnitTableComponent},
   {path: 'Login', component: LoginComponent}
 ];
 
