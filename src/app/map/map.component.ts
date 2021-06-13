@@ -7,7 +7,6 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { Cell } from "../cell";
-import { Position } from "../position";
 import { ServerService } from "../server-service";
 import { Direction } from "../direction.enum";
 
@@ -21,16 +20,16 @@ export class MapComponent implements OnInit {
   private mapLength: Array<number> = [];
   private mapHeight: Array<number> = [];
 
-  private map: Cell[] = [];
+  private map: Cell[];
 
   constructor(private service: ServerService) {
 
     for (let i: number = 0; i<this.service.getMapLength(); i++) {
-      this.mapLength.push(i);
+      this.mapLength.push(1);
     }
 
     for (let i: number = 0; i<this.service.getMapHeight(); i++) {
-      this.mapHeight.push(i);
+      this.mapHeight.push(1);
     }
 
   }
@@ -56,6 +55,7 @@ export class MapComponent implements OnInit {
   }
 
   displayCell(cell: Cell): string {
+    console.log(cell);
     let htmlStr: string = '';
     // OBSTACLE + UNITS (WOULD BE AN ERROR)
     if (cell.getObstacle() && cell.getUnit() != "") {
