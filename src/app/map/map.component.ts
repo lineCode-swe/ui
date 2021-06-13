@@ -55,22 +55,19 @@ export class MapComponent implements OnInit {
     return this.mapHeight;
   }
 
-  displayCell(cell: Cell, i: number, j: number): string {
+  displayCell(cell: Cell): string {
     let htmlStr: string = '';
-    let pos: Position= new Position(i, j);
-    if (cell.getPosition().toString() == pos.toString()) {
-      // OBSTACLE + UNITS (WOULD BE AN ERROR)
-      if (cell.getObstacle() && cell.getUnit() != "") {
-        htmlStr += '\xa0O<sup>U</sup>\xa0';
-      }
-      // OBSTACLE
-      else if (cell.getObstacle()) {
-        htmlStr += '\xa0O\xa0';
-      }
-      // UNITS
-      else if (cell.getUnit() != "") {
-        htmlStr += '\xa0U<sup>' + cell.getUnit() + '</sup>\xa0';
-      }
+    // OBSTACLE + UNITS (WOULD BE AN ERROR)
+    if (cell.getObstacle() && cell.getUnit() != "") {
+      htmlStr += '\xa0O<sup>U</sup>\xa0';
+    }
+    // OBSTACLE
+    else if (cell.getObstacle()) {
+      htmlStr += '\xa0O\xa0';
+    }
+    // UNITS
+    else if (cell.getUnit() != "") {
+      htmlStr += '\xa0U<sup>' + this.service.getUnit(cell.getUnit()).getName() + '</sup>\xa0';
     }
     return htmlStr;
   }
