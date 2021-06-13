@@ -6,9 +6,8 @@
     <div class="col-8">
 
       <table class="table">
-        <tr *ngFor="let row of this.getArrayHeight(); let i = index">
-          <td
-            *ngFor="let col of this.getArrayLength(); let j = index"
+        <tr *ngFor="let row of this.getMapHeight(); let i = index">
+          <td *ngFor="let col of this.getMapLength(); let j = index"
             [class.directionAll]="directionAll(i, j)"
             [class.directionUp]="directionUp(i, j)"
             [class.directionDown]="directionDown(i, j)"

@@ -17,6 +17,7 @@ import { Direction } from "../direction.enum";
 })
 export class MapComponent implements OnInit {
 
+  public countFunction: number = 0;
   private mapLength: Array<number> = [];
   private mapHeight: Array<number> = [];
 
@@ -32,6 +33,9 @@ export class MapComponent implements OnInit {
       this.mapHeight.push(1);
     }
 
+    console.log(this.mapLength);
+    console.log(this.mapHeight);
+
   }
 
   ngOnInit() {
@@ -46,16 +50,17 @@ export class MapComponent implements OnInit {
     return this.map;
   }
 
-  getArrayLength(): Array<number> {
+  getMapLength(): Array<number> {
     return this.mapLength;
   }
 
-  getArrayHeight(): Array<number> {
+  getMapHeight(): Array<number> {
     return this.mapHeight;
   }
 
   displayCell(cell: Cell): string {
-    console.log(cell);
+    this.countFunction++;
+    console.log(this.countFunction);
     let htmlStr: string = '';
     // OBSTACLE + UNITS (WOULD BE AN ERROR)
     if (cell.getObstacle() && cell.getUnit() != "") {
@@ -73,42 +78,42 @@ export class MapComponent implements OnInit {
   }
 
   directionAll(i: number, j: number): boolean {
-    let pos: number = this.getArrayLength().length * i + j;
+    let pos: number = this.getMapLength().length * i + j;
     return this.map[pos].getDirection() == Direction.ALL;
   }
 
   directionUp(i: number, j: number): boolean {
-    let pos: number = this.getArrayLength().length * i + j;
+    let pos: number = this.getMapLength().length * i + j;
     return this.map[pos].getDirection() == Direction.UP;
   }
 
   directionDown(i: number, j: number): boolean {
-    let pos: number = this.getArrayLength().length * i + j;
+    let pos: number = this.getMapLength().length * i + j;
     return this.map[pos].getDirection() == Direction.DOWN;
   }
 
   directionLeft(i: number, j: number): boolean {
-    let pos: number = this.getArrayLength().length * i + j;
+    let pos: number = this.getMapLength().length * i + j;
     return this.map[pos].getDirection() == Direction.LEFT;
   }
 
   directionRight(i: number, j: number): boolean {
-    let pos: number = this.getArrayLength().length * i + j;
+    let pos: number = this.getMapLength().length * i + j;
     return this.map[pos].getDirection() == Direction.RIGHT;
   }
 
   cellLocked(i: number, j: number): boolean {
-    let pos: number = this.getArrayLength().length * i + j;
+    let pos: number = this.getMapLength().length * i + j;
     return this.map[pos].isLocked();
   }
 
   cellBase(i: number, j: number): boolean {
-    let pos: number = this.getArrayLength().length * i + j;
+    let pos: number = this.getMapLength().length * i + j;
     return this.map[pos].isBase();
   }
 
   cellPoi(i: number, j: number): boolean {
-    let pos: number = this.getArrayLength().length * i + j;
+    let pos: number = this.getMapLength().length * i + j;
     return this.map[pos].isPoi();
   }
 }
