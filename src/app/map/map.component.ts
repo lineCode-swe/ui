@@ -59,8 +59,7 @@ export class MapComponent implements OnInit {
   }
 
   displayCell(cell: Cell): string {
-    this.countFunction++;
-    console.log(this.countFunction);
+    console.log(cell);
     let htmlStr: string = '';
     // OBSTACLE + UNITS (WOULD BE AN ERROR)
     if (cell.getObstacle() && cell.getUnit() != "") {
