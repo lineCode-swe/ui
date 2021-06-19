@@ -8,18 +8,20 @@
       <table class="table">
         <tr *ngFor="let row of this.getMapHeight(); let i = index">
           <td *ngFor="let col of this.getMapLength(); let j = index"
-              [class.directionAll]="directionAll(i, j)"
-              [class.directionUp]="directionUp(i, j)"
-              [class.directionDown]="directionDown(i, j)"
-              [class.directionLeft]="directionLeft(i, j)"
-              [class.directionRight]="directionRight(i, j)"
-              [class.cellLocked]="cellLocked(i, j)"
-              [class.cellBase]="cellBase(i, j)"
-              [class.cellPoi]="cellPoi(i, j)"
+            [class.directionAll]="directionAll(i, j)"
+            [class.directionUp]="directionUp(i, j)"
+            [class.directionDown]="directionDown(i, j)"
+            [class.directionLeft]="directionLeft(i, j)"
+            [class.directionRight]="directionRight(i, j)"
+            [class.cellLocked]="cellLocked(i, j)"
+            [class.cellBase]="cellBase(i, j)"
+            [class.cellPoi]="cellPoi(i, j)"
+          >
+            <span
               [class.cellUnit]="cellUnit(i, j)"
               [class.cellObstacle]="cellObstacle(i, j)"
               [innerHTML]="displayCell(i, j)"
-          >
+            ></span>
           </td>
         </tr>
       </table>
