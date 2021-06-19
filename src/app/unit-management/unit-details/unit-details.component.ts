@@ -116,7 +116,7 @@ export class UnitDetailsComponent implements OnChanges {
   }
 
   checkBase(): boolean {
-    return this.localUnit.getBase() != this.localUnit.getPosition();
+    return this.localUnit.getBase() == this.localUnit.getPosition();
   }
 
   checkGoBack(): boolean {
