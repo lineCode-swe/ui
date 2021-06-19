@@ -12,17 +12,19 @@ import {HomeMapComponent} from "./home-map/home-map.component";
 import {TablesUnitComponent} from "./tables-unit/tables-unit.component";
 import {UserTableComponent} from "./user-table/user-table.component";
 import {UnitTableComponent} from "./unit-table/unit-table.component";
+import {AdminMapComponent} from "./admin-map/admin-map.component";
 
 const routes: Routes=[
   {path: '', component: HomeMapComponent},
-  {path: 'UnitM', component: TablesUnitComponent},
-  {path: 'UserT', component: UserTableComponent},
-  {path: 'UnitT', component: UnitTableComponent},
+  {path: 'Coordination', component: TablesUnitComponent},
+  {path: 'UserManagement', component: UserTableComponent},
+  {path: 'UnitManagement', component: UnitTableComponent},
+  {path: 'MapManagement', component: AdminMapComponent},
   {path: 'Login', component: LoginComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports:[RouterModule]
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

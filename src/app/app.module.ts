@@ -29,6 +29,7 @@ import { Cell } from "./cell";
 import { User } from "./user";
 import { Unit } from "./unit";
 import { AuthStatus } from "./auth-status.enum";
+import { AdminMapComponent } from './admin-map/admin-map.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { AuthStatus } from "./auth-status.enum";
     UnitManagementComponent,
     UnitDetailsComponent,
     TablesUnitComponent,
-    HomeMapComponent
+    HomeMapComponent,
+    AdminMapComponent
   ],
   imports: [
     BrowserModule,

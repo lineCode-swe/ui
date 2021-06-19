@@ -34,10 +34,10 @@ export class LoginComponent {
       this.route.navigate(['']);
     }
     else if(auth == AuthStatus.AUTH){
-      this.route.navigate(['/UnitM']);
+      this.route.navigate(['/Coordination']);
     }
     else if(auth== AuthStatus.ADMIN){
-      this.route.navigate(['/UserT'])
+      this.route.navigate(['/UserManagement']);
     }
   }
 

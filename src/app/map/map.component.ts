@@ -17,7 +17,6 @@ import { Direction } from "../direction.enum";
 })
 export class MapComponent implements OnInit {
 
-  public countFunction: number = 0;
   private mapLength: Array<number> = [];
   private mapHeight: Array<number> = [];
 
@@ -32,9 +31,6 @@ export class MapComponent implements OnInit {
     for (let i: number = 0; i<this.service.getMapHeight(); i++) {
       this.mapHeight.push(1);
     }
-
-    console.log(this.mapLength);
-    console.log(this.mapHeight);
 
   }
 
@@ -59,7 +55,6 @@ export class MapComponent implements OnInit {
   }
 
   displayCell(cell: Cell): string {
-    console.log(cell);
     let htmlStr: string = '';
     // OBSTACLE + UNITS (WOULD BE AN ERROR)
     if (cell.getObstacle() && cell.getUnit() != "") {

@@ -23,17 +23,21 @@ export class HeaderComponent implements OnInit {
   showMe(): void{
     let auth:AuthStatus= this.service.getAuthStatus();
     if (auth== AuthStatus.NO_AUTH){
-      document.getElementById('adminUnit').hidden= true;
-      document.getElementById('adminUser').hidden= true;
-      document.getElementById('btn-logout').hidden= true;
+      document.getElementById('adminUnit').hidden = true;
+      document.getElementById('adminUser').hidden = true;
+      document.getElementById('adminMap').hidden = true;
+      document.getElementById('coordination').hidden = true;
+      document.getElementById('btn-logout').hidden = true;
     }
     else if (auth== AuthStatus.AUTH){
-      document.getElementById('adminUnit').hidden= true;
-      document.getElementById('adminUser').hidden= true;
-      document.getElementById('btn-login').hidden= true;
+      document.getElementById('adminUnit').hidden = true;
+      document.getElementById('adminUser').hidden = true;
+      document.getElementById('adminMap').hidden = true;
+      document.getElementById('coordination').hidden = true;
+      document.getElementById('btn-login').hidden = true;
     }
     else if(auth== AuthStatus.ADMIN){
-      document.getElementById('btn-login').hidden= true;
+      document.getElementById('btn-login').hidden = true;
     }
   }
 
@@ -42,12 +46,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  this.showMe();
-
+    this.showMe();
   }
 
   toggleNavbar(){
-    this.navbarOpen=!this.navbarOpen;
+    this.navbarOpen =! this.navbarOpen;
   }
 
 }
