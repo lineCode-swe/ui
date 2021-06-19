@@ -54,19 +54,20 @@ export class MapComponent implements OnInit {
     return this.mapHeight;
   }
 
-  displayCell(cell: Cell): string {
+  displayCell(i: number, j: number): string {
     let htmlStr: string = '';
+    let pos: number = this.getMapLength().length * i + j;
     // OBSTACLE + UNITS (WOULD BE AN ERROR)
-    if (cell.getObstacle() && cell.getUnit() != "") {
+    if (this.map[pos].getObstacle() && this.map[pos].getUnit() != "") {
       htmlStr += '\xa0O<sup>U</sup>\xa0';
     }
     // OBSTACLE
-    else if (cell.getObstacle()) {
+    else if (this.map[pos].getObstacle()) {
       htmlStr += '\xa0O\xa0';
     }
     // UNITS
-    else if (cell.getUnit() != "") {
-      htmlStr += '\xa0U<sup>' + this.service.getUnit(cell.getUnit()).getName() + '</sup>\xa0';
+    else if (this.map[pos].getUnit() != "") {
+      htmlStr += '\xa0U<sup>' + this.service.getUnit(this.map[pos].getUnit()).getName() + '</sup>\xa0';
     }
     return htmlStr;
   }
@@ -110,6 +111,17 @@ export class MapComponent implements OnInit {
     let pos: number = this.getMapLength().length * i + j;
     return this.map[pos].isPoi();
   }
+
+  cellUnit(i: number, j: number): boolean {
+    let pos: number = this.getMapLength().length * i + j;
+    return this.map[pos].getUnit() != "";
+  }
+
+  cellObstacle(i: number, j: number): boolean {
+    let pos: number = this.getMapLength().length * i + j;
+    return this.map[pos].getObstacle();
+  }
+
 }
 
 
