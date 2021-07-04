@@ -52,18 +52,24 @@ export class UnitDetailsComponent implements OnChanges {
     )
     {
       let pos: Position = new Position(this.poiForm.controls['poiX'].value, this.poiForm.controls['poiY'].value);
-      let present: boolean = false;
-      for (let poi of this.localUnit.getPoiList()) {
-        if (pos.getX() == poi.getX() && pos.getY() == poi.getY()) {
-          present = true;
-          alert("ERROR!\n" +
-            "The position inserted is already existent!");
+      if (this.service.getCell(pos).isPoi()) {
+        let present: boolean = false;
+        for (let poi of this.localUnit.getPoiList()) {
+          if (pos.getX() == poi.getX() && pos.getY() == poi.getY()) {
+            present = true;
+            alert("ERROR!\n" +
+              "The position inserted is already existent!");
+          }
+        }
+        if (!present) {
+          let array: Position[] = this.localUnit.getPoiList();
+          array.push(pos);
+          this.localUnit.setPoiList(array);
         }
       }
-      if (!present) {
-        let array: Position[] = this.localUnit.getPoiList();
-        array.push(pos);
-        this.localUnit.setPoiList(array);
+      else {
+        alert("ERROR!\n" +
+          "The position inserted is not a valid Point of Interest!");
       }
     }
     else {
