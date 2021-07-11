@@ -84,10 +84,10 @@ export class UnitTableComponent implements OnInit {
       this.unitForm.controls['unitName'].value.match(/^[a-zA-Z0-9]+$/) &&
 
       -1 < this.unitForm.controls['baseX'].value &&
-      this.unitForm.controls['baseX'].value < (this.service.getMapLength()-1) &&
+      this.unitForm.controls['baseX'].value <= (this.service.getMapLength()-1) &&
 
       -1 < this.unitForm.controls['baseY'].value &&
-      this.unitForm.controls['baseY'].value < (this.service.getMapHeight()-1) &&
+      this.unitForm.controls['baseY'].value <= (this.service.getMapHeight()-1) &&
 
       this.unitForm.controls['baseX'].value != null &&
       this.unitForm.controls['baseY'].value != null

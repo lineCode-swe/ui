@@ -31,24 +31,12 @@ table td {
   padding: 0;
 }
 
-li {
-  padding-top: 3px;
-  padding-bottom: 3px;
+ul {
+  list-style-type:none;
 }
 
 button {
   font-size: smaller;
-  border: 2px solid #2875d4;
-  background: #ffffff;
-  color: #2875d4;
-  border-radius: 4px;
-}
-
-button:hover {
-  border: 2px solid #2875d4;
-  background: #2875d4;
-  color: #ffffff;
-  border-radius: 4px;
 }
 
 button:disabled {
@@ -58,4 +46,20 @@ button:disabled {
 input {
   width: 40px;
   margin-right: 4px;
+}
+
+.alert_input_fields_hide {
+  display: none;
+}
+
+.alert_position_existent_hide {
+  display: none;
+}
+
+.alert_position_invalid_hide {
+  display: none;
+}
+
+.alert_empty_list_hide {
+  display: none;
 }

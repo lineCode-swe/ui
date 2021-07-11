@@ -21,6 +21,11 @@ export class UnitDetailsComponent implements OnChanges {
 
   @Input() public unitId: string;
 
+  private alert_input_fields = false;
+  private alert_position_existent = false;
+  private alert_position_invalid = false;
+  private alert_empty_list = false;
+
   private localUnit: Unit;
   poiForm = this.formBuilder.group({
     poiX: null,
@@ -34,6 +39,7 @@ export class UnitDetailsComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     let change: SimpleChange = changes['unitId'];
     if (change) {
+      this.resetAlerts();
       this.unitId = change.currentValue;
       this.localUnit = this.service.getUnit(this.unitId);
     }
@@ -42,10 +48,10 @@ export class UnitDetailsComponent implements OnChanges {
   onSubmit(): void {
     if (
       -1 < this.poiForm.controls['poiX'].value &&
-      this.poiForm.controls['poiX'].value < this.service.getMapLength() &&
+      this.poiForm.controls['poiX'].value <= this.service.getMapLength()-1 &&
 
       -1 < this.poiForm.controls['poiY'].value &&
-      this.poiForm.controls['poiY'].value < this.service.getMapHeight() &&
+      this.poiForm.controls['poiY'].value <= this.service.getMapHeight()-1 &&
 
       this.poiForm.controls['poiX'].value != null &&
       this.poiForm.controls['poiY'].value != null
@@ -57,28 +63,66 @@ export class UnitDetailsComponent implements OnChanges {
         for (let poi of this.localUnit.getPoiList()) {
           if (pos.getX() == poi.getX() && pos.getY() == poi.getY()) {
             present = true;
-            alert("ERROR!\n" +
-              "The position inserted is already existent!");
+            this.resetAlerts();
+            this.setAlertPositionExistent(true);
           }
         }
         if (!present) {
           let array: Position[] = this.localUnit.getPoiList();
           array.push(pos);
           this.localUnit.setPoiList(array);
+          this.resetAlerts();
         }
       }
       else {
-        alert("ERROR!\n" +
-          "The position inserted is not a valid Point of Interest!");
+        this.resetAlerts();
+        this.setAlertPositionInvalid(true);
       }
     }
     else {
-      alert("ERROR!\n" +
-        "The position inserted is not valid!\n" +
-        "X needs to be between 0 and " + (this.service.getMapLength() - 1) + '\n' +
-        "Y needs to be between 0 and " + (this.service.getMapHeight() - 1));
+      this.resetAlerts();
+      this.setAlertInputFields(true);
     }
     this.poiForm.reset();
+  }
+
+  resetAlerts(): void {
+    this.alert_input_fields = false;
+    this.alert_position_existent = false;
+    this.alert_position_invalid = false;
+    this.alert_empty_list = false;
+  }
+
+  getAlertInputFields(): boolean {
+    return this.alert_input_fields;
+  }
+
+  getAlertPositionExistent(): boolean {
+    return this.alert_position_existent;
+  }
+
+  getAlertPositionInvalid(): boolean {
+    return this.alert_position_invalid;
+  }
+
+  getAlertEmptyList(): boolean {
+    return this.alert_empty_list;
+  }
+
+  setAlertInputFields(view: boolean): void {
+    this.alert_input_fields = view;
+  }
+
+  setAlertPositionExistent(view: boolean): void {
+    this.alert_position_existent = view;
+  }
+
+  setAlertPositionInvalid(view: boolean): void {
+    this.alert_position_invalid = view;
+  }
+
+  setAlertEmptyList(view: boolean): void {
+    this.alert_empty_list = view;
   }
 
   getLocalUnit(): Unit {
@@ -94,24 +138,27 @@ export class UnitDetailsComponent implements OnChanges {
   }
 
   unitStart(id: string, list: Position[]): void {
+    this.resetAlerts();
     if (list.length > 0) {
       this.service.start(id, list);
     }
     else {
-      alert("ERROR!\n" +
-        "The order list is empty!\n");
+      this.alert_empty_list = true;
     }
   }
 
   unitGoBack(id: string): void {
+    this.resetAlerts();
     this.service.goBack(id);
   }
 
   unitStop(id: string): void {
+    this.resetAlerts();
     this.service.stop(id);
   }
 
   unitShutdown(id: string): void {
+    this.resetAlerts();
     this.service.shutdown(id);
   }
 
@@ -119,10 +166,11 @@ export class UnitDetailsComponent implements OnChanges {
     let array: Position[] = this.localUnit.getPoiList();
     array.splice(i, 1);
     this.localUnit.setPoiList(array);
+    this.resetAlerts();
   }
 
   checkBase(): boolean {
-    return this.localUnit.getBase() == this.localUnit.getPosition();
+    return this.localUnit.getStatus() != UnitStatus.BASE;
   }
 
   checkGoBack(): boolean {
@@ -146,6 +194,14 @@ export class UnitDetailsComponent implements OnChanges {
       || this.localUnit.getStatus() == UnitStatus.STOP
       || this.localUnit.getStatus() == UnitStatus.ERROR
       || this.localUnit.getStatus() == UnitStatus.DISCONNECTED;
+  }
+
+  getMapLength(): number {
+    return this.service.getMapLength();
+  }
+
+  getMapHeight(): number {
+    return this.service.getMapHeight();
   }
 
 }
