@@ -1,1 +1,37 @@
+* {
+  font-family: 'Nunito', sans-serif
+}
 
+h1 {
+  margin: 2%;
+  font-size: 50px;
+  text-align: center;
+}
+
+table {
+  text-align: center;
+}
+
+#unitID {
+  width: 200px;
+}
+
+#unitName {
+  width: 100px;
+}
+
+.number_input {
+  width: 60px;
+}
+
+.alert_unit_created_hide {
+  display: none;
+}
+
+.alert_base_invalid_hide {
+  display: none;
+}
+
+.alert_input_fields_hide {
+  display: none;
+}

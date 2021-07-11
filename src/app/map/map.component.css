@@ -5,21 +5,13 @@ table {
   table-layout:fixed;
 }
 
-table, td {
+table td {
   border: 3px solid black;
   border-collapse: collapse;
   empty-cells: show;
   text-align: center;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 800;
-}
-
-table td {
-  min-height: 40px;
-  max-height: 40px;
-  min-width: 40px;
-  max-width: 120px;
-  text-align: center;
   overflow: hidden;
 }
 
@@ -28,22 +20,22 @@ table td {
 }
 
 .directionUp {
-  background-image: url("src/assets/images/arrow1.png");
+  background-image: url("src/assets/images/arrow90.png");
   background-color: #d9d9d9;
 }
 
 .directionDown {
-  background-image: url("src/assets/images/arrow2.png");
+  background-image: url("src/assets/images/arrow90.png");
   background-color: #d9d9d9;
 }
 
 .directionLeft {
-  background-image: url("src/assets/images/arrow3.png");
+  background-image: url("src/assets/images/arrow180.png");
   background-color: #d9d9d9;
 }
 
 .directionRight {
-  background-image: url("src/assets/images/arrow4.png");
+  background-image: url("src/assets/images/arrow180.png");
   background-color: #d9d9d9;
 }
 
@@ -58,17 +50,14 @@ table td {
 
 .cellPoi {
   background: lightgreen;
-  /*background: #00cc00;*/
 }
 
 .cellBase {
   background: lightblue;
-  /*background-color: #4ddbff;*/
 }
 
 .cellObstacle {
   background: lightcoral;
-  /*background-color: #ff3333;*/
 }
 
 

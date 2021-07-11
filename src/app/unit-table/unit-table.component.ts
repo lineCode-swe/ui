@@ -11,6 +11,10 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 })
 export class UnitTableComponent implements OnInit {
 
+  private alert_unit_created = false;
+  private alert_base_invalid = false;
+  private alert_input_fields = false;
+
   private units: Unit[];
   unitForm: FormGroup = this.formBuilder.group({
     unitID: null,
@@ -31,6 +35,44 @@ export class UnitTableComponent implements OnInit {
 
   getUnits(): Unit[] {
     return this.units;
+  }
+
+  resetAlerts(): void {
+    this.alert_unit_created = false;
+    this.alert_base_invalid = false;
+    this.alert_input_fields = false;
+  }
+
+  getAlertUnitCreated(): boolean {
+    return this.alert_unit_created;
+  }
+
+  getAlertBaseInvalid(): boolean {
+    return this.alert_base_invalid;
+  }
+
+  getAlertInputFields(): boolean {
+    return this.alert_input_fields;
+  }
+
+  setAlertUnitCreated(view: boolean): void {
+    this.alert_unit_created = view;
+  }
+
+  setAlertBaseInvalid(view: boolean): void {
+    this.alert_base_invalid = view;
+  }
+
+  setAlertInputFields(view: boolean): void {
+    this.alert_input_fields = view;
+  }
+
+  getMapLength(): number {
+    return this.service.getMapLength();
+  }
+
+  getMapHeight(): number {
+    return this.service.getMapHeight();
   }
 
   onSubmit() {
@@ -54,19 +96,18 @@ export class UnitTableComponent implements OnInit {
       if (this.service.getCell(pos).isBase()) {
         this.service.addUnit(this.unitForm.controls['unitID'].value, this.unitForm.controls['unitName'].value, pos);
         this.unitForm.reset();
+
+        this.resetAlerts();
+        this.alert_unit_created = true;
       }
       else {
-        alert("ERROR!\n" +
-          "The coordinates inserted are not a valid Base position");
+        this.resetAlerts();
+        this.alert_base_invalid = true;
       }
     }
     else {
-      alert("ERROR!\n" +
-        "Name must be alphanumeric and not empty\n" +
-        "X must be between 0 and " + (this.service.getMapLength()-1) + "\n" +
-        "Y must be between 0 and " + (this.service.getMapHeight()-1) + "\n" +
-        "(X,Y) must be a valid Base position"
-      );
+      this.resetAlerts();
+      this.alert_input_fields = true;
     }
   }
 

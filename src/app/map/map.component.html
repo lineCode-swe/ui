@@ -6,7 +6,12 @@
     <div class="col-8">
 
       <table class="table">
+        <tr>
+          <td></td>
+          <td *ngFor="let col of this.getMapLength(); let j = index">{{ j }}</td>
+        </tr>
         <tr *ngFor="let row of this.getMapHeight(); let i = index">
+          <td>{{ i }}</td>
           <td *ngFor="let col of this.getMapLength(); let j = index"
             [class.directionAll]="directionAll(i, j)"
             [class.directionUp]="directionUp(i, j)"

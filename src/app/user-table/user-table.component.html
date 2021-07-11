@@ -2,25 +2,60 @@
 
 <h1>Users Management</h1>
 
-<div>
+<div class="container">
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-    <label>Username:
-      <input type="text" formControlName="username" placeholder="Username">
-    </label>
 
-    <label>Password:
-      <input type="text" formControlName="password" placeholder="Password">
-    </label>
+      <div class="form-row">
 
-    <input type="radio" id="admin" name="status" formControlName="status" value="true">
-    <label for="admin">Admin</label>
-    <input type="radio" id="user" name="status" formControlName="status" value="false">
-    <label for="user">User</label>
+        <div class="col-md-3">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Username</span>
+            <input type="text" class="form-control" formControlName="username">
+          </div>
+        </div>
 
-    <button class="button" type="submit">Add user</button>
-    </div>
+        <div class="col-md-3">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Password</span>
+            <input type="text" class="form-control" formControlName="password">
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="input-group">
+            <div class="input-group-text">
+              <input type="radio" id="admin" name="status" formControlName="status" value="true">
+            </div>
+            <label for="admin">Admin</label>
+            <div class="input-group-text">
+              <input type="radio" id="user" name="status" formControlName="status" value="false">
+            </div>
+            <label for="user">User</label>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+
+      </div>
+
   </form>
+
+  <div class="alert alert-success" role="alert"
+       (click)="setAlertUserCreated(false)"
+       [class.alert_user_created_hide]="!getAlertUserCreated()">
+    <p>User successfully created!</p>
+  </div>
+
+  <div class="alert alert-danger" role="alert"
+       (click)="setAlertInputFields(false)"
+       [class.alert_input_fields_hide]="!getAlertInputFields()">
+    <p>A Status must be selected</p>
+    <p>Username must be alphanumeric</p>
+    <p>Username and Password must not be empty</p>
+  </div>
+
 </div>
 
 <div class="container-fluid">
@@ -30,18 +65,19 @@
   <div class="row justify-content-center">
     <div class="col-8">
 
-      <table class="table">
+      <table class="table table-striped">
         <tr>
           <th>Username</th>
           <th>Status</th>
           <th>Actions</th>
         </tr>
         <tbody>
-        <tr *ngFor="let user of this.getUsers()" >
+        <tr *ngFor="let user of this.getUsers()">
           <td>{{ user.getUsername() }}</td>
           <td>{{ displayStatus(user.getAdmin()) }}</td>
           <td>
-            <button (click)="this.deleteUser(user.getUsername())">Delete</button></td>
+            <button (click)="this.deleteUser(user.getUsername())" class="btn btn-primary">Delete</button>
+          </td>
         </tr>
         </tbody>
       </table>

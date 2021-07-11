@@ -10,6 +10,9 @@ import { ServerService } from "../server-service";
 })
 export class UserTableComponent implements OnInit {
 
+  private alert_user_created = false;
+  private alert_input_fields = false;
+
   private users: User[];
   userForm: FormGroup = this.formBuilder.group({
     username: null,
@@ -31,6 +34,27 @@ export class UserTableComponent implements OnInit {
     return this.users;
   }
 
+  resetAlerts(): void {
+    this.alert_user_created = false;
+    this.alert_input_fields = false;
+  }
+
+  getAlertUserCreated(): boolean {
+    return this.alert_user_created;
+  }
+
+  getAlertInputFields(): boolean {
+    return this.alert_input_fields;
+  }
+
+  setAlertUserCreated(view: boolean): void {
+    this.alert_user_created = view;
+  }
+
+  setAlertInputFields(view: boolean): void {
+    this.alert_input_fields = view;
+  }
+
   onSubmit() {
     if (
       this.userForm.controls['username'].value != null &&
@@ -38,20 +62,15 @@ export class UserTableComponent implements OnInit {
       this.userForm.controls['status'].value != null &&
       this.userForm.controls['username'].value.match(/^[a-zA-Z0-9]+$/)
     ) {
-      if (typeof this.service.getUser(this.userForm.controls['username'].value) == typeof User) {
-        alert("ERROR!" +
-          "Username already existent");
-      }
-      else {
-        this.service.addUser(this.userForm.controls['username'].value, this.userForm.controls['password'].value, this.userForm.controls['status'].value);
-        this.userForm.reset();
-      }
+      this.service.addUser(this.userForm.controls['username'].value, this.userForm.controls['password'].value, this.userForm.controls['status'].value);
+      this.userForm.reset();
+
+      this.resetAlerts();
+      this.alert_user_created = true;
     }
     else {
-      alert("ERROR!\n" +
-        "Username must be alphanumeric\n" +
-        "Username and Password must not be empty\n" +
-        "A Status must be selected");
+      this.resetAlerts();
+      this.alert_input_fields = true;
     }
   }
 
