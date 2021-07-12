@@ -14,7 +14,7 @@
                 <div class="alert alert-danger p-1" role="alert"
                      (click)="setAlertInputFields(false)"
                      [class.alert_input_fields_hide]="!getAlertInputFields()">
-                  <p>The position inserted is not valid!</p>
+                  <p>The position inserted is not valid</p>
                   <p>X must be between 0 and {{ this.getMapLength() - 1 }}</p>
                   <p>Y must be between 0 and {{ this.getMapHeight() - 1 }}</p>
                   <p>(X,Y) must be a valid Base position</p>
@@ -22,12 +22,12 @@
                 <div class="alert alert-danger p-1" role="alert"
                      (click)="setAlertPositionInvalid(false)"
                      [class.alert_position_invalid_hide]="!getAlertPositionInvalid()">
-                  <p>The position inserted is not a valid Point of Interest!</p>
+                  <p>The position inserted is not a valid Point of Interest</p>
                 </div>
                 <div class="alert alert-danger p-1" role="alert"
                      (click)="setAlertPositionExistent(false)"
                      [class.alert_position_existent_hide]="!getAlertPositionExistent()">
-                  <p>The position inserted is already existent!</p>
+                  <p>The position inserted is already existent</p>
                 </div>
                 <ul>
                   <li *ngFor="let poi of this.getLocalUnit().getPoiList(); let i = index">
@@ -49,7 +49,7 @@
                 <div class="alert alert-danger p-1" role="alert"
                      (click)="setAlertEmptyList(false)"
                      [class.alert_empty_list_hide]="!getAlertEmptyList()">
-                  <p>The order list is empty!</p>
+                  <p>The order list is empty</p>
                 </div>
                 <div class="btn-group" role="group">
                   <button class="btn btn-outline-primary btn-sm" (click)="unitStart(this.getLocalUnit().getId(), this.getLocalUnit().getPoiList())" [disabled]="this.checkStart()">Start</button>

@@ -7,34 +7,34 @@
 
       <div class="form-row">
 
-        <div class="col-md-3">
+        <div class="col-md">
           <div class="input-group mb-3">
             <span class="input-group-text">Username</span>
             <input type="text" class="form-control" formControlName="username">
           </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md">
           <div class="input-group mb-3">
             <span class="input-group-text">Password</span>
             <input type="text" class="form-control" formControlName="password">
           </div>
         </div>
 
-        <div class="col-md-4">
-          <div class="input-group">
-            <div class="input-group-text">
-              <input type="radio" id="admin" name="status" formControlName="status" value="true">
-            </div>
-            <label for="admin">Admin</label>
-            <div class="input-group-text">
-              <input type="radio" id="user" name="status" formControlName="status" value="false">
-            </div>
-            <label for="user">User</label>
+        <div class="col-md offset-md-1">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-outline-primary">
+              <input type="radio" name="status" formControlName="status" value="true" autocomplete="off">
+              &nbsp;Admin&nbsp;
+            </label>
+            <label class="btn btn-outline-primary">
+              <input type="radio" name="status" formControlName="status" value="false" autocomplete="off">
+              &nbsp;User&nbsp;
+            </label>
           </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md">
           <button type="submit" class="btn btn-primary">Send</button>
         </div>
 
