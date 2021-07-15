@@ -12,6 +12,14 @@ table {
   text-align: center;
 }
 
+label {
+  margin: 5px;
+}
+
+input[type=text] {
+  margin-right: 10px;
+}
+
 .alert_user_created_hide {
   display: none;
 }

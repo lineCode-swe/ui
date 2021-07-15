@@ -1,41 +1,37 @@
-html, body{
+html, body {
   background-color: #2875d4;
   height: 100vh;
-
 }
 
-
-#col-title{
+#col-title {
   margin-top: 4%;
   text-align: center;
 }
 
-h1{
+h1 {
   font-size: 150px;
   color: white;
 }
 
-#col-form{
-
+#col-form {
   border-radius:  0px 8px 8px 0px;
   box-shadow:  0px 2px 6px -1px rgba(0,0,0,.12);
-
 }
-#col-img{
+#col-img {
   border-radius:  8px 0px 0px 8px;
   box-shadow:  0px 2px 6px -1px rgba(0,0,0,.12);
-}
-#cont-label{
+  background-image: linear-gradient(45deg, #fff 20%, #2875d4 20%, #2875d4 40%, #fff 40%, #fff 60%, #2875d4 60%, #2875d4 80%, #fff 80%, #fff 100%);}
+
+#cont-label {
   margin: 5% 5% 5% 5%;
 }
-#row-form{
 
-}
-h4,p{
+h4,p {
   font-size: 100vm;
   margin-top: 4%;
 }
-input{
+
+input {
   /* stile input*/
   font-size:  16px;
   padding:  10px 10px;
@@ -52,13 +48,12 @@ input{
   -webkit-appearance:  none;
 }
 
-
 button {
   border-radius:  24px;
   text-align:  center;
   padding:  15px 40px;
 
- float: right;
+  float: right;
   background-color: rgba(46,157,255,0.74);
   color: white;
   font-size:  14px;
@@ -71,7 +66,6 @@ button {
   margin-right: 7%;
 }
 
-#my-label{
+#my-label {
   padding-right:30px;
-
 }
