@@ -1,8 +1,5 @@
 table {
-
-  margin-left:auto;
   margin-top: 1em;
-  margin-right:auto;
 }
 
 table, td, th {
@@ -19,10 +16,6 @@ th, td {
 }
 
 table td {
-  min-height: 40px;
-  max-height: 40px;
-  min-width: 40px;
-  max-width: 120px;
   text-align: center;
   overflow: hidden;
 }

@@ -5,9 +5,9 @@
  * Copyright lineCode group <linecode.swe@gmail.com> 2020 - 2021
  * Distributed under open-source licence (see accompanying file LICENCE).
  */
-import {Component, OnInit} from '@angular/core';
-import {ServerService} from "../server-service";
-import {Unit} from "../unit";
+import {Component, OnInit, EventEmitter, Output} from '@angular/core';
+import {ServerService} from "../../server-service";
+import {Unit} from "../../unit";
 
 @Component({
   selector: 'app-unit-management',
@@ -17,7 +17,14 @@ import {Unit} from "../unit";
 export class UnitManagementComponent implements OnInit {
 
   private units: Unit[] = [];
+
+  @Output() unitSelected = new EventEmitter<string>();
   private unitId: string = '';
+
+  selectUnit(id: string) {
+    this.unitSelected.emit(id);
+    this.unitId = id;
+  }
 
   constructor(private service: ServerService) { }
 
@@ -35,10 +42,6 @@ export class UnitManagementComponent implements OnInit {
 
   getUnitId(): string {
     return this.unitId;
-  }
-
-  selectUnit(unitId: string): void {
-    this.unitId = unitId;
   }
 
 }
