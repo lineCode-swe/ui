@@ -35,6 +35,10 @@ ul {
   list-style-type:none;
 }
 
+li {
+  margin: 5px;
+}
+
 button {
   font-size: smaller;
 }
@@ -43,9 +47,14 @@ button:disabled {
   opacity: 0.5;
 }
 
+#buttonRemove {
+  margin-left: 10px;
+}
+
 input {
   width: 40px;
-  margin-right: 4px;
+  margin-right: 10px;
+  margin-top: 5px;
 }
 
 .alert_input_fields_hide {

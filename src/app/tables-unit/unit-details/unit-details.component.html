@@ -1,65 +1,76 @@
 <div *ngIf="unitId">
 
-          <table class="table">
-            <tr>
-              <td>NAME</td>
-              <td>
-                {{ this.getLocalUnit().getName() }}
-              </td>
-            </tr>
-            <tr>
-              <td>ORDERS</td>
-              <td>
-                <div class="alert alert-danger p-1" role="alert"
-                     (click)="setAlertInputFields(false)"
-                     [class.alert_input_fields_hide]="!getAlertInputFields()">
-                  <p>The position inserted is not valid</p>
-                  <p>X must be between 0 and {{ this.getMapLength() - 1 }}</p>
-                  <p>Y must be between 0 and {{ this.getMapHeight() - 1 }}</p>
-                  <p>(X,Y) must be a valid Base position</p>
-                </div>
-                <div class="alert alert-danger p-1" role="alert"
-                     (click)="setAlertPositionInvalid(false)"
-                     [class.alert_position_invalid_hide]="!getAlertPositionInvalid()">
-                  <p>The position inserted is not a valid Point of Interest</p>
-                </div>
-                <div class="alert alert-danger p-1" role="alert"
-                     (click)="setAlertPositionExistent(false)"
-                     [class.alert_position_existent_hide]="!getAlertPositionExistent()">
-                  <p>The position inserted is already existent</p>
-                </div>
-                <ul>
-                  <li *ngFor="let poi of this.getLocalPoiList(); let i = index">
-                    <span *ngIf="poi != null">X:{{ poi.getX() }} , Y:{{ poi.getY() }}</span>
-                    <button class="btn btn-outline-primary btn-sm" (click)="removePoi(i)" [disabled]="this.checkBase()">Remove</button>
-                  </li>
-                  <li>
-                    <form [formGroup]="poiForm" (ngSubmit)="onSubmit()">
-                      <input type="number" formControlName="poiX" min="0" placeholder="X">
-                      <input type="number" formControlName="poiY" min="0" placeholder="Y">
-                      <button class="btn btn-outline-primary btn-sm" type="submit" [disabled]="this.checkBase()">Add</button>
-                    </form>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <div class="alert alert-danger p-1" role="alert"
-                     (click)="setAlertEmptyList(false)"
-                     [class.alert_empty_list_hide]="!getAlertEmptyList()">
-                  <p>The order list is empty</p>
-                </div>
-                <div class="btn-group" role="group">
-                  <button class="btn btn-outline-primary btn-sm" (click)="unitStart(this.getLocalUnit().getId(), this.getLocalUnit().getPoiList())" [disabled]="this.checkStart()">Start</button>
-                  <button class="btn btn-outline-primary btn-sm" (click)="unitGoBack(this.getLocalUnit().getId())" [disabled]="this.checkGoBack()">Go Back</button>
-                  <button class="btn btn-outline-primary btn-sm" (click)="unitStop(this.getLocalUnit().getId())" [disabled]="this.checkStop()">Stop</button>
-                  <button class="btn btn-outline-primary btn-sm" (click)="unitShutdown(this.getLocalUnit().getId())" [disabled]="this.checkShutdown()">Shutdown</button>
-                </div>
-              </td>
-            </tr>
-          </table>
+  <table class="table">
+    <tr>
+      <td>NAME</td>
+      <td>
+        {{ this.getLocalUnit().getName() }}
+      </td>
+    </tr>
+    <tr>
+      <td>ORDERS</td>
+      <td>
+        <div class="alert alert-danger p-1" role="alert"
+             (click)="setAlertInputFields(false)"
+             [class.alert_input_fields_hide]="!getAlertInputFields()">
+          <p>The position inserted is not valid</p>
+          <p>X must be between 0 and {{ this.getMapLength() - 1 }}</p>
+          <p>Y must be between 0 and {{ this.getMapHeight() - 1 }}</p>
+          <p>(X,Y) must be a valid Base position</p>
         </div>
+        <div class="alert alert-danger p-1" role="alert"
+             (click)="setAlertPositionInvalid(false)"
+             [class.alert_position_invalid_hide]="!getAlertPositionInvalid()">
+          <p>The position inserted is not a valid Point of Interest</p>
+        </div>
+        <div class="alert alert-danger p-1" role="alert"
+             (click)="setAlertPositionExistent(false)"
+             [class.alert_position_existent_hide]="!getAlertPositionExistent()">
+          <p>The position inserted is already existent</p>
+        </div>
+        <ul>
+          <li *ngFor="let poi of this.getLocalPoiList(); let i = index">
+            <span *ngIf="poi != null">X:{{ poi.getX() }} , Y:{{ poi.getY() }}</span>
+            <button class="btn btn-outline-primary btn-sm" (click)="removePoi(i)" [disabled]="this.checkBase()"
+                    id="buttonRemove">Remove
+            </button>
+          </li>
+          <li>
+            <form [formGroup]="poiForm" (ngSubmit)="onSubmit()">
+              <input type="number" formControlName="poiX" min="0" placeholder="X">
+              <input type="number" formControlName="poiY" min="0" placeholder="Y">
+              <button class="btn btn-outline-primary btn-sm" type="submit" [disabled]="this.checkBase()">Add</button>
+            </form>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <div class="alert alert-danger p-1" role="alert"
+             (click)="setAlertEmptyList(false)"
+             [class.alert_empty_list_hide]="!getAlertEmptyList()">
+          <p>The order list is empty</p>
+        </div>
+        <div class="btn-group" role="group">
+          <button class="btn btn-outline-primary btn-sm"
+                  (click)="unitStart(this.getLocalUnit().getId(), this.getLocalUnit().getPoiList())"
+                  [disabled]="this.checkStart()">Start
+          </button>
+          <button class="btn btn-outline-primary btn-sm" (click)="unitGoBack(this.getLocalUnit().getId())"
+                  [disabled]="this.checkGoBack()">Go Back
+          </button>
+          <button class="btn btn-outline-primary btn-sm" (click)="unitStop(this.getLocalUnit().getId())"
+                  [disabled]="this.checkStop()">Stop
+          </button>
+          <button class="btn btn-outline-primary btn-sm" (click)="unitShutdown(this.getLocalUnit().getId())"
+                  [disabled]="this.checkShutdown()">Shutdown
+          </button>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
 
 
 
