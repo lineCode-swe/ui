@@ -29,7 +29,7 @@
                   <p>The position inserted is already existent</p>
                 </div>
                 <ul>
-                  <li *ngFor="let poi of this.getLocalUnit().getPoiList(); let i = index">
+                  <li *ngFor="let poi of this.getLocalPoiList(); let i = index">
                     <span *ngIf="poi != null">X:{{ poi.getX() }} , Y:{{ poi.getY() }}</span>
                     <button class="btn btn-outline-primary btn-sm" (click)="removePoi(i)" [disabled]="this.checkBase()">Remove</button>
                   </li>

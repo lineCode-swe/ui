@@ -58,9 +58,13 @@ export class UserTableComponent implements OnInit {
   onSubmit() {
     if (
       this.userForm.controls['username'].value != null &&
+      this.userForm.controls['username'].value != "" &&
+      this.userForm.controls['username'].value.match(/^[a-zA-Z0-9]+$/) &&
+
       this.userForm.controls['password'].value != null &&
-      this.userForm.controls['status'].value != null &&
-      this.userForm.controls['username'].value.match(/^[a-zA-Z0-9]+$/)
+      this.userForm.controls['password'].value != "" &&
+
+      this.userForm.controls['status'].value != null
     ) {
       this.service.addUser(this.userForm.controls['username'].value, this.userForm.controls['password'].value, this.userForm.controls['status'].value);
       this.userForm.reset();

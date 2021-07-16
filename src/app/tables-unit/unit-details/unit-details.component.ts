@@ -19,7 +19,7 @@ import {FormBuilder} from '@angular/forms';
 })
 export class UnitDetailsComponent implements OnChanges {
 
-  @Input() public unitId: string;
+  @Input() public unitId: string = "";
 
   private alert_input_fields = false;
   private alert_position_existent = false;
@@ -27,6 +27,7 @@ export class UnitDetailsComponent implements OnChanges {
   private alert_empty_list = false;
 
   private localUnit: Unit;
+  private localPoiList: Position[] = [];
   poiForm = this.formBuilder.group({
     poiX: null,
     poiY: null
@@ -34,6 +35,12 @@ export class UnitDetailsComponent implements OnChanges {
 
   constructor(private service: ServerService, private formBuilder: FormBuilder) {
     this.localUnit = this.service.getUnit(this.unitId);
+    if (this.unitId) {
+      for (let poi of this.localUnit.getPoiList()) {
+        let pos: Position = new Position(poi.getX(), poi.getY());
+        this.localPoiList.push(pos);
+      }
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -42,6 +49,12 @@ export class UnitDetailsComponent implements OnChanges {
       this.resetAlerts();
       this.unitId = change.currentValue;
       this.localUnit = this.service.getUnit(this.unitId);
+      if (this.unitId) {
+        for (let poi of this.localUnit.getPoiList()) {
+          let pos: Position = new Position(poi.getX(), poi.getY());
+          this.localPoiList.push(pos);
+        }
+      }
     }
   }
 
@@ -60,7 +73,7 @@ export class UnitDetailsComponent implements OnChanges {
       let pos: Position = new Position(this.poiForm.controls['poiX'].value, this.poiForm.controls['poiY'].value);
       if (this.service.getCell(pos).isPoi()) {
         let present: boolean = false;
-        for (let poi of this.localUnit.getPoiList()) {
+        for (let poi of this.localPoiList) {
           if (pos.getX() == poi.getX() && pos.getY() == poi.getY()) {
             present = true;
             this.resetAlerts();
@@ -68,9 +81,7 @@ export class UnitDetailsComponent implements OnChanges {
           }
         }
         if (!present) {
-          let array: Position[] = this.localUnit.getPoiList();
-          array.push(pos);
-          this.localUnit.setPoiList(array);
+          this.localPoiList.push(pos);
           this.resetAlerts();
         }
       }
@@ -129,8 +140,8 @@ export class UnitDetailsComponent implements OnChanges {
     return this.localUnit;
   }
 
-  getUnitId(): string {
-    return this.unitId;
+  getLocalPoiList(): Position[] {
+    return this.localPoiList;
   }
 
   setUnitIndex(i: string): void {
@@ -163,9 +174,7 @@ export class UnitDetailsComponent implements OnChanges {
   }
 
   removePoi(i: number): void {
-    let array: Position[] = this.localUnit.getPoiList();
-    array.splice(i, 1);
-    this.localUnit.setPoiList(array);
+    this.localPoiList.splice(i, 1);
     this.resetAlerts();
   }
 
