@@ -54,7 +54,7 @@
         </div>
         <div class="btn-group" role="group">
           <button class="btn btn-outline-primary btn-sm"
-                  (click)="unitStart(this.getLocalUnit().getId(), this.getLocalUnit().getPoiList())"
+                  (click)="unitStart(this.getLocalUnit().getId(), this.getLocalPoiList())"
                   [disabled]="this.checkStart()">Start
           </button>
           <button class="btn btn-outline-primary btn-sm" (click)="unitGoBack(this.getLocalUnit().getId())"
