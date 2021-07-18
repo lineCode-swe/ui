@@ -9,6 +9,7 @@ table, td, th {
   border-collapse: collapse;
   empty-cells: show;
   font-size: 15px;
+  text-align: center;
 }
 
 th, td {

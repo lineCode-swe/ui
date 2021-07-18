@@ -4,7 +4,7 @@ import {ServerService} from "../server-service";
 @Component({
   selector: 'app-tables-unit',
   templateUrl: './tables-unit.component.html',
-  styleUrls: ['./tables-unit.component.css']
+  styleUrls: []
 })
 export class TablesUnitComponent {
 

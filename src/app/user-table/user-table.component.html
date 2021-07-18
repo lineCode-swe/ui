@@ -66,10 +66,11 @@
     <div class="col-8">
 
       <table class="table table-striped">
+        <caption [hidden]="true">Table representing the users registered in the system.</caption>
         <tr>
-          <th>Username</th>
-          <th>Status</th>
-          <th>Actions</th>
+          <th scope="col">Username</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
         </tr>
         <tbody>
         <tr *ngFor="let user of this.getUsers()">
@@ -87,5 +88,5 @@
 </div>
 
 <footer>
-  <p>Application designed by <b>lineCode</b> group - A.A. 2020/2021 @UniPD</p>
+  <p>Application designed by <strong>lineCode</strong> group - A.A. 2020/2021 @UniPD</p>
 </footer>
