@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
       document.getElementById('adminMap').hidden = true;
       document.getElementById('coordination').hidden = true;
       document.getElementById('btn-logout').hidden = true;
+      document.getElementById('manual').hidden = true;
     }
     else if (auth== AuthStatus.AUTH){
       document.getElementById('adminUnit').hidden = true;
@@ -53,4 +54,9 @@ export class HeaderComponent implements OnInit {
     this.navbarOpen =! this.navbarOpen;
   }
 
+  confirmLogout() {
+    if(confirm("Are you sure you want to logout?")) {
+      this.logout();
+    }
+  }
 }

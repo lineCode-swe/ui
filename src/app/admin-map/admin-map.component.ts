@@ -11,9 +11,6 @@ export class AdminMapComponent {
   private alert_map_uploaded = false;
   private alert_input_error = false;
 
-  private loading: boolean = false;
-  private newMap: File = null;
-
   constructor(private service: ServerService) { }
 
   setAlertMapUploaded(view: boolean) {
