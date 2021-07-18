@@ -3,13 +3,13 @@
   <table class="table">
     <caption [hidden]="true">Table representing some details of the selected unit.</caption>
     <tr>
-      <th>NAME</th>
+      <th scope="row">NAME</th>
       <td>
         {{ this.getLocalUnit().getName() }}
       </td>
     </tr>
     <tr>
-      <th>ORDERS</th>
+      <th scope="row">ORDERS</th>
       <td>
         <div class="alert alert-danger p-1" role="alert"
              (click)="setAlertInputFields(false)"

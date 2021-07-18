@@ -8,8 +8,8 @@
       <table class="table">
         <caption [hidden]="true">Table representing the map of the restaurant.</caption>
         <tr>
-          <th></th>
-          <th *ngFor="let col of this.getMapLength(); let j = index">{{ j }}</th>
+          <th scope="col"></th>
+          <th *ngFor="let col of this.getMapLength(); let j = index" scope="col">{{ j }}</th>
         </tr>
         <tr *ngFor="let row of this.getMapHeight(); let i = index">
           <td>{{ i }}</td>
