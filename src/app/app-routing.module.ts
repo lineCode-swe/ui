@@ -15,7 +15,8 @@ import {UnitTableComponent} from "./unit-table/unit-table.component";
 import {AdminMapComponent} from "./admin-map/admin-map.component";
 
 const routes: Routes=[
-  {path: '', component: HomeMapComponent},
+  {path: '', component: LoginComponent},
+  {path: 'Home', component: HomeMapComponent},
   {path: 'Coordination', component: TablesUnitComponent},
   {path: 'UserManagement', component: UserTableComponent},
   {path: 'UnitManagement', component: UnitTableComponent},

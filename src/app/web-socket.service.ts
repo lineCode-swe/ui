@@ -69,6 +69,7 @@ export class WebSocketService implements ServerService {
         break;
 
       case 'MapToUi':
+        console.log("--- MapToUI ---");
         this.cellMap.clear();
         this.mapHeight = msg.map.height;
         this.mapLength = msg.map.length;

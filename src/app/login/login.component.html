@@ -30,11 +30,18 @@
                        placeholder="Password">
               </div>
             </div>
-            <a>
-              <button (click)="login(username, password)" type="submit" class="btn btn-primary">Submit</button>
-            </a>
+            <div id="form-buttons">
+              <a>
+                <button (click)="login(username, password)" type="submit" class="btn btn-primary">Submit</button>
+              </a>
+            </div>
           </form>
         </div>
+
+        <a>
+          <button routerLink="/Home" class="btn btn-secondary btn-lg" id="client-redirect">I'm just a client :)</button>
+        </a>
+
       </div>
     </div>
   </div>

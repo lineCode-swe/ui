@@ -22,7 +22,14 @@ export class MapComponent implements OnInit {
 
   private map: Cell[];
 
-  constructor(private service: ServerService) {
+  constructor(private service: ServerService) {}
+
+  ngOnInit() {
+    this.map = this.service.getCells();
+
+    this.service.subscribeCells({
+      next: () => { this.map = this.service.getCells(); }
+    });
 
     for (let i: number = 0; i<this.service.getMapLength(); i++) {
       this.mapLength.push(1);
@@ -31,15 +38,6 @@ export class MapComponent implements OnInit {
     for (let i: number = 0; i<this.service.getMapHeight(); i++) {
       this.mapHeight.push(1);
     }
-
-  }
-
-  ngOnInit() {
-    this.map = this.service.getCells();
-
-    this.service.subscribeCells({
-      next: cells => { this.map = cells; }
-    })
   }
 
   getMap(): Cell[] {
