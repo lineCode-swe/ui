@@ -47,9 +47,9 @@ describe('WebSocketService', () => {
     expect(spySocket.subscribe).toHaveBeenCalledTimes(1);
   });
 
-  it('should receive a "KeepaliveToUi" and do nothing [TU2]', () => {
+  it('should receive a "KeepAliveToUi" and do nothing [TU2]', () => {
     service.onMessage({
-      type: 'KeepaliveToUi',
+      type: 'KeepAliveToUi',
     });
 
     expect(service.getAuthStatus()).toEqual(AuthStatus.NO_AUTH);
@@ -193,10 +193,10 @@ describe('WebSocketService', () => {
 
     expect(spyMap.clear).toHaveBeenCalledTimes(1);
     expect(spyMap.set).toHaveBeenCalledTimes(4);
-    expect(spyMap.set.calls.argsFor(0)).toEqual([new Position(0, 0), cell0]);
-    expect(spyMap.set.calls.argsFor(1)).toEqual([new Position(1, 0), cell1]);
-    expect(spyMap.set.calls.argsFor(2)).toEqual([new Position(0, 1), cell2]);
-    expect(spyMap.set.calls.argsFor(3)).toEqual([new Position(1, 1), cell3]);
+    expect(spyMap.set.calls.argsFor(0)).toEqual([JSON.stringify(new Position(0, 0)), cell0]);
+    expect(spyMap.set.calls.argsFor(1)).toEqual([JSON.stringify(new Position(1, 0)), cell1]);
+    expect(spyMap.set.calls.argsFor(2)).toEqual([JSON.stringify(new Position(0, 1)), cell2]);
+    expect(spyMap.set.calls.argsFor(3)).toEqual([JSON.stringify(new Position(1, 1)), cell3]);
     expect(spySubject.next).toHaveBeenCalledOnceWith([cell0, cell1, cell2, cell3]);
     expect(service.getMapHeight()).toEqual(2);
     expect(service.getMapLength()).toEqual(2);
@@ -259,7 +259,7 @@ describe('WebSocketService', () => {
   it('should receive a "UnitSpeedToUi" with a known id, a new speed value and change internal data [TU9]',
     () => {
     let msg = {
-      type: 'UnitSpeedFromServer',
+      type: 'UnitSpeedToUi',
       id: 'unit1',
       speed: 42,
     }
@@ -324,8 +324,8 @@ describe('WebSocketService', () => {
     expect(spyMap.has).toHaveBeenCalledTimes(1);
     expect(spyMap.get).toHaveBeenCalledTimes(3);
     expect(spyMap.get).toHaveBeenCalledWith('unit1');
-    expect(spyMap.get).toHaveBeenCalledWith(oldPosition);
-    expect(spyMap.get).toHaveBeenCalledWith(newPosition);
+    expect(spyMap.get).toHaveBeenCalledWith(JSON.stringify(oldPosition));
+    expect(spyMap.get).toHaveBeenCalledWith(JSON.stringify(newPosition));
     expect(fakeUnit.getPosition()).toEqual(newPosition);
     expect(fakeCellInOldPosition.getUnit()).toEqual('');
     expect(fakeCellInNewPosition.getUnit()).toEqual('unit1');
@@ -335,14 +335,14 @@ describe('WebSocketService', () => {
     expect(console.log).not.toHaveBeenCalled();
   });
 
-  it('should receive a "Unit*FromServer" with unknown id, not change internal data and print error message [TU12]',
+  it('should receive a "Unit*ToUi" with unknown id, not change internal data and print error message [TU12]',
     () => {
     [
-      'UnitStatusFromServer',
-      'UnitPoiFromServer',
-      'UnitSpeedFromServer',
-      'UnitErrorFromServer',
-      'UnitPosFromServer',
+      'UnitStatusToUi',
+      'UnitPoiToUi',
+      'UnitSpeedToUi',
+      'UnitErrorToUi',
+      'UnitPositionToUi',
     ].forEach(currentType => {
       let msg = {
         type: currentType,
@@ -369,19 +369,19 @@ describe('WebSocketService', () => {
     () => {
     service.login('essepi78', 'TheRightPwd');
 
-    expect(spySocket.next).toHaveBeenCalledOnceWith(JSON.stringify({
+    expect(spySocket.next).toHaveBeenCalledOnceWith({
       type: 'LoginToServer',
       user: 'essepi78',
       password: 'TheRightPwd',
-    }));
+    });
   });
 
   it('should send a logout request through socket by giving an obj with username [TU14]', () => {
     service.logout();
 
-    expect(spySocket.next).toHaveBeenCalledOnceWith(JSON.stringify({
+    expect(spySocket.next).toHaveBeenCalledOnceWith({
       type: 'LogoutToServer',
-    }));
+    });
   });
 
   it('should send two new user request through socket by giving an obj with user data [TU15]', () => {
@@ -389,50 +389,47 @@ describe('WebSocketService', () => {
     service.addUser('FunkyGallo', '456', true);
 
     expect(spySocket.next).toHaveBeenCalledTimes(2);
-    expect(spySocket.next).toHaveBeenCalledWith(JSON.stringify({
+    expect(spySocket.next).toHaveBeenCalledWith({
       type: 'UserToServer',
       user: 'hiyajo',
       password: '123',
       admin: false,
-    }));
-    expect(spySocket.next).toHaveBeenCalledWith(JSON.stringify({
+    });
+    expect(spySocket.next).toHaveBeenCalledWith({
       type: 'UserToServer',
       user: 'FunkyGallo',
       password: '456',
       admin: true,
-    }));
+    });
   });
 
   it('should send a delete user request through socket by giving an obj with username [TU16]', () => {
     service.deleteUser('essepi78');
 
-    expect(spySocket.next).toHaveBeenCalledOnceWith(JSON.stringify({
+    expect(spySocket.next).toHaveBeenCalledOnceWith({
       type: 'DeleteUserToServer',
       user: 'essepi78',
-    }));
+    });
   });
 
   it('should send an add unit request through socket by giving an obj with unit data [TU17]', () => {
     service.addUnit('unit1', 'one', new Position(42, 240));
 
-    expect(spySocket.next).toHaveBeenCalledOnceWith(JSON.stringify({
+    expect(spySocket.next).toHaveBeenCalledOnceWith({
       type: 'UnitToServer',
       id: 'unit1',
       name: 'one',
-      base: {
-        x: 42,
-        y: 240,
-      },
-    }));
+      base: new Position(42, 240)
+    });
   });
 
   it('should send a delete unit request through socket by giving an obj with unit id [TU18]', () => {
     service.deleteUnit('unit1')
 
-    expect(spySocket.next).toHaveBeenCalledOnceWith(JSON.stringify({
+    expect(spySocket.next).toHaveBeenCalledOnceWith({
       type: 'DeleteUnitToServer',
       id: 'unit1',
-    }));
+    });
   });
 
   it('should send a start unit request through socket by giving an obj with id and poi list [TU19]', () => {
@@ -441,62 +438,53 @@ describe('WebSocketService', () => {
       new Position(9, 10),
     ])
 
-    expect(spySocket.next).toHaveBeenCalledOnceWith(JSON.stringify({
+    expect(spySocket.next).toHaveBeenCalledOnceWith({
       type: 'UnitStartToServer',
       id: 'unit1',
-      poiList: [
-        {
-          x: 7,
-          y: 8,
-        },
-        {
-          x: 9,
-          y: 10,
-        },
-      ],
-    }));
+      poiList: [ new Position(7,8), new Position(9, 10) ]
+    });
   });
 
   it('should send a stop unit request through socket by giving an obj with unit id and stop command [TU20]',
     () => {
     service.stop('unit1')
 
-    expect(spySocket.next).toHaveBeenCalledOnceWith(JSON.stringify({
+    expect(spySocket.next).toHaveBeenCalledOnceWith({
       type: 'UnitStopToServer',
       id: 'unit1',
       command: 'STOP',
-    }));
+    });
   });
 
   it('should send a shutdown unit request through socket by giving an obj with unit id and shutdown command [TU21]',
   () => {
     service.shutdown('unit1')
 
-    expect(spySocket.next).toHaveBeenCalledOnceWith(JSON.stringify({
+    expect(spySocket.next).toHaveBeenCalledOnceWith({
       type: 'UnitStopToServer',
       id: 'unit1',
       command: 'SHUTDOWN',
-    }));
+    });
   });
 
   it('should send a goback unit request through socket by giving an obj with unit id and goback command [TU22]',
   () => {
     service.goBack('unit1')
 
-    expect(spySocket.next).toHaveBeenCalledOnceWith(JSON.stringify({
+    expect(spySocket.next).toHaveBeenCalledOnceWith({
       type: 'UnitStopToServer',
       id: 'unit1',
       command: 'BASE',
-    }));
+    });
   });
 
   it('should send a new map request through socket by giving an obj with map string extracted from file [TU23]',
     () => {
     service.newMap('+ + > > > _\n+ + > > > _\n+ + + + + <\n+ + X + + ^\nB + + + + P')
 
-    expect(spySocket.next).toHaveBeenCalledOnceWith(JSON.stringify({
+    expect(spySocket.next).toHaveBeenCalledOnceWith({
       type: 'MapToServer',
       mapConfig: '+ + > > > _\n+ + > > > _\n+ + + + + <\n+ + X + + ^\nB + + + + P',
-    }));
+    });
   });
 });

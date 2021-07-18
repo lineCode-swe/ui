@@ -8,26 +8,6 @@ h1 {
   text-align: center;
 }
 
-table {
-  text-align: center;
-}
-
-label {
-  margin: 5px;
-}
-
-input[type=text] {
-  margin-right: 10px;
-}
-
-.alert_user_created_hide {
-  display: none;
-}
-
-.alert_input_fields_hide {
-  display: none;
-}
-
 footer {
   background: #2875d4;
   color: white;
@@ -37,4 +17,17 @@ footer {
   bottom: 0;
   width: 100%;
   padding-top: 5px;
+}
+
+#importFile {
+  margin: auto;
+  cursor: pointer;
+}
+
+.alert_map_uploaded_hide {
+  display: none;
+}
+
+.alert_input_error_hide {
+  display: none;
 }

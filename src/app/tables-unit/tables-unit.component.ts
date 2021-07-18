@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import {ServerService} from "../server-service";
 
 @Component({
   selector: 'app-tables-unit',
   templateUrl: './tables-unit.component.html',
   styleUrls: ['./tables-unit.component.css']
 })
-export class TablesUnitComponent implements OnInit {
+export class TablesUnitComponent {
 
-  constructor() { }
+  private unitId: string = '';
 
-  ngOnInit(): void {
+  constructor(private service: ServerService) { }
+
+  getUnitId() {
+    return this.unitId;
   }
 
+  setUnitId(id: string) {
+    this.unitId = id;
+  }
+
+  onUnitSelected(id: string): void {
+    this.unitId = id;
+  }
 }

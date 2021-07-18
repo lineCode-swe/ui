@@ -5,27 +5,27 @@
  * Copyright lineCode group <linecode.swe@gmail.com> 2020 - 2021
  * Distributed under open-source licence (see accompanying file LICENCE).
  */
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {RouterModule,Routes} from "@angular/router";
 import {LoginComponent} from "./login/login.component";
-import {HeaderComponent} from "./header/header.component";
-import {AppComponent} from "./app.component";
-import {MapComponent} from "./map/map.component";
+import {HomeMapComponent} from "./home-map/home-map.component";
 import {TablesUnitComponent} from "./tables-unit/tables-unit.component";
-import {HeaderAdminComponent} from "./header-admin/header-admin.component";
 import {UserTableComponent} from "./user-table/user-table.component";
 import {UnitTableComponent} from "./unit-table/unit-table.component";
+import {AdminMapComponent} from "./admin-map/admin-map.component";
 
 const routes: Routes=[
-  {path: '', component: HeaderAdminComponent},
-  {path:'UnitM', component: TablesUnitComponent},
-  {path: 'UserT', component: UserTableComponent},
-  {path:'UnitT', component: UnitTableComponent},
+  {path: '', component: LoginComponent},
+  {path: 'Home', component: HomeMapComponent},
+  {path: 'Coordination', component: TablesUnitComponent},
+  {path: 'UserManagement', component: UserTableComponent},
+  {path: 'UnitManagement', component: UnitTableComponent},
+  {path: 'MapManagement', component: AdminMapComponent},
   {path: 'Login', component: LoginComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports:[RouterModule]
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -31,31 +31,44 @@ table td {
   padding: 0;
 }
 
+ul {
+  list-style-type:none;
+}
+
 li {
-  padding-top: 3px;
-  padding-bottom: 3px;
+  margin: 5px;
 }
 
 button {
   font-size: smaller;
-  border: 2px solid #2875d4;
-  background: #ffffff;
-  color: #2875d4;
-  border-radius: 4px;
-}
-
-button:hover {
-  border: 2px solid #2875d4;
-  background: #2875d4;
-  color: #ffffff;
-  border-radius: 4px;
 }
 
 button:disabled {
   opacity: 0.5;
 }
 
+#buttonRemove {
+  margin-left: 10px;
+}
+
 input {
   width: 40px;
-  margin-right: 4px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.alert_input_fields_hide {
+  display: none;
+}
+
+.alert_position_existent_hide {
+  display: none;
+}
+
+.alert_position_invalid_hide {
+  display: none;
+}
+
+.alert_empty_list_hide {
+  display: none;
 }

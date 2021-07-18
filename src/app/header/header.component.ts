@@ -16,25 +16,29 @@ import {ServerService} from "../server-service";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private service: ServerService) {
-  }
+  navbarOpen = false;
 
+  constructor(private service: ServerService) { }
 
   showMe(): void{
     let auth:AuthStatus= this.service.getAuthStatus();
     if (auth== AuthStatus.NO_AUTH){
-      document.getElementById('adminUnit').hidden= true;
-      document.getElementById('adminUser').hidden= true;
-      document.getElementById('btn-logout').hidden= true;
-
+      document.getElementById('adminUnit').hidden = true;
+      document.getElementById('adminUser').hidden = true;
+      document.getElementById('adminMap').hidden = true;
+      document.getElementById('coordination').hidden = true;
+      document.getElementById('btn-logout').hidden = true;
+      document.getElementById('manual').hidden = true;
     }
-    if (auth== AuthStatus.AUTH){
-      document.getElementById('adminUnit').hidden= true;
-      document.getElementById('adminUser').hidden= true;
-      document.getElementById('btn-login').hidden= true;
+    else if (auth== AuthStatus.AUTH){
+      document.getElementById('adminUnit').hidden = true;
+      document.getElementById('adminUser').hidden = true;
+      document.getElementById('adminMap').hidden = true;
+      document.getElementById('coordination').hidden = true;
+      document.getElementById('btn-login').hidden = true;
     }
-    else{
-      document.getElementById('btn-login').hidden= true;
+    else if(auth== AuthStatus.ADMIN){
+      document.getElementById('btn-login').hidden = true;
     }
   }
 
@@ -43,17 +47,16 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  this.showMe();
-
+    this.showMe();
   }
 
-  navbarOpen=false;
   toggleNavbar(){
-    this.navbarOpen=!this.navbarOpen;
+    this.navbarOpen =! this.navbarOpen;
   }
 
-
-
-
-
+  confirmLogout() {
+    if(confirm("Are you sure you want to logout?")) {
+      this.logout();
+    }
+  }
 }

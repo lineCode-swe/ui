@@ -1,9 +1,15 @@
-<app-header-admin></app-header-admin>
+<app-header></app-header>
 
-<div class="container">
-  <div class="row justify-content-start">
-    <div class="col-sm-3"> <app-map></app-map></div>
-    <div class="col-7"><app-unit-management></app-unit-management></div>
+<div class="container-fluid row"><app-map></app-map></div>
+
+<div class="container-fluid row justify-content-md-center">
+
+  <div class="col-md-3 offset-1">
+    <app-unit-details [unitId]="this.getUnitId()"></app-unit-details>
   </div>
-</div>
 
+  <div class="col-md-7 offset-1">
+    <app-unit-management (unitSelected)="onUnitSelected($event)"></app-unit-management>
+  </div>
+
+</div>

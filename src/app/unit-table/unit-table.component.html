@@ -1,48 +1,95 @@
-<app-header-admin></app-header-admin>
+<app-header></app-header>
+
 <h1>Units Management</h1>
 
-<div>
+<div class="container">
   <form [formGroup]="unitForm" (ngSubmit)="onSubmit()">
-    <label>ID:
-      <input type="text" id="unitID" formControlName="unitID" placeholder="ID">
-    </label>
+    <div class="form-row">
 
-    <label>Name:
-      <input type="text" id="unitName" formControlName="unitName" placeholder="Name">
-    </label>
+      <div class="col-md-4">
+        <div class="input-group mb-3">
+          <span class="input-group-text">ID</span>
+          <input type="text" id="unitID" formControlName="unitID">
+        </div>
+      </div>
 
-    <label>Base X:
-      <input type="number" id="baseX" formControlName="baseX" min="0" placeholder="X">
-    </label>
+      <div class="col-md-3">
+        <div class="input-group mb-3">
+          <span class="input-group-text">Name</span>
+          <input type="text" id="unitName" formControlName="unitName">
+        </div>
+      </div>
 
-    <label>Base Y:
-      <input type="number" id="baseY" formControlName="baseY" min="0" placeholder="Y">
-    </label>
+      <div class="col-md-2">
+        <div class="input-group mb-3">
+          <span class="input-group-text">Base X</span>
+          <input type="number" class="number_input" formControlName="baseX" min="0">
+        </div>
+      </div>
 
-    <button class="button" type="submit">Add unit</button>
+      <div class="col-md-2">
+        <div class="input-group mb-3">
+          <span class="input-group-text">Base Y</span>
+          <input type="number" class="number_input" formControlName="baseY" min="0">
+        </div>
+      </div>
+
+
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+
+    </div>
+
   </form>
+
+  <div class="alert alert-success" role="alert"
+       (click)="setAlertUnitCreated(false)"
+       [class.alert_unit_created_hide]="!getAlertUnitCreated()">
+    <p>Unit successfully created!</p>
+  </div>
+
+  <div class="alert alert-danger" role="alert"
+       (click)="setAlertBaseInvalid(false)"
+       [class.alert_base_invalid_hide]="!getAlertBaseInvalid()">
+    <p>The coordinates inserted are not a valid Base position</p>
+  </div>
+
+  <div class="alert alert-danger" role="alert"
+       (click)="setAlertInputFields(false)"
+       [class.alert_input_fields_hide]="!getAlertInputFields()">
+    <p>Name must be alphanumeric and not empty</p>
+    <p>X must be between 0 and {{ this.getMapLength() - 1 }}</p>
+    <p>Y must be between 0 and {{ this.getMapHeight() - 1 }}</p>
+    <p>(X,Y) must be a valid Base position</p>
+  </div>
+
 </div>
 
-<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+<div class="container">
   <div class="row " id="row-hidden">
     <div class="col-12"></div>
   </div>
   <div class="row justify-content-center">
     <div class="col-8">
 
-      <table class="table">
+      <table class="table table-striped">
         <tr>
           <th>ID</th>
           <th>Name</th>
           <th>Action</th>
         </tr>
-        <tr *ngFor="let unit of this.getUnits() | async">
+        <tr *ngFor="let unit of this.getUnits()">
           <td>{{ unit.getId() }}</td>
           <td>{{ unit.getName() }}</td>
-          <td><button (click)="this.deleteUnit(unit.getId())">Delete</button></td>
+          <td><button (click)="this.deleteUnit(unit.getId())" class="btn btn-primary">Delete</button></td>
         </tr>
       </table>
 
     </div>
   </div>
 </div>
+
+<footer>
+  <p>Application designed by <b>lineCode</b> group - A.A. 2020/2021 @UniPD</p>
+</footer>

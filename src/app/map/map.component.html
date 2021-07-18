@@ -6,9 +6,13 @@
     <div class="col-8">
 
       <table class="table">
-        <tr *ngFor="let row of this.getArrayHeight(); let i = index">
-          <td
-            *ngFor="let col of this.getArrayLength(); let j = index"
+        <tr>
+          <td></td>
+          <td *ngFor="let col of this.getMapLength(); let j = index">{{ j }}</td>
+        </tr>
+        <tr *ngFor="let row of this.getMapHeight(); let i = index">
+          <td>{{ i }}</td>
+          <td *ngFor="let col of this.getMapLength(); let j = index"
             [class.directionAll]="directionAll(i, j)"
             [class.directionUp]="directionUp(i, j)"
             [class.directionDown]="directionDown(i, j)"
@@ -18,13 +22,11 @@
             [class.cellBase]="cellBase(i, j)"
             [class.cellPoi]="cellPoi(i, j)"
           >
-            <span *ngFor="let cell of this.getMap() | async">
-              <span [innerHTML]="displayCell(cell, i, j)"
-                    [class.cellUnit]="cell.getUnit()"
-                    [class.cellObstacle]="cell.getObstacle()"
-              >
-              </span>
-            </span>
+            <span
+              [class.cellUnit]="cellUnit(i, j)"
+              [class.cellObstacle]="cellObstacle(i, j)"
+              [innerHTML]="displayCell(i, j)"
+            ></span>
           </td>
         </tr>
       </table>

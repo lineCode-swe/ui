@@ -5,12 +5,12 @@
  * Copyright lineCode group <linecode.swe@gmail.com> 2020 - 2021
  * Distributed under open-source licence (see accompanying file LICENCE).
  */
-import {Position} from './position';
-import {AuthStatus} from "./auth-status.enum";
-import {Cell} from "./cell";
-import {Observable, PartialObserver} from "rxjs";
-import {User} from "./user";
-import {Unit} from "./unit";
+import { Position } from './position';
+import { AuthStatus } from "./auth-status.enum";
+import { Cell } from "./cell";
+import { PartialObserver } from "rxjs";
+import { User } from "./user";
+import { Unit } from "./unit";
 
 export abstract class ServerService {
   abstract getAuthStatus(): AuthStatus;
@@ -18,11 +18,14 @@ export abstract class ServerService {
   abstract getMapLength(): number;
   abstract getMapHeight(): number;
   abstract getCell(position: Position): Cell;
-  abstract getCellObservable(): Observable<Cell[]>;
+  abstract getCells(): Cell[];
+  abstract subscribeCells(obs: PartialObserver<Cell[]>): void;
   abstract getUser(username: string): User;
-  abstract getUserObservable(): Observable<User[]>;
+  abstract getUsers(): User[];
+  abstract subscribeUsers(obs: PartialObserver<User[]>): void;
   abstract getUnit(id: string): Unit;
-  abstract getUnitObservable(): Observable<Unit[]>;
+  abstract getUnits(): Unit[];
+  abstract subscribeUnits(obs: PartialObserver<Unit[]>): void;
   abstract login(user: string, password: string): void;
   abstract logout(): void;
   abstract addUser(user: string, password: string, admin: boolean): void;
