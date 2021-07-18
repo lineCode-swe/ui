@@ -74,10 +74,11 @@
     <div class="col-8">
 
       <table class="table table-striped">
+        <caption [hidden]="true">Table representing the units registered in the system.</caption>
         <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Action</th>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Action</th>
         </tr>
         <tr *ngFor="let unit of this.getUnits()">
           <td>{{ unit.getId() }}</td>
@@ -91,5 +92,5 @@
 </div>
 
 <footer>
-  <p>Application designed by <b>lineCode</b> group - A.A. 2020/2021 @UniPD</p>
+  <p>Application designed by <strong>lineCode</strong> group - A.A. 2020/2021 @UniPD</p>
 </footer>

@@ -5,7 +5,7 @@ table {
   table-layout:fixed;
 }
 
-table td {
+td, th {
   border: 3px solid black;
   border-collapse: collapse;
   empty-cells: show;
