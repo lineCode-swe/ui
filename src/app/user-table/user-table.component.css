@@ -28,6 +28,10 @@ input[type=text] {
   display: none;
 }
 
+.alert_user_deleted_hide {
+  display: none;
+}
+
 footer {
   background: #2875d4;
   color: white;

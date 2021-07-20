@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 export class UnitTableComponent implements OnInit {
 
   private alert_unit_created = false;
+  private alert_unit_deleted = false;
   private alert_base_invalid = false;
   private alert_input_fields = false;
 
@@ -39,12 +40,17 @@ export class UnitTableComponent implements OnInit {
 
   resetAlerts(): void {
     this.alert_unit_created = false;
+    this.alert_unit_deleted = false;
     this.alert_base_invalid = false;
     this.alert_input_fields = false;
   }
 
   getAlertUnitCreated(): boolean {
     return this.alert_unit_created;
+  }
+
+  getAlertUnitDeleted(): boolean {
+    return this.alert_unit_deleted;
   }
 
   getAlertBaseInvalid(): boolean {
@@ -57,6 +63,10 @@ export class UnitTableComponent implements OnInit {
 
   setAlertUnitCreated(view: boolean): void {
     this.alert_unit_created = view;
+  }
+
+  setAlertUnitDeleted(view: boolean): void {
+    this.alert_unit_deleted = view;
   }
 
   setAlertBaseInvalid(view: boolean): void {
@@ -112,6 +122,8 @@ export class UnitTableComponent implements OnInit {
   }
 
   deleteUnit(id: string) {
+    this.resetAlerts();
+    this.alert_unit_deleted = true;
     this.service.deleteUnit(id);
   }
 

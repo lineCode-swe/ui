@@ -12,6 +12,7 @@ export class UserTableComponent implements OnInit {
 
   private alert_user_created = false;
   private alert_input_fields = false;
+  private alert_user_deleted = false;
 
   private users: User[];
   userForm: FormGroup = this.formBuilder.group({
@@ -37,6 +38,7 @@ export class UserTableComponent implements OnInit {
   resetAlerts(): void {
     this.alert_user_created = false;
     this.alert_input_fields = false;
+    this.alert_user_deleted = false;
   }
 
   getAlertUserCreated(): boolean {
@@ -47,12 +49,20 @@ export class UserTableComponent implements OnInit {
     return this.alert_input_fields;
   }
 
+  getAlertUserDeleted(): boolean {
+    return this.alert_user_deleted;
+  }
+
   setAlertUserCreated(view: boolean): void {
     this.alert_user_created = view;
   }
 
   setAlertInputFields(view: boolean): void {
     this.alert_input_fields = view;
+  }
+
+  setAlertUserDeleted(view: boolean): void {
+    this.alert_user_deleted = view;
   }
 
   onSubmit() {
@@ -79,6 +89,8 @@ export class UserTableComponent implements OnInit {
   }
 
   deleteUser(username: string): void {
+    this.resetAlerts();
+    this.alert_user_deleted = true;
     this.service.deleteUser(username);
   }
 

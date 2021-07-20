@@ -49,6 +49,12 @@
     <p>Unit successfully created!</p>
   </div>
 
+  <div class="alert alert-primary" role="alert"
+       (click)="setAlertUnitDeleted(false)"
+       [class.alert_unit_deleted_hide]="!getAlertUnitDeleted()">
+    <p>Unit successfully deleted!</p>
+  </div>
+
   <div class="alert alert-danger" role="alert"
        (click)="setAlertBaseInvalid(false)"
        [class.alert_base_invalid_hide]="!getAlertBaseInvalid()">

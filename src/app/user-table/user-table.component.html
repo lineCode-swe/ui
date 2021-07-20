@@ -48,6 +48,12 @@
     <p>User successfully created!</p>
   </div>
 
+  <div class="alert alert-primary" role="alert"
+       (click)="setAlertUserDeleted(false)"
+       [class.alert_user_deleted_hide]="!getAlertUserDeleted()">
+    <p>User successfully deleted!</p>
+  </div>
+
   <div class="alert alert-danger" role="alert"
        (click)="setAlertInputFields(false)"
        [class.alert_input_fields_hide]="!getAlertInputFields()">

@@ -28,6 +28,10 @@ table {
   display: none;
 }
 
+.alert_unit_deleted_hide {
+  display: none;
+}
+
 .alert_base_invalid_hide {
   display: none;
 }
