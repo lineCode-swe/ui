@@ -1,3 +1,44 @@
+table {
+  table-layout: fixed;
+}
+
+#legend {
+ text-align: center;
+}
+
+.default {
+  background-color: #d9d9d9;
+}
+
+#direction {
+  background-image: url("src/assets/images/arrowUp.png");
+}
+
+#base {
+  background: lightblue;
+}
+
+#poi {
+  background: lightgreen;
+}
+
+#locked {
+  background-image: linear-gradient(45deg, #a3a3a3 25%, #424242 25%, #424242 50%, #a3a3a3 50%, #a3a3a3 75%, #424242 75%, #424242 100%);
+  background-size: 55px 55px;
+}
+
+#unit {
+  background-color: #ffff66;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+#obstacle {
+  background: lightcoral;
+  font-size: 17px;
+  font-weight: 800;
+}
+
 footer {
   background: #2875d4;
   color: white;
