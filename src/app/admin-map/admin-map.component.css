@@ -8,18 +8,7 @@ h1 {
   text-align: center;
 }
 
-footer {
-  background: #2875d4;
-  color: white;
-  text-align: center;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  padding-top: 5px;
-}
-
-#importFile {
+#importMap {
   margin: auto;
   cursor: pointer;
 }
@@ -30,4 +19,15 @@ footer {
 
 .alert_input_error_hide {
   display: none;
+}
+
+footer {
+  background: #2875d4;
+  color: white;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding-top: 5px;
 }

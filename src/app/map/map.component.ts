@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 import { Cell } from "../cell";
 import { ServerService } from "../server-service";
 import { Direction } from "../direction.enum";
+import {Position} from "../position";
 
 @Component({
   selector: 'app-map',
@@ -20,15 +21,17 @@ export class MapComponent implements OnInit {
   private mapLength: Array<number> = [];
   private mapHeight: Array<number> = [];
 
-  private map: Cell[];
+  private gridMap: Cell[];
 
   constructor(private service: ServerService) {}
 
   ngOnInit() {
-    this.map = this.service.getCells();
+    this.gridMap = this.service.getCells();
 
     this.service.subscribeCells({
-      next: () => { this.map = this.service.getCells(); }
+      next: map => {
+        this.gridMap = map;
+      }
     });
 
     for (let i: number = 0; i<this.service.getMapLength(); i++) {
@@ -41,7 +44,7 @@ export class MapComponent implements OnInit {
   }
 
   getMap(): Cell[] {
-    return this.map;
+    return this.gridMap;
   }
 
   getMapLength(): Array<number> {
@@ -52,72 +55,78 @@ export class MapComponent implements OnInit {
     return this.mapHeight;
   }
 
-  displayCell(i: number, j: number): string {
+  displayCell(cell: Cell, i: number, j: number): string {
     let htmlStr: string = '';
-    let pos: number = this.getMapLength().length * i + j;
-    // OBSTACLE + UNITS (WOULD BE AN ERROR)
-    if (this.map[pos].getObstacle() && this.map[pos].getUnit() != "") {
-      htmlStr += '\xa0O<sup>U</sup>\xa0';
+
+    let cellPos: number = this.getMapLength().length * cell.getPosition().getY() + cell.getPosition().getX();
+    let indexPos: number = this.getMapLength().length * i + j;
+
+    if (cellPos == indexPos) {
+      // OBSTACLE + UNITS (WOULD BE AN ERROR)
+      if (cell.getObstacle() && cell.getUnit() != "") {
+        htmlStr += '\xa0O<sup>U</sup>\xa0';
+      }
+      // OBSTACLE
+      else if (cell.getObstacle()) {
+        htmlStr += '\xa0O\xa0';
+      }
+      // UNIT
+      else if (cell.getUnit()) {
+        htmlStr += '\xa0U<sup>' + cell.getUnit() + '</sup>\xa0';
+      }
     }
-    // OBSTACLE
-    else if (this.map[pos].getObstacle()) {
-      htmlStr += '\xa0O\xa0';
-    }
-    // UNITS
-    else if (this.map[pos].getUnit() != "") {
-      htmlStr += '\xa0U<sup>' + this.service.getUnit(this.map[pos].getUnit()).getName() + '</sup>\xa0';
-    }
+
     return htmlStr;
   }
 
   directionAll(i: number, j: number): boolean {
     let pos: number = this.getMapLength().length * i + j;
-    return this.map[pos].getDirection() == Direction.ALL;
+    return this.gridMap[pos].getDirection() == Direction.ALL;
   }
 
   directionUp(i: number, j: number): boolean {
     let pos: number = this.getMapLength().length * i + j;
-    return this.map[pos].getDirection() == Direction.UP;
+    return this.gridMap[pos].getDirection() == Direction.UP;
   }
 
   directionDown(i: number, j: number): boolean {
     let pos: number = this.getMapLength().length * i + j;
-    return this.map[pos].getDirection() == Direction.DOWN;
+    return this.gridMap[pos].getDirection() == Direction.DOWN;
   }
 
   directionLeft(i: number, j: number): boolean {
     let pos: number = this.getMapLength().length * i + j;
-    return this.map[pos].getDirection() == Direction.LEFT;
+    return this.gridMap[pos].getDirection() == Direction.LEFT;
   }
 
   directionRight(i: number, j: number): boolean {
     let pos: number = this.getMapLength().length * i + j;
-    return this.map[pos].getDirection() == Direction.RIGHT;
+    return this.gridMap[pos].getDirection() == Direction.RIGHT;
   }
 
   cellLocked(i: number, j: number): boolean {
     let pos: number = this.getMapLength().length * i + j;
-    return this.map[pos].isLocked();
+    return this.gridMap[pos].isLocked();
   }
 
   cellBase(i: number, j: number): boolean {
     let pos: number = this.getMapLength().length * i + j;
-    return this.map[pos].isBase();
+    return this.gridMap[pos].isBase();
   }
 
   cellPoi(i: number, j: number): boolean {
     let pos: number = this.getMapLength().length * i + j;
-    return this.map[pos].isPoi();
+    return this.gridMap[pos].isPoi();
   }
 
   cellUnit(i: number, j: number): boolean {
     let pos: number = this.getMapLength().length * i + j;
-    return this.map[pos].getUnit() != "";
+    return this.gridMap[pos].getUnit() != "";
   }
 
   cellObstacle(i: number, j: number): boolean {
     let pos: number = this.getMapLength().length * i + j;
-    return this.map[pos].getObstacle();
+    return this.gridMap[pos].getObstacle();
   }
 
 }

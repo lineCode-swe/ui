@@ -7,9 +7,5 @@ import {ServerService} from "../server-service";
   styleUrls: ['./home-map.component.css']
 })
 export class HomeMapComponent {
-  constructor(private service: ServerService) {
-    console.log("--- Mappa ---");
-    console.log(this.service.getCells());
-    console.log("--- Mappa ---");
-  }
+  constructor(private service: ServerService) {}
 }
