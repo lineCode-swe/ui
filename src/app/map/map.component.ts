@@ -21,7 +21,7 @@ export class MapComponent implements OnInit {
   private mapLength: Array<number> = [];
   private mapHeight: Array<number> = [];
 
-  private gridMap: Cell[];
+  public gridMap: Cell[];
 
   constructor(private service: ServerService) {}
 
@@ -72,7 +72,7 @@ export class MapComponent implements OnInit {
       }
       // UNIT
       else if (cell.getUnit()) {
-        htmlStr += '\xa0U<sup>' + cell.getUnit() + '</sup>\xa0';
+        htmlStr += '\xa0U<sup>' + this.service.getUnit(cell.getUnit()).getName() + '</sup>\xa0';
       }
     }
 

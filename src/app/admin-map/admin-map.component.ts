@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
 import {ServerService} from "../server-service";
-import {Router} from "@angular/router";
-import {MapComponent} from "../map/map.component";
 
 @Component({
   selector: 'app-admin-map',
@@ -13,9 +11,7 @@ export class AdminMapComponent {
   private alert_map_uploaded = false;
   private alert_input_error = false;
 
-  constructor(private router: Router, private service: ServerService) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-  }
+  constructor(private service: ServerService) {}
 
   setAlertMapUploaded(view: boolean) {
     this.alert_map_uploaded = view;
@@ -77,17 +73,7 @@ export class AdminMapComponent {
     }
 
     (<HTMLInputElement>document.getElementById('importMap')).files[0].slice(0, 1);
-    this.refreshComponent();
+
     return;
-  }
-
-  refreshComponent(): void {
-    // MapComponent.prototype.gridMap = [];
-    // MapComponent.prototype.gridMap = this.service.getCells();
-    // MapComponent.prototype.ngOnInit();
-
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['MapManagement']);
-    });
   }
 }
