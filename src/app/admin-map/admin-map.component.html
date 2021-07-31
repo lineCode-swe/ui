@@ -18,17 +18,17 @@
   <p></p>
 
   <div class="alert alert-success" role="alert"
-       (click)="setAlertMapUploaded(false)"
+       (click)="resetErrors()"
        [class.alert_map_uploaded_hide]="!getAlertMapUploaded()">
     <p>Map uploaded successfully!</p>
   </div>
 
   <div class="alert alert-danger" role="alert"
-       (click)="setAlertInputError(false)"
+       (click)="resetErrors()"
        [class.alert_input_error_hide]="!getAlertInputError()">
-    <p>The file must have a .txt extension, and not being empty</p>
-    <p>The map must be a rectangle</p>
-    <p>The allowed characters are: x,X,b,B,p,P, ,^,_,<,>,+ \n</p>
+    <p [class.error_row]="!getAlertPExtension()">The file must have a .txt extension, and not being empty</p>
+    <p [class.error_row]="!getAlertPShape()">The map must be a rectangle</p>
+    <p [class.error_row]="!getAlertPCharacters()">The allowed characters are: x,X,b,B,p,P, ,^,_,<,>,+ \n</p>
   </div>
 </div>
 

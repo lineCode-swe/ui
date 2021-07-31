@@ -13,8 +13,13 @@ export class UnitTableComponent implements OnInit {
 
   private alert_unit_created = false;
   private alert_unit_deleted = false;
-  private alert_base_invalid = false;
   private alert_input_fields = false;
+
+  private alert_p_id = false;
+  private alert_p_name = false;
+  private alert_p_x = false;
+  private alert_p_y = false;
+  private alert_p_position = false;
 
   private units: Unit[];
   unitForm: FormGroup = this.formBuilder.group({
@@ -41,8 +46,13 @@ export class UnitTableComponent implements OnInit {
   resetAlerts(): void {
     this.alert_unit_created = false;
     this.alert_unit_deleted = false;
-    this.alert_base_invalid = false;
     this.alert_input_fields = false;
+
+    this.alert_p_id = false;
+    this.alert_p_name = false;
+    this.alert_p_x = false;
+    this.alert_p_y = false;
+    this.alert_p_position = false;
   }
 
   getAlertUnitCreated(): boolean {
@@ -53,8 +63,24 @@ export class UnitTableComponent implements OnInit {
     return this.alert_unit_deleted;
   }
 
-  getAlertBaseInvalid(): boolean {
-    return this.alert_base_invalid;
+  getAlertPId(): boolean {
+    return this.alert_p_id;
+  }
+
+  getAlertPName(): boolean {
+    return this.alert_p_name;
+  }
+
+  getAlertPX(): boolean {
+    return this.alert_p_x;
+  }
+
+  getAlertPY(): boolean {
+    return this.alert_p_y;
+  }
+
+  getAlertPPosition(): boolean {
+    return this.alert_p_position;
   }
 
   getAlertInputFields(): boolean {
@@ -67,10 +93,6 @@ export class UnitTableComponent implements OnInit {
 
   setAlertUnitDeleted(view: boolean): void {
     this.alert_unit_deleted = view;
-  }
-
-  setAlertBaseInvalid(view: boolean): void {
-    this.alert_base_invalid = view;
   }
 
   setAlertInputFields(view: boolean): void {
@@ -86,38 +108,66 @@ export class UnitTableComponent implements OnInit {
   }
 
   onSubmit() {
+    this.resetAlerts();
+    let alertPId = false;
+    let alertPName = false;
+    let alertPX = false;
+    let alertPY = false;
+    let alertPPosition = false;
+
     if (
-      this.unitForm.controls['unitID'].value != null &&
-      this.unitForm.controls['unitName'].value != null &&
-
-      this.unitForm.controls['unitID'].value.match(/^[a-zA-Z0-9-_]+$/) &&
-      this.unitForm.controls['unitName'].value.match(/^[a-zA-Z0-9]+$/) &&
-
-      -1 < this.unitForm.controls['baseX'].value &&
-      this.unitForm.controls['baseX'].value <= (this.service.getMapLength()-1) &&
-
-      -1 < this.unitForm.controls['baseY'].value &&
-      this.unitForm.controls['baseY'].value <= (this.service.getMapHeight()-1) &&
-
-      this.unitForm.controls['baseX'].value != null &&
-      this.unitForm.controls['baseY'].value != null
+      this.unitForm.controls['unitID'].value == null ||
+      !this.unitForm.controls['unitID'].value.match(/^[a-zA-Z0-9-_]+$/)
     ) {
-      let pos: Position = new Position(this.unitForm.controls['baseX'].value, this.unitForm.controls['baseY'].value);
-      if (this.service.getCell(pos).isBase()) {
-        this.service.addUnit(this.unitForm.controls['unitID'].value, this.unitForm.controls['unitName'].value, pos);
-        this.unitForm.reset();
+      alertPId = true;
+    }
 
-        this.resetAlerts();
-        this.alert_unit_created = true;
-      }
-      else {
-        this.resetAlerts();
-        this.alert_base_invalid = true;
+    if (
+      this.unitForm.controls['unitName'].value == null ||
+      !this.unitForm.controls['unitName'].value.match(/^[a-zA-Z0-9]+$/)
+    ) {
+      alertPName = true;
+    }
+
+    if (
+      -1 >= this.unitForm.controls['baseX'].value ||
+      this.unitForm.controls['baseX'].value > (this.service.getMapLength()-1) ||
+      this.unitForm.controls['baseX'].value == null
+    ) {
+      alertPX = true;
+    }
+
+    if (-1 >= this.unitForm.controls['baseY'].value ||
+      this.unitForm.controls['baseY'].value > (this.service.getMapHeight()-1) ||
+      this.unitForm.controls['baseY'].value == null
+    ) {
+      alertPY = true;
+    }
+
+    if (!alertPX && !alertPY) {
+      let pos: Position = new Position(this.unitForm.controls['baseX'].value, this.unitForm.controls['baseY'].value);
+      if (!this.service.getCell(pos).isBase()) {
+        alertPPosition = true;
       }
     }
+
+    if (!alertPId && !alertPName && !alertPX && !alertPY && !alertPPosition) {
+      this.service.addUnit(
+        this.unitForm.controls['unitID'].value,
+        this.unitForm.controls['unitName'].value,
+        new Position(this.unitForm.controls['baseX'].value, this.unitForm.controls['baseY'].value
+        )
+      );
+      this.unitForm.reset();
+      this.alert_unit_created = true;
+    }
     else {
-      this.resetAlerts();
       this.alert_input_fields = true;
+      if (alertPId) this.alert_p_id = true;
+      if (alertPName) this.alert_p_name = true;
+      if (alertPX) this.alert_p_x = true;
+      if (alertPY) this.alert_p_y = true;
+      if (alertPPosition) this.alert_p_position = true;
     }
   }
 
