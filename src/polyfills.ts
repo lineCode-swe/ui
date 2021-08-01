@@ -1,3 +1,11 @@
+/*
+ * PORTACS
+ * piattaforma di controllo mobilità autonoma
+ *
+ * Copyright (c) lineCode group <linecode.swe@gmail.com> 2020 - 2021
+ * Distributed under ISC license (see accompanying file LICENSE).
+ */
+
 /***************************************************************************************************
  * Load `$localize` onto the global scope - used if i18n tags appear in Angular templates.
  */
