@@ -55,29 +55,24 @@ export class AdminMapComponent {
   }
 
   async checkFile(): Promise<void> {
+    let error_extension = false;
+    let error_shape = false;
+    let error_characters = false;
+    this.resetErrors();
+
     let mapFile = (<HTMLInputElement>document.getElementById('importMap')).files[0];
 
     if (mapFile.type != "text/plain") {
-      this.resetErrors();
-
-      this.alert_map_uploaded = false;
-      this.alert_input_error = true;
-      this.alert_p_extension = true;
-
-      return;
+      error_extension = true;
     }
 
     let mapText = await mapFile.text();
-    const regex = new RegExp(/^[x|X|b|B|p|P| |^|_|<|>|+|\n]+$/g);
+    const regex = new RegExp('^[xXbBpP^_<>+ \n]*$');
+
+    console.log(regex.test(mapText));
 
     if (!regex.test(mapText)) {
-      this.resetErrors();
-
-      this.alert_map_uploaded = false;
-      this.alert_input_error = true;
-      this.alert_p_characters = true;
-
-      return;
+      error_characters = true;
     }
     mapText = mapText.replace(/ /g, "");
 
@@ -91,20 +86,22 @@ export class AdminMapComponent {
         valid = false;
       }
     }
-
     if (!valid) {
-      this.resetErrors();
+      error_shape = true;
+    }
 
-      this.alert_map_uploaded = false;
-      this.alert_input_error = true;
-      this.alert_p_shape = true;
+
+    if (!error_shape && !error_extension && !error_characters) {
+      this.service.newMap(mapText);
+      (<HTMLInputElement>document.getElementById('importMap')).files[0].slice(0, 1);
+
+      this.alert_map_uploaded = true;
     }
     else {
-      this.service.newMap(mapText);
+      this.alert_input_error = true;
+      if (error_extension) this.alert_p_extension = true;
+      if (error_shape) this.alert_p_shape = true;
+      if (error_characters) this.alert_p_characters = true;
     }
-
-    (<HTMLInputElement>document.getElementById('importMap')).files[0].slice(0, 1);
-
-    return;
   }
 }
