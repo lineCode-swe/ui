@@ -67,29 +67,28 @@ export class AdminMapComponent {
     }
 
     let mapText = await mapFile.text();
-    const regex = new RegExp('^[xXbBpP^_<>+ \n]*$');
 
-    console.log(regex.test(mapText));
-
-    if (!regex.test(mapText)) {
-      error_characters = true;
-    }
-    mapText = mapText.replace(/ /g, "");
+    mapText = mapText.replace(/ /g, ""); console.log(mapText);
 
     const LINE_EXPRESSION = /\r\n|\n\r|\n|\r/g;
-    const mapArray = mapText.split(LINE_EXPRESSION);
+    const mapArray = mapText.split(LINE_EXPRESSION); console.log(mapArray);
+    const regex = /^[xXbBpP^_<>+ ]*$/gmi;
 
     const length: number = mapArray[0].length;
+    let matches: number = 0;
     let valid: boolean = true;
     for (let row of mapArray) {
+      console.log(row);
       if (row.length != length) {
         valid = false;
       }
+      if (regex.test(row)) {
+        console.log('count');
+        matches++;
+      }
     }
-    if (!valid) {
-      error_shape = true;
-    }
-
+    if (!valid) error_shape = true;
+    if (matches != mapArray.length) error_characters = true;
 
     if (!error_shape && !error_extension && !error_characters) {
       this.service.newMap(mapText);
