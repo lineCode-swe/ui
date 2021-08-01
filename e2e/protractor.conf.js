@@ -1,3 +1,11 @@
+/*
+ * PORTACS
+ * piattaforma di controllo mobilità autonoma
+ *
+ * Copyright (c) lineCode group <linecode.swe@gmail.com> 2020 - 2021
+ * Distributed under ISC license (see accompanying file LICENSE).
+ */
+
 // @ts-check
 // Protractor configuration file, see link for more information
 // https://github.com/angular/protractor/blob/master/lib/config.ts

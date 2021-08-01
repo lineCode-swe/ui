@@ -1,3 +1,11 @@
+/*
+ * PORTACS
+ * piattaforma di controllo mobilità autonoma
+ *
+ * Copyright (c) lineCode group <linecode.swe@gmail.com> 2020 - 2021
+ * Distributed under ISC license (see accompanying file LICENSE).
+ */
+
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.

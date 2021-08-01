@@ -1,3 +1,11 @@
+<!--
+  ~ PORTACS
+  ~ piattaforma di controllo mobilità autonoma
+  ~
+  ~ Copyright (c) lineCode group <linecode.swe@gmail.com> 2020 - 2021
+  ~ Distributed under ISC license (see accompanying file LICENSE).
+  -->
+
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="E2E Tests (ui)" type="JavaScriptTestRunnerProtractor">
     <config-file value="$PROJECT_DIR$/e2e/protractor.conf.js" />
