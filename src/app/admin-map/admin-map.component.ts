@@ -72,21 +72,26 @@ export class AdminMapComponent {
 
     const LINE_EXPRESSION = /\r\n|\n\r|\n|\r/g;
     const mapArray = mapText.split(LINE_EXPRESSION); console.log(mapArray);
-    const regex = /^[xXbBpP^_<>+ ]*$/gmi;
 
     const length: number = mapArray[0].length;
     let matches: number = 0;
     let valid: boolean = true;
     for (let row of mapArray) {
       console.log(row);
+
+      const regex = /^[xXbBpP^_<>+ ]*$/g;
+
       if (row.length != length) {
         valid = false;
+
       }
+
       if (regex.test(row)) {
         console.log('count');
         matches++;
       }
     }
+    
     if (!valid) error_shape = true;
     if (matches != mapArray.length) error_characters = true;
 
