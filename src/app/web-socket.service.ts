@@ -141,6 +141,16 @@ export class WebSocketService implements ServerService {
         }
         break;
 
+      case 'ObstaclesToUi':
+        this.cellMap.forEach((cell: Cell) => {
+          cell.setObstacle(false);
+        });
+        msg.obsList.forEach((position) => {
+          this.cellMap.get(JSON.stringify(new Position(position.x, position.y))).setObstacle(true);
+        });
+        this.cellSubj.next(Array.from(this.cellMap.values()));
+        break;
+
       default:
         console.log('Received unrecognized type of message');
         break;
