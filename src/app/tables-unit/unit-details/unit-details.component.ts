@@ -32,9 +32,7 @@ export class UnitDetailsComponent implements OnChanges {
     poiY: null
   });
 
-  constructor(private service: ServerService, private formBuilder: FormBuilder) {
-    Object.assign(this.localUnit, this.service.getUnit(this.unitId));
-  }
+  constructor(private service: ServerService, private formBuilder: FormBuilder) {}
 
   ngOnChanges(changes: SimpleChanges) {
     let change: SimpleChange = changes['unitId'];
