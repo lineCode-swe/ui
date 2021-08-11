@@ -169,8 +169,7 @@ export class UnitDetailsComponent implements OnChanges {
   }
 
   checkStart(): boolean {
-    return this.localUnit.getStatus() == UnitStatus.GOINGTO
-      || this.localUnit.getStatus() == UnitStatus.ERROR;
+    return this.localUnit.getStatus() == UnitStatus.GOINGTO;
   }
 
   checkStop(): boolean {
