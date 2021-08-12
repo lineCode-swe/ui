@@ -10,7 +10,35 @@
 
 <h1>Map Management</h1>
 
-<app-map></app-map>
+<div class="container">
+  <div class="col-md-6 offset-md-3">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text upload" id="btnUpload">Upload a new map</span>
+      </div>
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="importMap" (change)="checkFile()">
+        <label for="importMap" class="custom-file-label"></label>
+      </div>
+    </div>
+  </div>
+
+  <p></p>
+
+  <div class="alert alert-success" role="alert"
+       (click)="resetErrors()"
+       [class.alert_map_uploaded_hide]="!getAlertMapUploaded()">
+    <p>Map uploaded successfully!</p>
+  </div>
+
+  <div class="alert alert-danger" role="alert"
+       (click)="resetErrors()"
+       [class.alert_input_error_hide]="!getAlertInputError()">
+    <p [class.error_row]="!getAlertPExtension()">The file must have a .txt extension, and not being empty</p>
+    <p [class.error_row]="!getAlertPShape()">The map must be a rectangle</p>
+    <p [class.error_row]="!getAlertPCharacters()">The allowed characters are: x,X,b,B,p,P, ,^,_,<,>,+ \n</p>
+  </div>
+</div>
 
 <footer>
   <p>Application designed by <strong>lineCode</strong> group - A.A. 2020/2021 @UniPD</p>

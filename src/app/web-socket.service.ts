@@ -69,7 +69,6 @@ export class WebSocketService implements ServerService {
         break;
 
       case 'MapToUi':
-        console.log("--- MapToUI ---");
         this.cellMap.clear();
         this.mapHeight = msg.map.height;
         this.mapLength = msg.map.length;
@@ -140,6 +139,16 @@ export class WebSocketService implements ServerService {
         } else {
           console.log(`Unit with ID: ${msg.id} has been requested but not found`);
         }
+        break;
+
+      case 'ObstaclesToUi':
+        this.cellMap.forEach((cell: Cell) => {
+          cell.setObstacle(false);
+        });
+        msg.obsList.forEach((position) => {
+          this.cellMap.get(JSON.stringify(new Position(position.x, position.y))).setObstacle(true);
+        });
+        this.cellSubj.next(Array.from(this.cellMap.values()));
         break;
 
       default:

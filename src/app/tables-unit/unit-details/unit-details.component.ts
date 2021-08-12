@@ -26,22 +26,13 @@ export class UnitDetailsComponent implements OnChanges {
   private alert_position_invalid = false;
   private alert_empty_list = false;
 
-  private localUnit: Unit;
-  private localPoiList: Position[] = [];
+  public localUnit: Unit;
   poiForm = this.formBuilder.group({
     poiX: null,
     poiY: null
   });
 
-  constructor(private service: ServerService, private formBuilder: FormBuilder) {
-    this.localUnit = this.service.getUnit(this.unitId);
-    if (this.unitId) {
-      for (let poi of this.localUnit.getPoiList()) {
-        let pos: Position = new Position(poi.getX(), poi.getY());
-        this.localPoiList.push(pos);
-      }
-    }
-  }
+  constructor(private service: ServerService, private formBuilder: FormBuilder) {}
 
   ngOnChanges(changes: SimpleChanges) {
     let change: SimpleChange = changes['unitId'];
@@ -49,12 +40,6 @@ export class UnitDetailsComponent implements OnChanges {
       this.resetAlerts();
       this.unitId = change.currentValue;
       this.localUnit = this.service.getUnit(this.unitId);
-      if (this.unitId) {
-        for (let poi of this.localUnit.getPoiList()) {
-          let pos: Position = new Position(poi.getX(), poi.getY());
-          this.localPoiList.push(pos);
-        }
-      }
     }
   }
 
@@ -73,7 +58,7 @@ export class UnitDetailsComponent implements OnChanges {
       let pos: Position = new Position(this.poiForm.controls['poiX'].value, this.poiForm.controls['poiY'].value);
       if (this.service.getCell(pos).isPoi()) {
         let present: boolean = false;
-        for (let poi of this.localPoiList) {
+        for (let poi of this.localUnit.getPoiList()) {
           if (pos.getX() == poi.getX() && pos.getY() == poi.getY()) {
             present = true;
             this.resetAlerts();
@@ -81,7 +66,9 @@ export class UnitDetailsComponent implements OnChanges {
           }
         }
         if (!present) {
-          this.localPoiList.push(pos);
+          let list = this.localUnit.getPoiList();
+          list.push(pos);
+          this.localUnit.setPoiList(list);
           this.resetAlerts();
         }
       }
@@ -136,14 +123,6 @@ export class UnitDetailsComponent implements OnChanges {
     this.alert_empty_list = view;
   }
 
-  getLocalUnit(): Unit {
-    return this.localUnit;
-  }
-
-  getLocalPoiList(): Position[] {
-    return this.localPoiList;
-  }
-
   setUnitIndex(i: string): void {
     this.unitId = i;
   }
@@ -174,7 +153,9 @@ export class UnitDetailsComponent implements OnChanges {
   }
 
   removePoi(i: number): void {
-    this.localPoiList.splice(i, 1);
+    let list = this.localUnit.getPoiList();
+    list.splice(i, 1);
+    this.localUnit.setPoiList(list);
     this.resetAlerts();
   }
 
@@ -188,8 +169,7 @@ export class UnitDetailsComponent implements OnChanges {
   }
 
   checkStart(): boolean {
-    return this.localUnit.getStatus() == UnitStatus.GOINGTO
-      || this.localUnit.getStatus() == UnitStatus.ERROR;
+    return this.localUnit.getStatus() == UnitStatus.GOINGTO;
   }
 
   checkStop(): boolean {
@@ -212,5 +192,4 @@ export class UnitDetailsComponent implements OnChanges {
   getMapHeight(): number {
     return this.service.getMapHeight();
   }
-
 }

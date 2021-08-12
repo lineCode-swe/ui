@@ -25,7 +25,7 @@
         <div class="col-md">
           <div class="input-group mb-3">
             <span class="input-group-text">Password</span>
-            <input type="text" class="form-control" formControlName="password">
+            <input type="password" class="form-control" formControlName="password">
           </div>
         </div>
 
@@ -51,23 +51,23 @@
   </form>
 
   <div class="alert alert-success" role="alert"
-       (click)="setAlertUserCreated(false)"
+       (click)="resetAlerts()"
        [class.alert_user_created_hide]="!getAlertUserCreated()">
     <p>User successfully created!</p>
   </div>
 
   <div class="alert alert-primary" role="alert"
-       (click)="setAlertUserDeleted(false)"
+       (click)="resetAlerts()"
        [class.alert_user_deleted_hide]="!getAlertUserDeleted()">
     <p>User successfully deleted!</p>
   </div>
 
   <div class="alert alert-danger" role="alert"
-       (click)="setAlertInputFields(false)"
+       (click)="resetAlerts()"
        [class.alert_input_fields_hide]="!getAlertInputFields()">
-    <p>A Status must be selected</p>
-    <p>Username must be alphanumeric</p>
-    <p>Username and Password must not be empty</p>
+    <p [class.error_row]="!getAlertPStatus()">A Status must be selected</p>
+    <p [class.error_row]="!getAlertPAlphanumeric()">Username must be alphanumeric</p>
+    <p [class.error_row]="!getAlertPEmpty()">Username and Password must not be empty</p>
   </div>
 
 </div>

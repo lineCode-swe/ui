@@ -15,29 +15,34 @@
 
       <table class="table">
         <caption [hidden]="true">Table representing the map of the restaurant.</caption>
+
         <tr>
           <th scope="col"></th>
-          <th *ngFor="let col of this.getMapLength(); let j = index" scope="col">{{ j }}</th>
+          <th *ngFor="let col of this.getMapLength(); let x = index" scope="col">{{ x }}</th>
         </tr>
-        <tr *ngFor="let row of this.getMapHeight(); let i = index">
-          <td>{{ i }}</td>
-          <td *ngFor="let col of this.getMapLength(); let j = index"
-            [class.directionAll]="directionAll(i, j)"
-            [class.directionUp]="directionUp(i, j)"
-            [class.directionDown]="directionDown(i, j)"
-            [class.directionLeft]="directionLeft(i, j)"
-            [class.directionRight]="directionRight(i, j)"
-            [class.cellLocked]="cellLocked(i, j)"
-            [class.cellBase]="cellBase(i, j)"
-            [class.cellPoi]="cellPoi(i, j)"
+
+        <tr *ngFor="let row of this.getMapHeight(); let y = index">
+
+          <td>{{ y }}</td>
+          <td *ngFor="let col of this.getMapLength(); let x = index"
+              [class.directionAll]="directionAll(y, x)"
+              [class.directionUp]="directionUp(y, x)"
+              [class.directionDown]="directionDown(y, x)"
+              [class.directionLeft]="directionLeft(y, x)"
+              [class.directionRight]="directionRight(y, x)"
+              [class.cellLocked]="cellLocked(y, x)"
+              [class.cellBase]="cellBase(y, x)"
+              [class.cellPoi]="cellPoi(y, x)"
           >
-            <span
-              [class.cellUnit]="cellUnit(i, j)"
-              [class.cellObstacle]="cellObstacle(i, j)"
-              [innerHTML]="displayCell(i, j)"
+            <span *ngFor="let cell of this.getMap()"
+                  [class.cellUnit]="cellUnit(y, x)"
+                  [class.cellObstacle]="cellObstacle(y, x)"
+                  [innerHTML]="displayCell(cell, y, x)"
             ></span>
           </td>
+
         </tr>
+
       </table>
 
     </div>

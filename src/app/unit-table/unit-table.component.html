@@ -64,18 +64,13 @@
   </div>
 
   <div class="alert alert-danger" role="alert"
-       (click)="setAlertBaseInvalid(false)"
-       [class.alert_base_invalid_hide]="!getAlertBaseInvalid()">
-    <p>The coordinates inserted are not a valid Base position</p>
-  </div>
-
-  <div class="alert alert-danger" role="alert"
        (click)="setAlertInputFields(false)"
        [class.alert_input_fields_hide]="!getAlertInputFields()">
-    <p>Name must be alphanumeric and not empty</p>
-    <p>X must be between 0 and {{ this.getMapLength() - 1 }}</p>
-    <p>Y must be between 0 and {{ this.getMapHeight() - 1 }}</p>
-    <p>(X,Y) must be a valid Base position</p>
+    <p [class.error_row]="!getAlertPId()">Id must not empty</p>
+    <p [class.error_row]="!getAlertPName()">Name must be alphanumeric and not empty</p>
+    <p [class.error_row]="!getAlertPX()">X must be between 0 and {{ this.getMapLength() - 1 }}</p>
+    <p [class.error_row]="!getAlertPY()">Y must be between 0 and {{ this.getMapHeight() - 1 }}</p>
+    <p [class.error_row]="!getAlertPPosition()">(X,Y) must be a valid Base position</p>
   </div>
 
 </div>

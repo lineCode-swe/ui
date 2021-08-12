@@ -19,26 +19,42 @@ export class LoginComponent {
 
   constructor(private service: ServerService, private route:Router) {
     service.subscribeAuth({
-      next: newAuth => { this.redirectIfAuth(newAuth); }
+      next: newAuth => { this.redirectOnInit(newAuth); }
     });
   }
 
-  login(user: HTMLInputElement, password: HTMLInputElement):void{
-      let value: string = user.value;
-      this.service.login(value,password.value);
-      this.redirectIfAuth(this.service.getAuthStatus());
+  login(user: HTMLInputElement, password: HTMLInputElement): void {
+    let value: string = user.value;
+    this.service.login(value, password.value);
+    setTimeout(() => {
+      this.redirectAfterInput(this.service.getAuthStatus());
+    }, 1500);
   }
 
-  redirectIfAuth(auth: AuthStatus):void{
-    if(auth == AuthStatus.NO_AUTH){
+  redirectOnInit(auth: AuthStatus):void {
+    if (auth == AuthStatus.NO_AUTH) {
       this.route.navigate(['']);
     }
-    else if(auth == AuthStatus.AUTH){
+    else if (auth == AuthStatus.AUTH) {
       this.route.navigate(['/Coordination']);
     }
-    else if(auth== AuthStatus.ADMIN){
+    else if (auth== AuthStatus.ADMIN) {
       this.route.navigate(['/UserManagement']);
     }
   }
 
+  redirectAfterInput(auth: AuthStatus) {
+    if (auth == AuthStatus.NO_AUTH) {
+      alert(
+        "ERROR!\n" +
+        "The credentials inserted are not valid!"
+      );
+    }
+    else if (auth == AuthStatus.AUTH) {
+      this.route.navigate(['/Coordination']);
+    }
+    else if (auth== AuthStatus.ADMIN) {
+      this.route.navigate(['/UserManagement']);
+    }
+  }
 }

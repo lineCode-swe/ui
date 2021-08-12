@@ -11,9 +11,9 @@
   <table class="table">
     <caption [hidden]="true">Table representing some details of the selected unit.</caption>
     <tr>
-      <th scope="row">NAME</th>
+      <th scope="row">UNIT</th>
       <td>
-        {{ this.getLocalUnit().getName() }}
+        {{ this.localUnit.getName() }}
       </td>
     </tr>
     <tr>
@@ -38,7 +38,7 @@
           <p>The position inserted is already existent</p>
         </div>
         <ul>
-          <li *ngFor="let poi of this.getLocalPoiList(); let i = index">
+          <li *ngFor="let poi of this.localUnit.getPoiList(); let i = index">
             <span *ngIf="poi != null">X:{{ poi.getX() }} , Y:{{ poi.getY() }}</span>
             <button class="btn btn-outline-primary btn-sm" (click)="removePoi(i)" [disabled]="this.checkBase()"
                     id="buttonRemove">Remove
@@ -63,16 +63,16 @@
         </div>
         <div class="btn-group" role="group">
           <button class="btn btn-outline-primary btn-sm"
-                  (click)="unitStart(this.getLocalUnit().getId(), this.getLocalPoiList())"
+                  (click)="unitStart(this.localUnit.getId(), this.localUnit.getPoiList())"
                   [disabled]="this.checkStart()">Start
           </button>
-          <button class="btn btn-outline-primary btn-sm" (click)="unitGoBack(this.getLocalUnit().getId())"
+          <button class="btn btn-outline-primary btn-sm" (click)="unitGoBack(this.localUnit.getId())"
                   [disabled]="this.checkGoBack()">Go Back
           </button>
-          <button class="btn btn-outline-primary btn-sm" (click)="unitStop(this.getLocalUnit().getId())"
+          <button class="btn btn-outline-primary btn-sm" (click)="unitStop(this.localUnit.getId())"
                   [disabled]="this.checkStop()">Stop
           </button>
-          <button class="btn btn-outline-primary btn-sm" (click)="unitShutdown(this.getLocalUnit().getId())"
+          <button class="btn btn-outline-primary btn-sm" (click)="unitShutdown(this.localUnit.getId())"
                   [disabled]="this.checkShutdown()">Shutdown
           </button>
         </div>

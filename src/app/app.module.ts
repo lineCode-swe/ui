@@ -30,6 +30,7 @@ import { User } from "./user";
 import { Unit } from "./unit";
 import { AuthStatus } from "./auth-status.enum";
 import { AdminMapComponent } from './admin-map/admin-map.component';
+import { LegendComponent } from './legend/legend.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { AdminMapComponent } from './admin-map/admin-map.component';
     UnitDetailsComponent,
     TablesUnitComponent,
     HomeMapComponent,
-    AdminMapComponent
+    AdminMapComponent,
+    LegendComponent
   ],
   imports: [
     BrowserModule,

@@ -40,6 +40,10 @@ input[type=text] {
   display: none;
 }
 
+.error_row {
+  display: none;
+}
+
 footer {
   background: #2875d4;
   color: white;

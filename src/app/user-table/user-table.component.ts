@@ -22,6 +22,10 @@ export class UserTableComponent implements OnInit {
   private alert_input_fields = false;
   private alert_user_deleted = false;
 
+  private alert_p_status = false;
+  private alert_p_alphanumeric = false;
+  private alert_p_empty = false;
+
   private users: User[];
   userForm: FormGroup = this.formBuilder.group({
     username: null,
@@ -47,6 +51,10 @@ export class UserTableComponent implements OnInit {
     this.alert_user_created = false;
     this.alert_input_fields = false;
     this.alert_user_deleted = false;
+
+    this.alert_p_empty = false;
+    this.alert_p_status = false;
+    this.alert_p_alphanumeric = false;
   }
 
   getAlertUserCreated(): boolean {
@@ -61,16 +69,16 @@ export class UserTableComponent implements OnInit {
     return this.alert_user_deleted;
   }
 
-  setAlertUserCreated(view: boolean): void {
-    this.alert_user_created = view;
+  getAlertPStatus(): boolean {
+    return this.alert_p_status;
   }
 
-  setAlertInputFields(view: boolean): void {
-    this.alert_input_fields = view;
+  getAlertPAlphanumeric(): boolean {
+    return this.alert_p_alphanumeric;
   }
 
-  setAlertUserDeleted(view: boolean): void {
-    this.alert_user_deleted = view;
+  getAlertPEmpty(): boolean {
+    return this.alert_p_empty;
   }
 
   onSubmit() {
@@ -93,6 +101,20 @@ export class UserTableComponent implements OnInit {
     else {
       this.resetAlerts();
       this.alert_input_fields = true;
+      if (
+        this.userForm.controls['username'].value == null ||
+        this.userForm.controls['username'].value == "" ||
+        this.userForm.controls['password'].value == null ||
+        this.userForm.controls['password'].value == ""
+      ) {
+        this.alert_p_empty = true;
+      }
+      else if (!this.userForm.controls['username'].value.match(/^[a-zA-Z0-9]+$/)) {
+        this.alert_p_alphanumeric = true;
+      }
+      if (this.userForm.controls['status'].value == null) {
+        this.alert_p_status = true;
+      }
     }
   }
 
@@ -105,5 +127,4 @@ export class UserTableComponent implements OnInit {
   displayStatus(status: boolean): string {
     return status ? "Admin" : "User";
   }
-
 }
