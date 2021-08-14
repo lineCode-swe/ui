@@ -13,9 +13,9 @@ export class Unit {
     private readonly id: string,
     private readonly name: string,
     private readonly base: Position,
-    private position: Position = base,
+    private position: Position = new Position(-1, -1),
     private poiList: Position[] = [],
-    private status: UnitStatus = UnitStatus.BASE,
+    private status: UnitStatus = UnitStatus.DISCONNECTED,
     private error: number = 0,
     private speed: number = 0,
   ) {}
