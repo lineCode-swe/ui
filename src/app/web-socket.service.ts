@@ -135,7 +135,9 @@ export class WebSocketService implements ServerService {
           if (oldPosition.getX() !== -1 || oldPosition.getY() !== -1) {
             this.cellMap.get(JSON.stringify(oldPosition)).setUnit('');
           }
-          this.cellMap.get(JSON.stringify(newPosition)).setUnit(msg.id);
+          if (newPosition.getX() !== -1 || newPosition.getY() !== -1) {
+            this.cellMap.get(JSON.stringify(newPosition)).setUnit(msg.id);
+          }
           this.cellSubj.next(Array.from(this.cellMap.values()));
           this.unitSubj.next(Array.from(this.unitMap.values()));
         } else {
