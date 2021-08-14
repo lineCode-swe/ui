@@ -132,7 +132,9 @@ export class WebSocketService implements ServerService {
           let oldPosition: Position = unit.getPosition();
           let newPosition: Position = new Position(msg.position.x, msg.position.y);
           unit.setPosition(newPosition);
-          this.cellMap.get(JSON.stringify(oldPosition)).setUnit('');
+          if (oldPosition.getX() !== -1 || oldPosition.getY() !== -1) {
+            this.cellMap.get(JSON.stringify(oldPosition)).setUnit('');
+          }
           this.cellMap.get(JSON.stringify(newPosition)).setUnit(msg.id);
           this.cellSubj.next(Array.from(this.cellMap.values()));
           this.unitSubj.next(Array.from(this.unitMap.values()));
