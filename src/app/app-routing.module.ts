@@ -13,6 +13,7 @@ import {TablesUnitComponent} from "./tables-unit/tables-unit.component";
 import {UserTableComponent} from "./user-table/user-table.component";
 import {UnitTableComponent} from "./unit-table/unit-table.component";
 import {AdminMapComponent} from "./admin-map/admin-map.component";
+import {UserManualComponent} from "./user-manual/user-manual.component";
 
 const routes: Routes=[
   {path: '', component: LoginComponent},
@@ -21,7 +22,8 @@ const routes: Routes=[
   {path: 'UserManagement', component: UserTableComponent},
   {path: 'UnitManagement', component: UnitTableComponent},
   {path: 'MapManagement', component: AdminMapComponent},
-  {path: 'Login', component: LoginComponent}
+  {path: 'Login', component: LoginComponent},
+  {path: 'UserManual', component: UserManualComponent}
 ];
 
 @NgModule({

@@ -6,11 +6,11 @@
  * Distributed under ISC license (see accompanying file LICENSE).
  */
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-home-map',
-  templateUrl: './home-map.component.html',
-  styleUrls: ['./home-map.component.css']
+  selector: 'app-user-manual',
+  templateUrl: './user-manual.component.html',
+  styleUrls: ['./user-manual.component.css']
 })
-export class HomeMapComponent {}
+export class UserManualComponent {}

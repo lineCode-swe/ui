@@ -1,0 +1,627 @@
+<!--
+  ~ PORTACS
+  ~ piattaforma di controllo mobilità autonoma
+  ~
+  ~ Copyright (c) lineCode group <linecode.swe@gmail.com> 2020 - 2021
+  ~ Distributed under ISC license (see accompanying file LICENSE).
+  -->
+
+<app-header></app-header>
+
+<div  class="book" id="header">
+  <h1>PORTACS - Manuale Utente</h1>
+  <div class="details">
+    <span id="author" class="author">gruppo lineCode</span><br>
+    <span id="email" class="email"><a href="mailto:linecode.swe@gmail.com">linecode.swe@gmail.com</a></span><br>
+    <span id="revnumber">version 1.0.0,</span>
+    <span id="revdate">18-07-2021</span>
+  </div>
+  <div id="toc" class="toc">
+    <div id="toctitle">Table of Contents</div>
+    <ul class="sectlevel1">
+      <li><a href="/UserManual#_introduzione">1. Introduzione</a>
+        <ul class="sectlevel2">
+          <li><a href="/UserManual#_scopo_del_documento">1.1. Scopo del documento</a></li>
+          <li><a href="/UserManual#_scopo_del_prodotto">1.2. Scopo del prodotto</a></li>
+        </ul>
+      </li>
+      <li><a href="/UserManual#_istruzioni_per_lutilizzo">2. Istruzioni per l&#8217;utilizzo</a>
+        <ul class="sectlevel2">
+          <li><a href="/UserManual#_schermata_iniziale">2.1. Schermata iniziale</a>
+            <ul class="sectlevel3">
+              <li><a href="/UserManual#_login">2.1.1. Login</a></li>
+              <li><a href="/UserManual#_mappa_in_sola_lettura">2.1.2. Mappa in sola lettura</a></li>
+            </ul>
+          </li>
+          <li><a href="/UserManual#_guida_utente">2.2. Guida Utente</a></li>
+          <li><a href="/UserManual#_schermata_coordinatore">2.3. Schermata coordinatore</a>
+            <ul class="sectlevel3">
+              <li><a href="/UserManual#_visualizzazione_unità_attive">2.3.1. Visualizzazione unità attive</a></li>
+              <li><a href="/UserManual#_gestione_ordini_e_unità">2.3.2. Gestione ordini e unità</a></li>
+            </ul>
+          </li>
+          <li><a href="/UserManual#_schermata_admin">2.4. Schermata admin</a>
+            <ul class="sectlevel3">
+              <li><a href="/UserManual#_gestione_utenti">2.4.1. Gestione utenti</a></li>
+              <li><a href="/UserManual#_gestione_unità">2.4.2. Gestione unità</a></li>
+              <li><a href="/UserManual#_gestione_mappa">2.4.3. Gestione Mappa</a>
+                <ul class="sectlevel4">
+                  <li><a href="/UserManual#_creazione_mappa_da_file">2.4.3.1. Creazione Mappa da file</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+<div id="content">
+  <div id="preamble">
+    <div class="sectionbody">
+      <table class="tableblock frame-all grid-all stretch">
+        <caption class="title">Table 1. Dati sul documento</caption>
+        <colgroup>
+          <col style="width: 50%;">
+          <col style="width: 50%;">
+        </colgroup>
+        <tbody>
+        <tr>
+          <td class="tableblock halign-left valign-top"><p class="tableblock">Uso</p></td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock">Esterno</p></td>
+        </tr>
+        <tr>
+          <td class="tableblock halign-left valign-top"><p class="tableblock">Redattori</p></td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock">Alessandro Dindinelli<br>
+            Lucia Fenu<br>
+            Valton Tahiraj</p></td>
+        </tr>
+        <tr>
+          <td class="tableblock halign-left valign-top"><p class="tableblock">Verificatori</p></td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock">Giacomo Bulbarelli<br>
+            Lucia Fenu</p></td>
+        </tr>
+        <tr>
+          <td class="tableblock halign-left valign-top"><p class="tableblock">Responsabile</p></td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock">Alessandro Chimetto</p></td>
+        </tr>
+        <tr>
+          <td class="tableblock halign-left valign-top"><p class="tableblock">Destinatari</p></td>
+          <td class="tableblock halign-left valign-top"><p class="tableblock">lineCode<br>
+            prof. Vardanega Tullio<br>
+            prof. Cardin Riccardo<br>
+            Sanmarco Informatica</p></td>
+        </tr>
+        </tbody>
+      </table>
+      <div style="page-break-after: always;"></div>
+    </div>
+  </div>
+  <div class="sect1">
+    <h2 id="_introduzione">1. Introduzione</h2>
+    <div class="sectionbody">
+      <div class="sect2">
+        <h3 id="_scopo_del_documento">1.1. Scopo del documento</h3>
+        <div class="paragraph">
+          <p>Il documento vuole essere una guida per illustrare tutte le funzionalità del progetto PORTACS.
+            In questo modo l&#8217;utente finale potrà effettuare un corretto uso del sistema.</p>
+        </div>
+      </div>
+      <div class="sect2">
+        <h3 id="_scopo_del_prodotto">1.2. Scopo del prodotto</h3>
+        <div class="paragraph">
+          <p>Lo scopo del prodotto è la realizzazione di un applicativo
+            in grado di guidare delle unità dotate di mobilità autonoma in ambienti specifici,
+            partendo dal presupposto che queste si muovano in ambienti in cui sono presenti altre unità.</p>
+        </div>
+        <div style="page-break-after: always;"></div>
+      </div>
+    </div>
+  </div>
+  <div class="sect1">
+    <h2 id="_istruzioni_per_lutilizzo">2. Istruzioni per l&#8217;utilizzo</h2>
+    <div class="sectionbody">
+      <div class="sect2">
+        <h3 id="_schermata_iniziale">2.1. Schermata iniziale</h3>
+        <div class="sect3">
+          <h4 id="_login">2.1.1. Login</h4>
+          <div class="paragraph">
+            <p>La schermata iniziale corrisponde alla pagina di Login (Figura 1),
+              in cui l&#8217;utente registrato dovrà inserire le credenziali corrette affinché l&#8217;accesso vada a buon fine.
+              Nel caso in cui le credenziali non dovessero essere corrette, verrà visualizzato un apposito messaggio di errore.</p>
+          </div>
+          <div id="Figure-1" class="imageblock">
+            <div class="content">
+              <img src="../../assets/images/user_manual/login.png" alt="login">
+            </div>
+            <div class="title">Figure 1. Login</div>
+          </div>
+        </div>
+        <div class="sect3">
+          <h4 id="_mappa_in_sola_lettura">2.1.2. Mappa in sola lettura</h4>
+          <div id="Figure-2" class="imageblock">
+            <div class="content">
+              <img src="../../assets/images/user_manual/home_non_auth.png" alt="home non auth">
+            </div>
+            <div class="title">Figure 2. Visualizzazione mappa in sola lettura</div>
+          </div>
+          <div class="paragraph">
+            <p>La legenda della mappa è qui in tabella descritta:</p>
+          </div>
+          <table class="tableblock frame-all grid-all stretch">
+            <caption class="title">Table 2. Legenda Mappa</caption>
+            <colgroup>
+              <col style="width: 50%;">
+              <col style="width: 50%;">
+            </colgroup>
+            <thead>
+            <tr>
+              <th class="tableblock halign-left valign-top">Elemento</th>
+              <th class="tableblock halign-left valign-top">Descrizione</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Default</strong></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">la cella è percorribile senza nessun vincolo</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>One way</strong></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">la cella ha un senso unico il cui verso è indicato dalle freccie direzionali</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Base</strong></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">la cella contiene la base per una unità</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>POI</strong></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">la cella contiene il punto di interesse per una unità</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Locked</strong></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">la cella continee un ostacolo fisso</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Unit</strong></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">l&#8217;unità provvista di nome che si muove all&#8217;interno della mappa</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Obstacle</strong></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">un ostacolo temporaneo rilevato dall&#8217;unità</p></td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="paragraph">
+            <p><strong>N.B: Per "Punto di interesse" si intende la coordinata (x,y) inserita dal coordinatore nella
+              gestione degli ordini che l&#8217;unità deve raggiungere.</strong></p>
+          </div>
+          <div class="paragraph">
+            <p>In qualsiasi momento è disponibile la visualizzazione della mappa in sola lettura (anche per utenti non registrati), in cui sono visualizzabili le unità in movimento.
+              Tutti gli utenti possono accedere alla mappa tramite l&#8217;apposito pulsante presente nella pagina di login (Figura 2).</p>
+          </div>
+          <div id="Figure-3" class="imageblock text-center">
+            <div class="content">
+              <img src="assets/images/login_bottone.png" alt="login bottone">
+            </div>
+            <div class="title">Figure 3. Bottone visualizzazione mappa da utente non registrato</div>
+          </div>
+          <div class="paragraph">
+            <p>Per gli utenti autenticati è possibile vedere la mappa in sola lettura tramite il bottone 'Portacs' posto in alto a sinistra nella barra di navigazione di ogni pagina.</p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2">
+        <h3 id="_guida_utente">2.2. Guida Utente</h3>
+        <div class="paragraph">
+          <p>Il presente manuale è disponibile online a tutti gli utenti autenticati,
+            tramite apposito link nella rispettiva barra di navigazione.</p>
+        </div>
+      </div>
+      <div class="sect2">
+        <h3 id="_schermata_coordinatore">2.3. Schermata coordinatore</h3>
+        <div class="paragraph">
+          <p>Il coordinatore può eseguire i suoi compiti in un&#8217;unica schermata (Figura 4) tramite i componenti:</p>
+        </div>
+        <div class="ulist">
+          <ul>
+            <li>
+              <p>Mappa: aggiornata in tempo reale con la posizione delle unità attive e degli ostacoli da esse rilevate;</p>
+            </li>
+            <li>
+              <p>tabella delle unità: elenco delle unità attive con i rispettivi dettagli qui di seguito dispiegati.</p>
+            </li>
+          </ul>
+        </div>
+        <div id="Figure-4" class="imageblock">
+          <div class="content">
+            <img src="../../assets/images/user_manual/user_coordination.png" alt="user coordination">
+          </div>
+          <div class="title">Figure 4. Schermata coordinatore</div>
+        </div>
+        <div class="sect3">
+          <h4 id="_visualizzazione_unità_attive">2.3.1. Visualizzazione unità attive</h4>
+          <div id="Figure-5" class="imageblock">
+            <div class="content">
+              <img src="../../assets/images/user_manual/GestioneUnità.PNG" alt="GestioneUnità">
+            </div>
+            <div class="title">Figure 5. Gestione ordini e unità</div>
+          </div>
+          <div class="paragraph">
+            <p>La tabella (Figura 5) contiene tutte le informazioni utili per ogni unità presente nel sistema:</p>
+          </div>
+          <table class="tableblock frame-all grid-all stretch">
+            <caption class="title">Table 3. Tabella unità attive</caption>
+            <colgroup>
+              <col style="width: 50%;">
+              <col style="width: 50%;">
+            </colgroup>
+            <thead>
+            <tr>
+              <th class="tableblock halign-left valign-top">Colonna</th>
+              <th class="tableblock halign-left valign-top">Descrizione</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Name</strong></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">il nome dell&#8217;unità registrato all&#8217;interno del sistema</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Base</strong></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">la posizione della base per la specifica unità</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Position</strong></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">la posizione corrente dell&#8217;unità</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Status</strong></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">lo status corrente dell&#8217;unità tra i seguenti:<br>
+                - <strong>Going to</strong>: l&#8217;unità è in movimento verso il punto di interesse;<br>
+                - <strong>Stop</strong>: l&#8217;unità è ferma;<br>
+                - <strong>Base</strong>: l&#8217;unità è alla sua postazione di base;<br>
+                - <strong>Error</strong>: l&#8217;unità ha rilevato un errore.</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Speed</strong></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">la velocità corrente dell&#8217;unità</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Error</strong></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">segnalazione errori</p></td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="paragraph">
+            <p>Le unità possono essere selezionate tramite il bottone "@". Una volta cliccato
+              mostrerà la tabella per la gestione della specifica unità.</p>
+          </div>
+        </div>
+        <div class="sect3">
+          <h4 id="_gestione_ordini_e_unità">2.3.2. Gestione ordini e unità</h4>
+          <div id="Figure-6" class="imageblock">
+            <div class="content">
+              <img src="../../assets/images/user_manual/gestione_ordini.PNG" alt="gestione ordini">
+            </div>
+            <div class="title">Figure 6. Gestione ordini e unità</div>
+          </div>
+          <div class="paragraph">
+            <p>Tramite la tabella gestionale (Figura 6) è possibile comandare l&#8217;unità selezionata.</p>
+          </div>
+          <div class="paragraph">
+            <p>Se l&#8217;unità si trova nella propria cella base, è possibile fornire o rimuovere ordini dalla coda
+              dell&#8217;unità. Gli ordini dovranno avere delle coordinate (x,y) che corrispondono alla cella della mappa in cui l&#8217;unità dovrà
+              esaurire il suo compito e, successivamente, tornare in base.
+              Ogni ordine è definito come <strong>Punto di interesse</strong>.</p>
+          </div>
+          <div class="paragraph">
+            <p>Verrà visualizzato un messaggio di errore se le coordinate inserite non sono valide.</p>
+          </div>
+          <div class="paragraph">
+            <p>Le unità possono essere parzialmente guidate tramite i seguenti bottoni, che vengono attivati o disabilitati
+              in base allo stato corrente dell&#8217;unità stessa:</p>
+          </div>
+          <table class="tableblock frame-all grid-all stretch">
+            <caption class="title">Table 4. Bottoni gestione ordini e unità</caption>
+            <colgroup>
+              <col style="width: 50%;">
+              <col style="width: 50%;">
+            </colgroup>
+            <thead>
+            <tr>
+              <th class="tableblock halign-left valign-top">Bottone</th>
+              <th class="tableblock halign-left valign-top">Descrizione</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Start</strong></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">l&#8217;unità inizia o riprende il percorso</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Go back</strong></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">l&#8217;unità ritorna alla base</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Stop</strong></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">l&#8217;unità si ferma</p></td>
+            </tr>
+            <tr>
+              <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Shutdown</strong></p></td>
+              <td class="tableblock halign-left valign-top"><p class="tableblock">l&#8217;unità si spegne</p></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="sect2">
+        <h3 id="_schermata_admin">2.4. Schermata admin</h3>
+        <div id="Figure-7" class="imageblock">
+          <div class="content">
+            <img src="../../assets/images/user_manual/home_non_auth-vistaDaAdmin_menu.png" alt="home non auth vistaDaAdmin menu">
+          </div>
+          <div class="title">Figure 7. Menù amministratore</div>
+        </div>
+        <div class="paragraph">
+          <p>L&#8217;amministratore svolge diversi compiti, ognuno accessibile dalla barra di navigazione (Figura 7).
+            É previsto che un amministratore possa anche compiere le azioni di un coordinatore.</p>
+        </div>
+        <div class="paragraph">
+          <p>In dettaglio:</p>
+        </div>
+        <table class="tableblock frame-all grid-all stretch">
+          <caption class="title">Table 5. Barra di navigazione amministratore</caption>
+          <colgroup>
+            <col style="width: 50%;">
+            <col style="width: 50%;">
+          </colgroup>
+          <thead>
+          <tr>
+            <th class="tableblock halign-left valign-top">Menù</th>
+            <th class="tableblock halign-left valign-top">Descrizione</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Portacs</strong></p></td>
+            <td class="tableblock halign-left valign-top"><p class="tableblock">si accede alla pagina di visualizzazione della mappa in sola lettura</p></td>
+          </tr>
+          <tr>
+            <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Users</strong></p></td>
+            <td class="tableblock halign-left valign-top"><p class="tableblock">si accede alla pagina di gestione utenti</p></td>
+          </tr>
+          <tr>
+            <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Units</strong></p></td>
+            <td class="tableblock halign-left valign-top"><p class="tableblock">si accede alla pagina di gestione unità</p></td>
+          </tr>
+          <tr>
+            <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Map</strong></p></td>
+            <td class="tableblock halign-left valign-top"><p class="tableblock">si accede alla pagina di gestione mappa</p></td>
+          </tr>
+          <tr>
+            <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Coordination</strong></p></td>
+            <td class="tableblock halign-left valign-top"><p class="tableblock">si accede alla pagina di gestione, usata dai Coordinatori</p></td>
+          </tr>
+          <tr>
+            <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Manual</strong></p></td>
+            <td class="tableblock halign-left valign-top"><p class="tableblock">si accede al Manuale utente</p></td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="sect3">
+          <h4 id="_gestione_utenti">2.4.1. Gestione utenti</h4>
+          <div id="Figure-8" class="imageblock">
+            <div class="content">
+              <img src="../../assets/images/user_manual/admin_user.png" alt="admin user">
+            </div>
+            <div class="title">Figure 8. Gestione utenti</div>
+          </div>
+          <div class="paragraph">
+            <p>Per la gestione degli utenti, è previsto che l&#8217;amministratore possa visualizzare tutti gli utenti registrati
+              al sistema (Figura 8).</p>
+          </div>
+          <div class="paragraph">
+            <p>L&#8217;amministatore può creare un nuovo utente. Le informazioni richieste sono:</p>
+          </div>
+          <div class="ulist">
+            <ul>
+              <li>
+                <p>Username;</p>
+              </li>
+              <li>
+                <p>Password;</p>
+              </li>
+              <li>
+                <p>Status utente:</p>
+                <div class="ulist">
+                  <ul>
+                    <li>
+                      <p>Admin: l&#8217;utente creato avrà lo stato di amministratore;</p>
+                    </li>
+                    <li>
+                      <p>User: l&#8217;utente creato avrà lo stato di coordinatore.</p>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="paragraph">
+            <p>In caso di errori nell&#8217;input dei dati utente, verranno visualizzati degli appositi messaggi di errore.</p>
+          </div>
+          <div class="paragraph">
+            <p>L&#8217;amministratore può eliminire uno specifico utente tramite il bottone 'Delete', posto lungo la riga dell&#8217;utente che si vuole eliminiare.</p>
+          </div>
+        </div>
+        <div class="sect3">
+          <h4 id="_gestione_unità">2.4.2. Gestione unità</h4>
+          <div id="Figure-9" class="imageblock">
+            <div class="content">
+              <img src="../../assets/images/user_manual/admin_unit.png" alt="admin unit">
+            </div>
+            <div class="title">Figure 9. Gestione unità</div>
+          </div>
+          <div class="paragraph">
+            <p>Per la gestione delle unità, l&#8217;amministratore può visualizzare tutte le unità registrate
+              nel sistema (Figura 9). Da qui le può eliminare con l&#8217;apposito pulsante,
+              oppure usare il form presente per inserire i dettagli della nuova unità che si vuole registrare.</p>
+          </div>
+          <div class="paragraph">
+            <p>L&#8217;amministatore può inserire una nuova unità. Le informazioni richieste sono:</p>
+          </div>
+          <div class="ulist">
+            <ul>
+              <li>
+                <p>ID: identificativo di fabbrica dell&#8217;unità;</p>
+              </li>
+              <li>
+                <p>Name: nome dell&#8217;unità che verrà visualizzato nella mappa;</p>
+              </li>
+              <li>
+                <p>Base:</p>
+                <div class="ulist">
+                  <ul>
+                    <li>
+                      <p>X: coordinata X della cella base nella mappa;</p>
+                    </li>
+                    <li>
+                      <p>Y: coordinata y della cella base nella mappa.</p>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="paragraph">
+            <p>In caso di errori nell&#8217;input dei campi dati, verranno visualizzati degli appositi messaggi di errore.</p>
+          </div>
+          <div class="paragraph">
+            <p>L&#8217;amministratore può eliminire una specifica unità tramite il bottone 'Delete', posto lungo la riga dell&#8217;unità che si vuole eliminiare.</p>
+          </div>
+        </div>
+        <div class="sect3">
+          <h4 id="_gestione_mappa">2.4.3. Gestione Mappa</h4>
+          <div id="Figure-10" class="imageblock">
+            <div class="content">
+              <img src="../../assets/images/user_manual/admin_map.png" alt="admin map">
+            </div>
+            <div class="title">Figure 10. Gestione mappa</div>
+          </div>
+          <div class="paragraph">
+            <p>Per modificare la mappa, l&#8217;amministratore ha la possibilità di importare dei file
+              in formato '.txt' appositamente formattati, tramite il bottone 'Browse' (Figura 10).
+              Tramite il seguente bottone, l&#8217;amministratore dovrà ricercare nel suo sistema il file oppurtuno richiesto.</p>
+          </div>
+          <div class="sect4">
+            <h5 id="_creazione_mappa_da_file">2.4.3.1. Creazione Mappa da file</h5>
+            <div class="paragraph">
+              <p>Per creare la mappa in modo adeguato, è necessario rispettare i seguenti vincoli:</p>
+            </div>
+            <div class="ulist">
+              <ul>
+                <li>
+                  <p>La mappa deve essere rettagolare;</p>
+                </li>
+                <li>
+                  <p>i caratteri permessi sono i seguenti:</p>
+                </li>
+              </ul>
+            </div>
+            <table class="tableblock frame-all grid-all stretch">
+              <caption class="title">Table 6. Comandi creazione mappa</caption>
+              <colgroup>
+                <col style="width: 50%;">
+                <col style="width: 50%;">
+              </colgroup>
+              <thead>
+              <tr>
+                <th class="tableblock halign-left valign-top">Comando</th>
+                <th class="tableblock halign-left valign-top">Uso</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong> oppure <strong>X</strong></p></td>
+                <td class="tableblock halign-left valign-top"><p class="tableblock">cella contenente un ostacolo fisso</p></td>
+              </tr>
+              <tr>
+                <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>b</strong> oppure <strong>B</strong></p></td>
+                <td class="tableblock halign-left valign-top"><p class="tableblock">cella contiene la base per una unità</p></td>
+              </tr>
+              <tr>
+                <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>p</strong> oppure <strong>P</strong></p></td>
+                <td class="tableblock halign-left valign-top"><p class="tableblock">cella contiene il punto di interesse dell&#8217;unità</p></td>
+              </tr>
+              <tr>
+                <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>^</strong></p></td>
+                <td class="tableblock halign-left valign-top"><p class="tableblock">cella con senso unico verso l&#8217;alto</p></td>
+              </tr>
+              <tr>
+                <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>_</strong></p></td>
+                <td class="tableblock halign-left valign-top"><p class="tableblock">cella con senso unico verso il basso</p></td>
+              </tr>
+              <tr>
+                <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>&lt;</strong></p></td>
+                <td class="tableblock halign-left valign-top"><p class="tableblock">cella con senso unico verso sinistra</p></td>
+              </tr>
+              <tr>
+                <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>&gt;</strong></p></td>
+                <td class="tableblock halign-left valign-top"><p class="tableblock">cella senso unico verso destra</p></td>
+              </tr>
+              <tr>
+                <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>+</strong></p></td>
+                <td class="tableblock halign-left valign-top"><p class="tableblock">cella è percorribile senza nessun vincolo</p></td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="ulist">
+              <ul>
+                <li>
+                  <p>il numero delle righe all&#8217;interno del file corrisponde alla coordinata y;</p>
+                </li>
+                <li>
+                  <p>il numero delle colonne all&#8217;interno del file corrisponde alla coordinata x;</p>
+                </li>
+                <li>
+                  <p>la numerazione delle celle parte dal numero zero.</p>
+                </li>
+              </ul>
+            </div>
+            <div class="paragraph">
+              <p>Tra un carattere e l&#8217;altro è possibile inserire una carattere di spazio.</p>
+            </div>
+            <div class="paragraph">
+              <p>Nel caso ci siano degli errori nel file di importazione, verranno visualizzati all&#8217;interno del sistema con i relativi errori.</p>
+            </div>
+            <div class="paragraph">
+              <p>Un esempio di file per la creazione della mappa è il seguente:</p>
+            </div>
+            <div class="listingblock">
+              <div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">x + &gt; +
+P ^ b B
+_ + _ +
++ + &lt; +</code></pre>
+              </div>
+            </div>
+            <div class="paragraph">
+              <p>Il risulato del file è il seguente:</p>
+            </div>
+            <div id="Figure-11" class="imageblock">
+              <div class="content">
+                <img src="../../assets/images/user_manual/ex_map.png" alt="ex map">
+              </div>
+              <div class="title">Figure 11. Gestione mappa</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer">
+  <div id="footer-text">
+    Version 1.0.0<br>
+    Last updated 2021-08-17 18:37:35 +0200
+  </div>
+</div>
