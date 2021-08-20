@@ -192,4 +192,28 @@ export class UnitDetailsComponent implements OnChanges {
   getMapHeight(): number {
     return this.service.getMapHeight();
   }
+
+  statusBase(status: UnitStatus): boolean {
+    return status == UnitStatus.BASE;
+  }
+
+  statusGoingTo(status: UnitStatus): boolean {
+    return status == UnitStatus.GOINGTO;
+  }
+
+  statusError(status: UnitStatus): boolean {
+    return status == UnitStatus.ERROR;
+  }
+
+  statusStop(status: UnitStatus): boolean {
+    return status == UnitStatus.STOP;
+  }
+
+  statusDisconnect(status: UnitStatus): boolean {
+    return status == UnitStatus.DISCONNECTED;
+  }
+
+  statusPoi(position: Position): boolean {
+    return this.service.getCell(position).isPoi();
+  }
 }

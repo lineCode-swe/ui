@@ -66,6 +66,30 @@ input {
   margin-top: 5px;
 }
 
+.statusBase {
+  background-image: url("src/assets/images/unit_status/base.jpg");
+}
+
+.statusGoingTo {
+  background-image: url("src/assets/images/unit_status/goingto.jpg");
+}
+
+.statusStop {
+  background-image: url("src/assets/images/unit_status/stop.jpg");
+}
+
+.statusPoi {
+  background-image: url("src/assets/images/unit_status/poi.jpg");
+}
+
+.statusError {
+  background-image: url("src/assets/images/unit_status/error.jpg");
+}
+
+.statusDisconnect {
+  background-image: url("src/assets/images/unit_status/disconnected.jpg");
+}
+
 .alert_input_fields_hide {
   display: none;
 }
