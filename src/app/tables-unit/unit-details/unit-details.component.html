@@ -11,20 +11,19 @@
   <table class="table">
     <caption [hidden]="true">Table representing some details of the selected unit.</caption>
     <tr>
-      <td colspan="2"
-        [class.statusBase]="statusBase(this.localUnit.getStatus())"
-        [class.statusGoingTo]="statusGoingTo(this.localUnit.getStatus())"
-        [class.statusError]="statusError(this.localUnit.getStatus())"
-        [class.statusStop]="statusStop(this.localUnit.getStatus())"
-        [class.statusDisconnect]="statusDisconnect(this.localUnit.getStatus())"
-        [class.statusPoi]="statusPoi(this.localUnit.getPosition())"
-      ></td>
-    </tr>
-    <tr>
-      <th scope="row">UNIT</th>
-      <td>
+      <th scope="row" class="col-md-3">UNIT</th>
+      <td class="col-md-3">
         {{ this.localUnit.getName() }}
       </td>
+      <td rowspan="3"
+          class="col-md-6"
+          [class.statusBase]="statusBase(this.localUnit.getStatus())"
+          [class.statusGoingTo]="statusGoingTo(this.localUnit.getStatus())"
+          [class.statusError]="statusError(this.localUnit.getStatus())"
+          [class.statusStop]="statusStop(this.localUnit.getStatus())"
+          [class.statusDisconnect]="statusDisconnect(this.localUnit.getStatus())"
+          [class.statusPoi]="statusPoi(this.localUnit.getPosition())"
+      ></td>
     </tr>
     <tr>
       <th scope="row">ORDERS</th>
