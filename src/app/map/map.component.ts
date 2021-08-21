@@ -9,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
 import { Cell } from "../cell";
 import { ServerService } from "../server-service";
 import { Direction } from "../direction.enum";
-import {Position} from "../position";
 
 @Component({
   selector: 'app-map',
