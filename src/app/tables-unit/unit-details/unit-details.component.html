@@ -26,7 +26,17 @@
       ></td>
     </tr>
     <tr>
-      <th scope="row">ORDERS</th>
+      <th scope="row">
+        ORDERS
+        <ul>
+          <li *ngFor="let poi of this.localUnit.getPoiList(); let i = index">
+            <span *ngIf="poi != null">X:{{ poi.getX() }} , Y:{{ poi.getY() }}</span>
+            <button class="btn btn-outline-primary btn-sm" (click)="removePoi(i)" [disabled]="this.checkBase()"
+                    id="buttonRemove">Remove
+            </button>
+          </li>
+        </ul>
+      </th>
       <td>
         <div class="alert alert-danger p-1" role="alert"
              (click)="setAlertInputFields(false)"
@@ -46,21 +56,11 @@
              [class.alert_position_existent_hide]="!getAlertPositionExistent()">
           <p>The position inserted is already existent</p>
         </div>
-        <ul>
-          <li *ngFor="let poi of this.localUnit.getPoiList(); let i = index">
-            <span *ngIf="poi != null">X:{{ poi.getX() }} , Y:{{ poi.getY() }}</span>
-            <button class="btn btn-outline-primary btn-sm" (click)="removePoi(i)" [disabled]="this.checkBase()"
-                    id="buttonRemove">Remove
-            </button>
-          </li>
-          <li>
-            <form [formGroup]="poiForm" (ngSubmit)="onSubmit()">
-              <input type="number" formControlName="poiX" min="0" placeholder="X">
-              <input type="number" formControlName="poiY" min="0" placeholder="Y">
-              <button class="btn btn-outline-primary btn-sm" type="submit" [disabled]="this.checkBase()">Add</button>
-            </form>
-          </li>
-        </ul>
+        <form [formGroup]="poiForm" (ngSubmit)="onSubmit()">
+          <input type="number" formControlName="poiX" min="0" placeholder="X">
+          <input type="number" formControlName="poiY" min="0" placeholder="Y">
+          <button class="btn btn-outline-primary btn-sm" type="submit" [disabled]="this.checkBase()">Add</button>
+        </form>
       </td>
     </tr>
     <tr>
