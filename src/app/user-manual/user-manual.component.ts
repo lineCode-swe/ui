@@ -6,7 +6,7 @@
  * Distributed under ISC license (see accompanying file LICENSE).
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-user-manual',
