@@ -83,14 +83,12 @@ export class AdminMapComponent {
 
     const length: number = mapArray[0].length;
     let matches: number = 0;
-    let valid: boolean = true;
     for (let row of mapArray) {
 
       const regex = /^[xXbBpP^_<>+ ]*$/g;
 
       if (row.length != length) {
-        valid = false;
-
+        error_shape = true;
       }
 
       if (regex.test(row)) {
@@ -98,7 +96,6 @@ export class AdminMapComponent {
       }
     }
 
-    if (!valid) error_shape = true;
     if (matches != mapArray.length) error_characters = true;
 
     if (!error_shape && !error_extension && !error_characters) {
