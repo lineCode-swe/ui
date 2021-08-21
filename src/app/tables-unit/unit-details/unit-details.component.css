@@ -69,31 +69,37 @@ input {
 .statusBase {
   background-image: url("src/assets/images/unit_status/base.jpg");
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .statusGoingTo {
   background-image: url("src/assets/images/unit_status/goingto.jpg");
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .statusStop {
   background-image: url("src/assets/images/unit_status/stop.jpg");
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .statusPoi {
   background-image: url("src/assets/images/unit_status/poi.jpg");
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .statusError {
   background-image: url("src/assets/images/unit_status/error.jpg");
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .statusDisconnect {
   background-image: url("src/assets/images/unit_status/disconnected.jpg");
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .alert_input_fields_hide {
