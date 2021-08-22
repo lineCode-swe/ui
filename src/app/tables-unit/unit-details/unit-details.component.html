@@ -12,11 +12,11 @@
     <caption [hidden]="true">Table representing some details of the selected unit.</caption>
     <tr>
       <th scope="row" class="col-md-3">UNIT</th>
-      <td class="col-md-3">
+      <td class="col-md-4">
         {{ this.localUnit.getName() }}
       </td>
       <td rowspan="3"
-          class="col-md-5"
+          class="col-md-4"
           [class.statusBase]="statusBase(this.localUnit.getStatus())"
           [class.statusGoingTo]="statusGoingTo(this.localUnit.getStatus())"
           [class.statusError]="statusError(this.localUnit.getStatus())"
