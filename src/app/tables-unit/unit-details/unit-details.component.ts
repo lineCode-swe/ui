@@ -214,6 +214,12 @@ export class UnitDetailsComponent implements OnChanges {
   }
 
   statusPoi(position: Position): boolean {
-    return this.service.getCell(position).isPoi();
+    let valid: boolean =  false;
+    for (let poi of this.localUnit.getPoiList()) {
+      if (position == poi) {
+        valid = true;
+      }
+    }
+    return valid;
   }
 }
