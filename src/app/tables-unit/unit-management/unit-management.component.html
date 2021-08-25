@@ -14,7 +14,6 @@
     <th scope="col">BASE</th>
     <th scope="col">POSITION</th>
     <th scope="col">STATUS</th>
-    <th scope="col">SPEED</th>
     <th scope="col">ERROR</th>
   </tr>
   <tr *ngFor="let unit of this.getUnits()">
@@ -25,7 +24,6 @@
     <td>X:{{ unit.getBase().getX() }} , Y:{{ unit.getBase().getY() }}</td>
     <td>X:{{ unit.getPosition().getX() }} , Y:{{ unit.getPosition().getY() }}</td>
     <td>{{ unit.getStatus() }}</td>
-    <td>{{ unit.getSpeed() }}</td>
     <td>{{ unit.getError() }}</td>
   </tr>
 </table>

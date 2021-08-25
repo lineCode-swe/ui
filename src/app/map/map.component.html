@@ -17,7 +17,7 @@
         <caption [hidden]="true">Table representing the map of the restaurant.</caption>
 
         <tr>
-          <th scope="col"></th>
+          <th scope="col">Y \ X</th>
           <th *ngFor="let col of this.getMapLength(); let x = index" scope="col">{{ x }}</th>
         </tr>
 
